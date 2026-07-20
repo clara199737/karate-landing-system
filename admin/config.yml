@@ -9,14 +9,43 @@
 # with a specific field-path error.
 ########################################################################
 
+# DecapBridge PKCE auth — brokered via decapbridge.com so we don't run a
+# server. Site UUID is decapbridge's identifier for this site (safe to
+# commit; it names the site, doesn't grant access). Actual repo write
+# access is via the fine-grained GitHub PAT that decapbridge holds server-side.
 backend:
-  name: github
+  name: git-gateway
   repo: clara199737/karate-landing-system
   branch: main
-  # decapbridge.com brokers the OAuth flow so we don't run a server.
-  # Sign up at decapbridge.com, create a site, paste the site_id here.
-  base_url: https://api.decapbridge.com
-  site_id: TODO_SITE_ID
+  auth_type: pkce
+  base_url: https://auth.decapbridge.com
+  auth_endpoint: /sites/6645fcce-eb26-47ad-baf9-ea653ff0196c/pkce
+  auth_token_endpoint: /sites/6645fcce-eb26-47ad-baf9-ea653ff0196c/token
+  gateway_url: https://gateway.decapbridge.com
+  # Attribute each commit to the CMS user who made it (surfaces in
+  # git log / GitHub commit author).
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}" - {{author-name}} <{{author-login}}> via DecapBridge'
+    update: 'Update {{collection}} "{{slug}}" - {{author-name}} <{{author-login}}> via DecapBridge'
+    delete: 'Delete {{collection}} "{{slug}}" - {{author-name}} <{{author-login}}> via DecapBridge'
+    uploadMedia: 'Upload "{{path}}" - {{author-name}} <{{author-login}}> via DecapBridge'
+    deleteMedia: 'Delete "{{path}}" - {{author-name}} <{{author-login}}> via DecapBridge'
+    openAuthoring: 'Message {{message}} - {{author-name}} <{{author-login}}> via DecapBridge'
+
+# PKCE auth claim mapping — reads user info from decapbridge's PKCE
+# response so Decap knows who's editing.
+auth:
+  email_claim: email
+  first_name_claim: first_name
+  last_name_claim: last_name
+  avatar_url_claim: avatar_url
+
+# Decap + DecapBridge co-branded login screen (cosmetic).
+logo_url: https://decapbridge.com/decapcms-with-bridge.svg
+
+# Shows a "View live site" link on each entry.
+site_url: https://karate-landing-system.vercel.app
+display_url: https://karate-landing-system.vercel.app
 
 # Where Decap uploads land in the repo. Overridden per-file below so each
 # segment's photos land in that segment's assets/ folder.
@@ -27,11 +56,6 @@ public_folder: assets
 # triggers a Vercel rebuild. Flip to `editorial_workflow` if you want
 # a draft → review → publish pipeline.
 publish_mode: simple
-
-# Uncomment and set once your custom domain is live so Decap shows a
-# "View live site" link for each entry.
-# site_url: https://TODO_DOMAIN
-# display_url: https://TODO_DOMAIN
 
 ########################################################################
 # Field definitions — anchored so all four segment files share one spec.
