@@ -493,53 +493,33 @@ _field_definitions: &segment_fields
           - {name: href, label: "Phone tel: link (e.g. 'tel:+15555551234')", widget: string}
 
 ########################################################################
-# Collections — one file per segment, all sharing the field spec above.
+# Collection — folder mode.
+#
+# Every JSON in content/ shows up as an entry. Clicking "New landing page"
+# creates a new content/<slug>.json where <slug> comes from the
+# meta.segment field the user fills in. Vercel serves the resulting
+# dist/<slug>/index.html at /<slug> automatically.
+#
+# Photos uploaded through the CMS land in source/{{slug}}/assets/ so
+# build.js finds them where it already looks.
 ########################################################################
 
 collections:
-  - name: content
+  - name: pages
     label: "Landing pages"
     label_singular: "landing page"
+    folder: content
+    create: true                              # Enables the "New landing page" button
+    extension: json
+    format: json
+    json:
+      indent_style: space
+      indent_size: 2
+    slug: "{{fields.meta.segment}}"            # Filename derives from meta.segment
+    identifier_field: meta.segment             # What Decap shows as the entry title in the list
+    summary: "{{fields.meta.segment}} — {{fields.meta.page_title}}"
+    media_folder: "/source/{{fields.meta.segment}}/assets"
+    public_folder: "assets"
     editor:
-      preview: false  # Decap's default preview doesn't run the real template
-    files:
-      - name: preschool
-        label: "Preschool (ages 3–5)"
-        file: content/preschool.json
-        format: json
-        json:
-          indent_style: space
-          indent_size: 2
-        media_folder: "/source/preschool/assets"
-        public_folder: "assets"
-        fields: *segment_fields
-      - name: elementary
-        label: "Elementary (ages 6–11)"
-        file: content/elementary.json
-        format: json
-        json:
-          indent_style: space
-          indent_size: 2
-        media_folder: "/source/elementary/assets"
-        public_folder: "assets"
-        fields: *segment_fields
-      - name: teens
-        label: "Teens (ages 12–17)"
-        file: content/teens.json
-        format: json
-        json:
-          indent_style: space
-          indent_size: 2
-        media_folder: "/source/teens/assets"
-        public_folder: "assets"
-        fields: *segment_fields
-      - name: adults
-        label: "Adults (18+)"
-        file: content/adults.json
-        format: json
-        json:
-          indent_style: space
-          indent_size: 2
-        media_folder: "/source/adults/assets"
-        public_folder: "assets"
-        fields: *segment_fields
+      preview: false
+    fields: *segment_fields

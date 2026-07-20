@@ -134,21 +134,91 @@ Both are run automatically by Vercel on every deploy, but running
 
 ---
 
-## Adding a fifth landing page
+## Adding a new landing page
+
+The CMS has a **New landing page** button in the top right of the
+Landing pages list. Click it → fill the form → save. Vercel builds
+your new page and it's live at `/<audience-slug>` on the site within
+~30 seconds.
+
+### The fast way — duplicate an existing page
+
+Filling every field from scratch on a new page is slow. Instead:
+
+1. Open the Landing pages list at `/admin/`.
+2. Find the segment most similar to what you're building (e.g. for a
+   "Little Dragons ages 2–3" page, start from **Preschool (ages 3–5)**;
+   for a "summer camp" page, start from **Elementary**).
+3. Click the ⋯ menu (three dots) on that entry → **Duplicate**.
+4. In the duplicated entry, first change **Head + SEO → Segment slug**
+   from the old value to the new one (e.g. `little-dragons`).
+   **Everything else in the JSON stays valid as long as the segment
+   slug matches the filename** — Decap enforces this by using the slug
+   as the filename.
+5. Change the page title, hero headline, hero image, and any other
+   audience-specific copy.
+6. **Very important:** change **Wiring → Formspree form ID** to a
+   fresh Formspree form (otherwise the new audience's leads will land
+   in the wrong inbox). If you don't have one yet, use a distinct
+   placeholder like `FORM_ID_little_dragons` — production build will
+   refuse to ship until it's real, but preview builds will work.
+7. Save. Wait ~30 seconds. Your new page is live at
+   `https://karate-landing-system.vercel.app/<new-slug>`.
+
+### The truly-fresh way — click "New landing page"
+
+If you don't have a similar existing page to duplicate:
+
+1. Click **New landing page** (top right).
+2. Fill the required fields (marked with `*`):
+   - **Head + SEO:** segment slug, page title, meta description
+   - **Wiring:** Formspree form ID (unique per page)
+   - **Hero:** badge, headline (use `[[double brackets]]` around the
+     purple highlight text), subheadline, image (drag-and-drop),
+     alt text
+   - **Hero → Form card:** heading, submit button label, disclaimer,
+     at least one field
+   - **Thank-you swap:** lead line + body
+   - **Problem:** eyebrow + headline (checklist optional)
+   - **Risk reversal:** headline + body
+   - **FAQ:** headline + at least one Q/A
+   - **Final CTA:** headline + subheadline + button label
+   - **Footer:** school name, address, phone
+3. Optional sections (proof bar, benefits, reframe, instructor,
+   beginner objection, sideline bridge, testimonials, how-it-works)
+   can be left empty — the template just skips them.
+4. Save.
+
+### What you cannot change per-page
+
+- **The design system** (colors, fonts, spacing) — lives in
+  `templates/styles.css`, applies to all pages.
+- **The page's structural layout** — lives in `templates/page.html`;
+  only content differs per page.
+- **Meta pixel ID** — one pixel across all pages; attribution happens
+  by `Wiring → Pixel content_category`.
+
+If a new page truly needs a totally different design temperature,
+add a `body.segment-<slug> { … }` block to `templates/styles.css`
+overriding the tokens you want to change.
+
+---
+
+## Adding a fifth or sixth landing page — advanced (JSON edits)
+
+The button-based flow above uses the CMS. If you prefer to edit JSON
+directly (or want to script the creation from another tool):
 
 1. Copy one of the existing files in `content/` (e.g.
    `content/adults.json`) → save as `content/<new-slug>.json`.
-2. Edit `admin/config.yml`: under `collections[0].files`, duplicate one
-   of the existing entries and change `name`, `label`, `file`, and
-   `media_folder` to the new slug.
-3. Update the copy inside the new JSON (change `meta.segment` to
-   match the new filename).
-4. Give it a unique `config.formspree_id`.
-5. Commit and push. The editor picks up the new page automatically on
-   next load; the build produces `dist/<new-slug>/`.
+2. Change `meta.segment` inside to `<new-slug>` (must match the
+   filename).
+3. Give it a unique `config.formspree_id`.
+4. Update the copy.
+5. Commit and push. The build produces `dist/<new-slug>/`.
 
-The template renders it the same way as the existing four. No HTML,
-CSS, or template code has to change.
+You don't need to touch `admin/config.yml` — folder-mode Decap auto-
+picks up any new JSON in `content/`.
 
 ---
 
