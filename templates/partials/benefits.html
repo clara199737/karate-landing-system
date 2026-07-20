@@ -1,0 +1,33 @@
+{{#benefits}}  <!-- ============================================================= -->
+  <!-- BENEFITS                                                      -->
+  <!-- ============================================================= -->
+  <section class="section benefits">
+    <div class="wrap">
+      <p class="eyebrow">{{{eyebrow}}}</p>
+      <h2 class="section__title">{{{headline}}}</h2>
+
+{{#is_split}}      <div class="split">
+{{#columns}}        <div class="split__col split__col--{{{modifier}}}">
+          <p class="split__who">{{{title}}}</p>
+          <ul class="split__list">
+{{#items}}            <li>{{{.}}}</li>
+{{/items}}          </ul>
+        </div>
+{{/columns}}      </div>
+
+{{/is_split}}{{#is_grid}}      <div class="gains__grid">
+{{#items}}        <div class="gain">
+          <img class="gain__photo" src="{{{thumbnail.src}}}"
+               alt="{{{thumbnail.alt}}}" width="{{{thumbnail.width}}}" height="{{{thumbnail.height}}}" loading="lazy">
+          <h3 class="gain__title">{{{title}}}</h3>
+          <p>{{{body}}}</p>
+        </div>
+{{/items}}      </div>
+
+{{/is_grid}}      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">{{{cta_label}}}</a>
+      </div>
+    </div>
+  </section>
+
+{{/benefits}}

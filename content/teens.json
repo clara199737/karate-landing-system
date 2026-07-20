@@ -1,0 +1,225 @@
+{
+  "meta": {
+    "segment": "teens",
+    "page_title": "Free Teen Karate Class — Ages 12–17 · Teens-Only, Real Training",
+    "meta_description": "A free intro karate class for teens 12–17 — teens-only, no children in the room. Real technique, real conditioning, real rank he has to earn. No experience needed."
+  },
+  "config": {
+    "formspree_id": "FORM_ID_teens",
+    "pixel_content_category": "teens"
+  },
+  "hero": {
+    "badge": "100% FREE · AGES 12–17",
+    "headline": "One free class. No little kids. [[Real training.]]",
+    "subheadline": "A free intro class for teens 12–17. Teens-only — no children in the room. He trains with people his own age from day one.",
+    "image": {
+      "src": "assets/hero.jpg",
+      "alt": "A teenage boy in a white karate gi and black belt holding a strong front-kick mid-technique in a sunlit dojo, heavy bags behind him",
+      "width": 432,
+      "height": 544
+    },
+    "trust_items": [
+      "Ages 12–17",
+      "Teens-only class",
+      "No experience needed"
+    ],
+    "route_link": {
+      "label": "Under 12? This class is built for them →",
+      "href": "https://karate-landing-elementary.vercel.app"
+    },
+    "form": {
+      "heading": "Claim his free class",
+      "subheading": "Takes 60 seconds. We'll email to confirm his time.",
+      "button_label": "Claim His Free Class",
+      "disclaimer": "60-second signup · no card · no experience needed",
+      "fields": [
+        { "name": "parent_name", "label": "Parent's name", "type": "text", "autocomplete": "name", "required": true },
+        { "name": "phone", "label": "Phone", "type": "tel", "autocomplete": "tel", "required": true },
+        { "name": "email", "label": "Email", "type": "email", "autocomplete": "email", "required": true },
+        { "name": "teen_name", "label": "Teen's first name", "type": "text", "autocomplete": "off", "required": true },
+        {
+          "name": "teen_age",
+          "label": "Teen's age",
+          "type": "select",
+          "required": true,
+          "placeholder_label": "Select age",
+          "field_comment": "Teen age gates routing to the right teens-only session.",
+          "options": [
+            { "value": "12", "label": "12" },
+            { "value": "13", "label": "13" },
+            { "value": "14", "label": "14" },
+            { "value": "15", "label": "15" },
+            { "value": "16", "label": "16" },
+            { "value": "17", "label": "17" }
+          ]
+        },
+        {
+          "name": "class_night",
+          "label": "Preferred class night",
+          "type": "select",
+          "required": true,
+          "placeholder_label": "Select a night",
+          "field_comment": "TODO: replace with the school's REAL teens-only schedule",
+          "options": [
+            { "value": "TODO-night-1", "label": "TODO: weeknight A" },
+            { "value": "TODO-night-2", "label": "TODO: weeknight B" },
+            { "value": "TODO-saturday", "label": "TODO: Saturday session" }
+          ]
+        }
+      ]
+    }
+  },
+  "thank_you": {
+    "lead": "He's booked. 🥋",
+    "body": "Check your email — we'll confirm his class night shortly."
+  },
+  "proof_bar": {
+    "stats": [
+      { "value": "TODO: [N]", "label": "teens currently training" },
+      { "value": "TODO: [X] nights", "label": "teens-only classes a week" },
+      { "value": "TODO: [N]★", "label": "Google rating" }
+    ]
+  },
+  "problem": {
+    "eyebrow": "Sound familiar?",
+    "headline": "You're not worried he's a bad kid. You're worried he's drifting.",
+    "body": "He didn't ask for karate. The worry came from somewhere else — and if you're watching one of these, you already know which one.",
+    "checklist": [
+      "\"Screens have swallowed him — gaming till 1am, no outlet, no friends he sees in person.\"",
+      "\"He shrank at the middle-school jump. Slouching, mumbling, won't try anything new.\"",
+      "\"He quits everything. Two weeks of guitar, one season of soccer, a drawer of dropped hobbies.\"",
+      "\"He's walking home alone now. I want him able to handle himself.\"",
+      "\"He's not in trouble — he's just drifting. No structure, nothing he's working toward.\""
+    ],
+    "closing": "Every activity you've suggested got an eye-roll. This one he'll actually want — because it's nothing like the karate he's picturing."
+  },
+  "reframe": {
+    "variant": "notkid",
+    "eyebrow": "Read this part yourself",
+    "headline": "This isn't little-kid karate.",
+    "body": "Whatever you're picturing — forget it. This is a teens-only room. No 6-year-olds. No participation trophies. Here's the actual trade:",
+    "swaps": [
+      { "from": "Kiddie games and pool-noodle \"hi-ya\"", "to": "Real technique, drilled until it's yours" },
+      { "from": "Standing in lines waiting your turn", "to": "Real conditioning — you'll actually get strong" },
+      { "from": "Trophies for showing up", "to": "Real sparring, when you're ready and geared up" },
+      { "from": "Belts handed out on a schedule", "to": "Real rank you have to earn — nobody can hand it to you" }
+    ],
+    "reassurance": "And you're not going to be the oldest beginner in the room. Half our teen class started at 13 or later. Everyone in there was new once — recently."
+  },
+  "how_it_works": {
+    "eyebrow": "His first class, start to finish",
+    "headline": "No spotlight. No ceremony. Just train.",
+    "image": {
+      "src": "assets/class.webp",
+      "alt": "A line of teenage students in gis and gym clothes throwing punches in unison in a sunlit dojo while a black-belt instructor watches",
+      "width": 1692,
+      "height": 1148
+    },
+    "steps": [
+      { "title": "Book the free class", "body": "Pick a teens-only session — a night when the room is nothing but people his age." },
+      { "title": "Show up in gym clothes", "body": "No gi, no bowing ceremony, no getting singled out. He joins the warm-up like everyone else." },
+      { "title": "Train the full class, then decide", "body": "He does the real thing end to end. No pressure, no sales pitch in front of him." }
+    ]
+  },
+  "benefits": {
+    "eyebrow": "Two people have to say yes",
+    "headline": "One class. What each of you actually gets.",
+    "columns": [
+      {
+        "modifier": "parent",
+        "title": "What you see",
+        "items": [
+          "An hour a night off the screen — a real, physical outlet.",
+          "Confidence you can see: in his posture, his voice, how he carries himself.",
+          "Structure and a goal ladder — belts he works toward, week over week.",
+          "A coach in his corner who isn't you."
+        ]
+      },
+      {
+        "modifier": "teen",
+        "title": "What he gets",
+        "items": [
+          "Get strong — real conditioning, not warm-up games.",
+          "Learn to actually defend yourself.",
+          "Train with people your own age, not a room of little kids.",
+          "Earn rank nobody can hand you."
+        ]
+      }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "From a parent — and a teen who tried it",
+    "headline": "\"I thought it would be babyish.\"",
+    "items": [
+      {
+        "comment": "TODO: replace with a REAL parent quote + name + photo. HARD GATE.",
+        "quote": "\"He used to disappear into his room after school and not come out. Now he's got two nights a week he won't miss — and he's standing up straighter. I didn't expect that part.\"",
+        "name": "TODO: real parent",
+        "avatar": { "src": "assets/parent.jpg", "alt": "Portrait of a parent in her 40s", "width": 56, "height": 56 },
+        "placeholder": true
+      },
+      {
+        "comment": "TODO: replace with a REAL teen quote + name + photo. HARD GATE. The segment-unique asset — a teen in his own words.",
+        "variant": "teen",
+        "quote": "\"I thought it would be babyish. It's the hardest workout I do. I'm the only one of my friends who can actually say I train.\"",
+        "name": "TODO: real teen student, age 15",
+        "avatar": { "src": "assets/teen.jpg", "alt": "Portrait of a teenage student in a gym", "width": 56, "height": 56 },
+        "placeholder": true
+      }
+    ]
+  },
+  "risk_reversal": {
+    "headline": "If he walks out and says it's not for him, that's a complete answer.",
+    "body": "The free class costs you nothing and commits you to nothing. No contract, month-to-month after. If it's not for him, you'll know — and you'll never get a sales call. And if he asks when he can go back? That's the only sign you need.",
+    "signature": { "name": "TODO: school owner's name", "title": "" }
+  },
+  "faq": {
+    "eyebrow": "Good questions",
+    "headline": "What teen parents usually ask…",
+    "items": [
+      {
+        "q": "Is 14, 15, 16 too old to start?",
+        "a": "No — there's a dedicated beginner-friendly teens class, and late starters are the norm, not the exception. Most of the room started as teenagers. Nobody expects him to know anything on day one."
+      },
+      {
+        "q": "What if he tries it and quits like everything else?",
+        "a": "Then you've spent nothing to find out. The class is free, and after that it's month-to-month — no contract trap. But teens who stick past the first month tend to stay, because for once they're not being dragged; they're choosing it."
+      },
+      {
+        "q": "Is sparring safe?",
+        "comment": "TODO: confirm the school's real sparring policy + required gear.",
+        "a": "TODO: confirm with the school. (Common honest answer: sparring is earned, supervised, opt-in, and gear is required — beginners drill technique long before they ever spar.)"
+      },
+      {
+        "q": "Does he need to be in shape first?",
+        "a": "No — getting in shape is what the class builds. Conditioning is part of the training, not a prerequisite for it. He starts where he is."
+      },
+      {
+        "q": "Can girls join?",
+        "comment": "TODO: fill [N] girls currently training from school records.",
+        "a": "Yes — the teens class is co-ed. TODO: [N] girls currently train in it."
+      },
+      {
+        "q": "What happens when he turns 18?",
+        "comment": "Only teen→adult mention allowed (non-goal §4: no adult upsell).",
+        "a": "At 16+ he can train alongside the adult program, and there's a natural path into it at 18 — so the progress he builds now doesn't hit a wall."
+      }
+    ]
+  },
+  "final_cta": {
+    "headline": "Ready to claim his free class?",
+    "subheadline": "Free · teens-only · no experience needed",
+    "button_label": "Claim His Free Class"
+  },
+  "footer": {
+    "school_name": "Your Karate School",
+    "address": {
+      "text": "123 Example Street, Yourtown, ST 00000",
+      "href": "https://maps.google.com/?q=TODO+address"
+    },
+    "phone": {
+      "text": "(000) 000-0000",
+      "href": "tel:+10000000000"
+    }
+  }
+}

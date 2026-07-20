@@ -1,0 +1,207 @@
+{
+  "meta": {
+    "segment": "elementary",
+    "page_title": "Free Elementary Karate Class — Ages 6–11 · Focus, Listening, Confidence",
+    "meta_description": "A free 45-minute intro karate class for ages 6–11 — where focus, listening, and confidence are taught as physical skills, disguised as fun. No experience needed."
+  },
+  "config": {
+    "formspree_id": "FORM_ID_elementary",
+    "pixel_content_category": "elementary"
+  },
+  "hero": {
+    "badge": "100% FREE · AGES 6–11",
+    "headline": "Focus at school. Listening at home. [[Confidence everywhere else.]]",
+    "subheadline": "A free 45-minute intro class for ages 6–11 — where kids think they're just having fun.",
+    "image": {
+      "src": "assets/hero-2.webp",
+      "alt": "A focused elementary-age boy in a white karate gi holding a front stance in the dojo, other students lined up behind him",
+      "width": 1181,
+      "height": 787
+    },
+    "trust_items": [
+      "Ages 6–11",
+      "45 minutes",
+      "No experience needed"
+    ],
+    "route_link": {
+      "label": "Ages 3–5? This class is built for them →",
+      "href": "https://karate-landing-preschool.vercel.app"
+    },
+    "form": {
+      "heading": "Save your child's spot",
+      "subheading": "Takes 60 seconds. We'll email to confirm your time.",
+      "button_label": "Save My Child's Spot",
+      "disclaimer": "60-second signup · no card · no experience needed",
+      "fields": [
+        { "name": "parent_name", "label": "Parent's name", "type": "text", "autocomplete": "name", "required": true },
+        { "name": "child_name", "label": "Child's first name", "type": "text", "autocomplete": "off", "required": true },
+        {
+          "name": "child_age",
+          "label": "Child's age",
+          "type": "select",
+          "required": true,
+          "placeholder_label": "Select age",
+          "options": [
+            { "value": "6", "label": "6" },
+            { "value": "7", "label": "7" },
+            { "value": "8", "label": "8" },
+            { "value": "9", "label": "9" },
+            { "value": "10", "label": "10" },
+            { "value": "11", "label": "11" }
+          ]
+        },
+        { "name": "phone", "label": "Phone", "type": "tel", "autocomplete": "tel", "required": true },
+        { "name": "email", "label": "Email", "type": "email", "autocomplete": "email", "required": true },
+        {
+          "name": "class_time",
+          "label": "Preferred class time",
+          "type": "select",
+          "required": true,
+          "placeholder_label": "Select a time",
+          "options": [
+            { "value": "TODO-weekday-pm", "label": "Weekday afternoons" },
+            { "value": "TODO-weekday-evening", "label": "Weekday evenings" },
+            { "value": "TODO-saturday", "label": "Saturday mornings" }
+          ]
+        }
+      ]
+    }
+  },
+  "thank_you": {
+    "lead": "You're in! 🎉",
+    "body": "Check your email — we'll confirm your class time shortly."
+  },
+  "problem": {
+    "eyebrow": "Sound familiar?",
+    "headline": "You've said it five times. They still aren't moving.",
+    "body": "Getting through shouldn't feel like a battle. If you're watching one of these on repeat, you're not imagining it — and you're not the only one.",
+    "checklist": [
+      "\"He won't listen until I've raised my voice.\"",
+      "\"She can't focus long enough to finish anything.\"",
+      "\"He shrinks around other kids and won't speak up.\"",
+      "\"She's glued to a screen the second she's bored.\""
+    ],
+    "closing": "You've probably already tried a season of something — soccer, swim, gymnastics — hoping it would stick. The question isn't whether your kid is busy. It's whether anything is actually changing what you're seeing at home."
+  },
+  "reframe": {
+    "eyebrow": "Here's the reframe",
+    "headline": "You can't lecture a kid into focus. You can train it.",
+    "body": "Focus, self-control, and confidence aren't personality traits your child either has or doesn't. They're physical skills — and karate teaches them the way kids actually learn: by doing, repeating, and winning small. Disguised, the whole time, as fun.",
+    "items": [
+      { "icon": "focus", "title": "Focus", "description": "Holding a stance without wobbling — a whole body learning to stay put on purpose." },
+      { "icon": "self-control", "title": "Self-control", "description": "Stopping the instant the instructor says \"stop\" — the pause button, practiced until it's a habit." },
+      { "icon": "confidence", "title": "Confidence", "description": "Testing for the next belt in front of the whole class — earning it, out loud, in public." }
+    ]
+  },
+  "how_it_works": {
+    "eyebrow": "45 minutes, start to finish",
+    "headline": "What the class actually looks like",
+    "image": {
+      "src": "assets/class-2.webp",
+      "alt": "Two elementary-age students bowing to each other in white gis as a black-belt instructor watches, other kids seated behind them on the dojo mat",
+      "width": 1198,
+      "height": 798
+    },
+    "steps": [
+      { "title": "Warm-up game", "body": "A fast, laughing game to burn off the after-school jitters and get everyone in the room, together." },
+      { "title": "Technique of the day", "body": "One move — a punch, a block, a kick — taught step by step, slow enough to get right and celebrated when they do." },
+      { "title": "Partner drill", "body": "Working with another kid: taking turns, waiting, controlling the move. Self-control and respect, built in reps." },
+      { "title": "Mat chat", "body": "A 3-minute character lesson to close — focus, honesty, standing up for a friend. The part parents notice at home." }
+    ],
+    "belt_ladder": {
+      "caption": "Progress you <em>and</em> your kid can both see",
+      "rungs": [
+        { "color": "#ffffff", "line": "#c9c9c9", "name": "White belt", "time": "Day one" },
+        { "color": "#ffffff", "line": "#c9c9c9", "striped": true, "name": "First stripe", "time": "TODO: ~weeks" },
+        { "color": "#f2c200", "line": "#d4a900", "name": "Yellow belt", "time": "TODO: ~months" },
+        { "color": "#f08a00", "line": "#cf7500", "name": "Orange belt", "time": "TODO: ~months" },
+        { "color": "#2a9d3f", "line": "#1f7a30", "more": true, "name": "…and up", "time": "Keep going" }
+      ],
+      "note": "Every stripe and belt is a milestone your child earns and can point to — concrete proof that the focus and confidence are actually building."
+    }
+  },
+  "testimonials": {
+    "eyebrow": "From parents who were watching the same things",
+    "headline": "\"Something actually changed.\"",
+    "items": [
+      {
+        "quote": "\"His teacher pulled me aside at pickup — not to complain, for once — to ask what changed. He'd started raising his hand and finishing his work. That was three months into karate.\"",
+        "name": "TODO: real parent",
+        "avatar": { "src": "assets/review-4.webp", "alt": "", "width": 56, "height": 56 }
+      },
+      {
+        "quote": "\"Homework used to be a nightly fight. Now she sets a timer and just does it. I don't fully understand it, but I'll take it.\"",
+        "name": "TODO: real parent",
+        "avatar": { "src": "assets/review-5.webp", "alt": "", "width": 56, "height": 56 }
+      },
+      {
+        "quote": "\"He was the kid who never spoke up. Last week he told an older boy to stop picking on his friend — calm, not aggressive. I nearly cried.\"",
+        "name": "TODO: real parent",
+        "avatar": { "src": "assets/review-6.webp", "alt": "", "width": 56, "height": 56 }
+      }
+    ]
+  },
+  "instructor": {
+    "eyebrow": "Who's teaching",
+    "name": "TODO: Instructor name",
+    "bio": "TODO: one warm paragraph — years teaching this age, why they love the 6–11 stretch (the age where the lessons really stick), and a human detail. Keep it about the kids, not the trophies.",
+    "photo": {
+      "src": "assets/instructor-2.webp",
+      "alt": "A black-belt karate instructor standing on the dojo mat, holding out a folded yellow belt toward the camera",
+      "width": 1181,
+      "height": 787,
+      "placeholder": true
+    },
+    "credential_line": "TODO: rank/credential · <strong>trained specifically for ages 6–11</strong>"
+  },
+  "risk_reversal": {
+    "headline": "If they don't ask to come back, that's your answer.",
+    "body": "The class is free, and there's no contract to talk about. Your kid gets a vote — a real one. If they walk out and don't ask when they can go again, you've lost nothing but 45 minutes. And if they <strong>do</strong> ask? That's the only sign you need."
+  },
+  "faq": {
+    "eyebrow": "Good questions",
+    "headline": "Elementary parents usually ask…",
+    "items": [
+      {
+        "q": "Will it make him more aggressive?",
+        "a": "It's the opposite — and it's structural, not a marketing line. Every class ends with a mat chat on self-control and respect, and the whole point of the training is learning when <em>not</em> to use it. Kids who feel more capable pick fewer fights, not more."
+      },
+      {
+        "q": "What if she's not athletic?",
+        "a": "Perfect — this isn't a sport where the fastest kid wins. Progress is measured against your own child, one belt at a time. Plenty of our students started as the kid who sat out in gym class."
+      },
+      {
+        "q": "How long until we see changes?",
+        "a": "TODO: confirm with the school. (Common honest answer: small things — posture, eye contact, \"yes ma'am\" — show up in the first few weeks; the bigger focus-and-confidence shifts build over the first few months.)"
+      },
+      {
+        "q": "What does it cost after the free class?",
+        "a": "TODO: real program pricing. No hard sell at the free class — if your kid loved it, we'll walk you through the elementary program and the schedule, plainly, with the real numbers."
+      },
+      {
+        "q": "Are there belt-testing fees?",
+        "a": "TODO: confirm with the school and state it plainly — whether testing is included, and if there's a fee, exactly what it is. Don't leave this vague; hidden costs are the #1 trust-killer for this age group."
+      },
+      {
+        "q": "Can siblings try together?",
+        "a": "TODO: confirm with the school. (Common answer: yes — siblings in the 6–11 range are welcome in the same free class; a younger sibling under 6 is a better fit for the preschool class linked above.)"
+      }
+    ]
+  },
+  "final_cta": {
+    "headline": "Ready to save your child's spot?",
+    "subheadline": "Free · 45 minutes · no experience needed",
+    "button_label": "Save My Child's Spot"
+  },
+  "footer": {
+    "school_name": "Your Karate School",
+    "address": {
+      "text": "123 Example Street, Yourtown, ST 00000",
+      "href": "https://maps.google.com/?q=TODO+address"
+    },
+    "phone": {
+      "text": "(000) 000-0000",
+      "href": "tel:+10000000000"
+    }
+  }
+}

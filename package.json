@@ -1,0 +1,16 @@
+{
+  "name": "karate-landing-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "JSON-driven templating system for karate landing pages (preschool, elementary, teens, adults).",
+  "type": "module",
+  "scripts": {
+    "build": "node build.js",
+    "build:prod": "node build.js --production",
+    "lint": "node build.js --lint-only",
+    "test": "node tests/run-tests.js"
+  },
+  "dependencies": {
+    "mustache": "^4.2.0"
+  }
+}

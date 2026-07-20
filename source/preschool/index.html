@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TODO: replace with the real school name + program name (e.g. "Little Dragons") before launch -->
+  <title>Free Preschool Karate Class — Ages 3–5 · A First Class for First-Timers</title>
+  <!-- TODO: tune meta description to match the live ad angle -->
+  <meta name="description" content="A free 30-minute intro karate class built for ages 3–5. Play-based, gentle, and parents stay in the room. Too young? That's exactly who this class is for.">
+
+  <!-- Fonts: Bricolage Grotesque (headings) + Manrope (body) + Archivo (accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Bricolage+Grotesque:wght@600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- HTMX 2.0 blocks cross-origin requests by default (selfRequestsOnly).
+       Formspree is cross-origin, so we must opt in or the form silently won't POST. -->
+  <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
+
+  <!-- HTMX (latest stable 2.x) -->
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+
+  <!-- Meta pixel base -->
+  <!-- TODO: replace PIXEL_ID with the real Meta Pixel ID (SAME pixel as the 4–12 page).
+       Lead events on this page carry content_category: preschool for ad-set attribution. -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','PIXEL_ID'); fbq('track','PageView');
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- ============================================================= -->
+  <!-- HERO — headline + subhead + trust strip + form                -->
+  <!-- Locked imagery principle: ONE child, tight emotional shot,    -->
+  <!-- documentary realism (3–4 y/o mid-laugh in an oversized gi).   -->
+  <!-- ============================================================= -->
+  <header class="hero" id="top">
+    <div class="hero__inner">
+
+      <!-- Left column: the pitch -->
+      <div class="hero__copy">
+        <!-- Hero: the only above-fold image. Landscape scene — laughing preschooler
+             in an oversized gi, with other kids and watching parents behind (sells
+             "parents stay and watch"). ~81KB WebP, well under the 1.2MB page budget. -->
+        <img class="hero__photo" src="assets/hero.webp"
+             alt="A laughing preschool girl in an oversized white karate gi mid-class, with other children and watching parents behind her"
+             width="1192" height="798" fetchpriority="high">
+
+
+        <span class="badge">100% FREE · AGES 3–5</span>
+
+        <!-- Recommended headline (worry→hope, preschool). Match to the live ad angle. -->
+        <h1 class="hero__headline">
+          Too young for karate? <span class="accent-purple">That's exactly who this class is for.</span>
+        </h1>
+
+        <p class="hero__subhead">
+          A free 30-minute intro class for ages 3–5. Games, giggles, and their
+          first "yes ma'am." Parents stay and watch.
+        </p>
+
+        <!-- Trust strip -->
+        <ul class="trust-strip">
+          <li>Ages 3–5</li>
+          <li>Parents welcome</li>
+          <li>No experience — obviously</li>
+        </ul>
+      </div>
+
+      <!-- Right column: the form card -->
+      <div class="hero__form-wrap" id="book">
+        <div class="form-card">
+          <h2 class="form-card__title">Save your child's spot</h2>
+          <p class="form-card__sub">Takes 60 seconds. We'll email to confirm your time.</p>
+
+          <!-- action+method = no-JS fallback (browser posts, Formspree confirms).
+               hx-post = JS path (HTMX posts, JSON response, we swap to thank-you).
+               TODO: replace FORM_ID with a NEW Formspree form ID — preschool leads
+               MUST be segmented from the 4–12 page at the source. -->
+          <form id="lead-form" class="lead-form"
+                action="https://formspree.io/f/FORM_ID" method="POST"
+                hx-post="https://formspree.io/f/FORM_ID"
+                hx-swap="none"
+                hx-headers='{"Accept":"application/json"}'>
+            <label class="field">
+              <span class="field__label">Parent's name</span>
+              <input type="text" name="parent_name" autocomplete="name" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Child's first name</span>
+              <input type="text" name="child_name" autocomplete="off" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Child's age</span>
+              <select name="child_age" required>
+                <option value="" disabled selected>Select age</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Email</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Preferred class time</span>
+              <!-- TODO: replace with the school's REAL preschool schedule -->
+              <select name="class_time" required>
+                <option value="" disabled selected>Select a time</option>
+                <option value="TODO-weekday-am">Weekday mornings</option>
+                <option value="TODO-weekday-pm">Weekday afternoons</option>
+                <option value="TODO-saturday">Saturday mornings</option>
+              </select>
+            </label>
+
+            <!-- Honeypot anti-spam: hidden from humans -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp">
+
+            <button type="submit" class="btn btn--cta">Save My Child's Spot</button>
+            <p class="form-status" role="alert" hidden></p>
+            <p class="form-card__micro">60-second signup · no card · parents stay and watch</p>
+          </form>
+
+          <!-- US-3: age-routing integrity — send 6+ to the 4–12 page. -->
+          <!-- TODO: point href at the live 4–12 page URL (/free-class). -->
+          <p class="route-link"><a href="https://free-karate-landing.vercel.app/">Child older than 5? Start here →</a></p>
+
+          <!-- Thank-you state — revealed on successful submit by main.js -->
+          <!-- TODO: confirm follow-up wording matches the school's real process. -->
+          <div id="thanks" class="thanks" hidden>
+            <p class="thanks__lead">You're in! 🎉</p>
+            <p>Check your email — we'll confirm your class time shortly.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================= -->
+  <!-- PROBLEM — three worry statements in the parent's voice        -->
+  <!-- ============================================================= -->
+  <section class="section problem">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2 class="section__title">You're not sure they're ready.</h2>
+      <ul class="worries">
+        <li>"He won't sit still for five minutes."</li>
+        <li>"She's shy — she hides behind my leg with new people."</li>
+        <li>"I'm just not sure he's ready for something like this yet."</li>
+      </ul>
+      <p class="problem__body">
+        For most preschool parents, this would be their child's first structured
+        class of any kind. That nervous feeling is normal — and it's the whole
+        reason this class exists.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- REFRAME — readiness is the output, not the prerequisite       -->
+  <!-- ============================================================= -->
+  <section class="section reframe">
+    <div class="wrap">
+      <p class="eyebrow">Here's the reframe</p>
+      <h2 class="section__title">Readiness isn't required. It's what the class builds.</h2>
+      <p class="reframe__lead">
+        Your child doesn't need to sit still, take turns, or follow directions
+        <em>yet</em>. Those are the exact skills a first class starts to grow —
+        gently, through play.
+      </p>
+      <div class="reframe__grid">
+        <div class="reframe__item">
+          <span class="reframe__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0-9 9v5a2 2 0 0 0 2 2h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H3"/><path d="M12 3a9 9 0 0 1 9 9v5a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h3"/></svg>
+          </span>
+          <h3 class="reframe__title">Listening</h3>
+          <p>Tuning in to an instructor's voice in a room full of other kids.</p>
+        </div>
+        <div class="reframe__item">
+          <span class="reframe__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          </span>
+          <h3 class="reframe__title">Taking turns</h3>
+          <p>Waiting for a turn, then cheering on the friend who goes next.</p>
+        </div>
+        <div class="reframe__item">
+          <span class="reframe__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </span>
+          <h3 class="reframe__title">Following directions</h3>
+          <p>"Hands up, feet together" — following two-step directions, one game at a time.</p>
+        </div>
+      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">Save My Child's Spot</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- HOW THE CLASS WORKS — 4-step, 30-minute timeline              -->
+  <!-- ============================================================= -->
+  <section class="section how">
+    <div class="wrap">
+      <p class="eyebrow">30 minutes, start to finish</p>
+      <h2 class="section__title">What the class actually looks like</h2>
+      <img class="how__photo" src="assets/class.webp"
+           alt="A black-belt instructor kneeling to high-five a smiling preschool girl in a white gi, with parents watching from a bench behind them"
+           width="1192" height="802" loading="lazy">
+      <ol class="steps steps--timeline">
+        <li class="step">
+          <span class="step__num">1</span>
+          <h3 class="step__title">Circle-up game</h3>
+          <p>Everyone sits in a circle for a name game — a soft landing so no one feels put on the spot.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">2</span>
+          <h3 class="step__title">Animal-movement drill</h3>
+          <p>Bear crawls, crab walks, kangaroo hops — the wiggles come out and the giggles start.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">3</span>
+          <h3 class="step__title">One karate move</h3>
+          <p>Just one — a punch or a block — taught slow, celebrated big. Their first real "yes ma'am."</p>
+        </li>
+        <li class="step">
+          <span class="step__num">4</span>
+          <h3 class="step__title">High-five graduation</h3>
+          <p>A line of high-fives and a sticker. They leave feeling like they did something big — because they did.</p>
+        </li>
+      </ol>
+      <p class="how__note">
+        The instructor is trained specifically for this age group, and
+        <strong>you stay in the room the whole time</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SOCIAL PROOF — "I thought too young" angle                    -->
+  <!-- ⚠️ Real parent photos + quotes REQUIRED before scaling spend  -->
+  <!-- (carried risk from the parent campaign). AI photos = blocker. -->
+  <!-- ============================================================= -->
+  <section class="section proof">
+    <div class="wrap">
+      <p class="eyebrow">From parents who were unsure too</p>
+      <h2 class="section__title">"I thought she was too young…"</h2>
+
+      <div class="proof__quotes">
+        <!-- TODO: replace with REAL parent quote + name. AI/stock quotes are a scaling blocker. -->
+        <blockquote class="quote">
+          <p>"I honestly thought she was too young and would just cry. She was quiet
+            the first week — and now she picks out her gi the night before."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/review-1.webp" alt="" width="56" height="56" loading="lazy">
+            <cite>— Gabriela M.</cite>
+          </footer>
+        </blockquote>
+
+        <!-- TODO: replace with REAL parent quote + name. -->
+        <blockquote class="quote">
+          <p>"He cried the entire first class and clung to my leg. The instructor
+            said 'that's totally normal, come back next week.' Now he runs in."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/review-2.webp" alt="" width="56" height="56" loading="lazy">
+            <cite>— Danny K.</cite>
+          </footer>
+        </blockquote>
+
+        <!-- TODO: replace with REAL parent quote + name (optional third). -->
+        <blockquote class="quote">
+          <p>"It's his first ever activity. I didn't expect a 3-year-old to follow
+            along — but it's all games, so he doesn't even realize he's learning."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/review-3.webp" alt="" width="56" height="56" loading="lazy">
+            <cite>— Renée A.</cite>
+          </footer>
+        </blockquote>
+      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">Save My Child's Spot</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- INSTRUCTOR — one photo, one paragraph, credential             -->
+  <!-- ============================================================= -->
+  <section class="section instructor">
+    <div class="wrap wrap--narrow instructor__inner">
+      <img class="instructor__photo" src="assets/instructor.webp"
+           alt="A smiling black-belt karate instructor sitting cross-legged on the dojo mat, holding a sheet of star stickers"
+           width="1190" height="798" loading="lazy">
+      <div class="instructor__body">
+        <p class="eyebrow">Who's teaching</p>
+        <!-- TODO: real instructor name, bio, and credential. -->
+        <h2 class="section__title">Meet <span class="accent-purple">TODO: Instructor name</span></h2>
+        <p>
+          TODO: one warm paragraph — years teaching, why they love this age, and a
+          human detail. Keep it about the kids, not the trophies.
+        </p>
+        <p class="instructor__cred">
+          <!-- TODO: real credential/rank -->
+          TODO: rank/credential · <strong>trained specifically for ages 3–5</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- RISK REVERSAL — free class + explicit permission to fail       -->
+  <!-- ============================================================= -->
+  <section class="section reversal">
+    <div class="wrap wrap--narrow">
+      <h2 class="reversal__title">If they cling to your leg the whole time? That's fine. That's normal.</h2>
+      <p class="reversal__body">
+        The class is free, and there's no contract to think about. If your child
+        has a rough first day, that's completely okay — <strong>come back next
+        week, free.</strong> Some kids watch for three weeks before they join in.
+        We've seen it a hundred times.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FAQ — 6 age-specific questions (expandable via <details>)     -->
+  <!-- TODO: replace answers with the school's real specifics.       -->
+  <!-- ============================================================= -->
+  <section class="section faq">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Good questions</p>
+      <h2 class="section__title">Preschool parents usually ask…</h2>
+
+      <details class="faq__item">
+        <summary>Is my child too young?</summary>
+        <div class="faq__a">
+          <p>Almost certainly not. The class is built for ages 3–5, and readiness
+            is what it builds — not something your child needs to bring. If they can
+            walk and follow a simple game, they can start.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What if they cry or have a meltdown?</summary>
+        <div class="faq__a">
+          <p>Completely normal, and completely okay. You're right there in the room.
+            If they need to sit with you and watch, that's a fine first class — and
+            you're welcome back next week, free, to try again.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Do parents stay?</summary>
+        <div class="faq__a">
+          <p>Yes. For this age, parents stay in the room and watch the whole time.
+            No drop-off, no separation — you're part of the first class.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What should they wear?</summary>
+        <div class="faq__a">
+          <p>Comfy clothes they can move in — a t-shirt and stretchy pants are
+            perfect. Bare feet or grippy socks. Nothing to buy for the free class.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Do they need to be potty trained?</summary>
+        <div class="faq__a">
+          <!-- TODO: confirm the school's ACTUAL potty-training policy — this is a
+               real question preschool parents ask. Placeholder answer below. -->
+          <p>TODO: confirm with the school. (Common answer: potty training isn't
+            required for the free class since a parent stays in the room, but check
+            the school's policy before launch.)</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What happens after the free class?</summary>
+        <div class="faq__a">
+          <p>No pressure, no hard sell. If your child loved it, we'll walk you
+            through the preschool program and schedule. If it wasn't the right fit
+            yet, that's genuinely fine — many families come back a few months later.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FINAL CTA — scrolls back to the hero form                     -->
+  <!-- ============================================================= -->
+  <section class="section final-cta">
+    <div class="wrap wrap--narrow final-cta__inner">
+      <h2 class="final-cta__title">Ready to save your child's spot?</h2>
+      <p class="final-cta__sub">Free · 30 minutes · parents stay and watch</p>
+      <a href="#book" class="btn btn--cta btn--inline">Save My Child's Spot</a>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FOOTER — minimal, no nav, no extra exits                      -->
+  <!-- TODO: replace school name, address, phone, and map link.      -->
+  <!-- ============================================================= -->
+  <footer class="footer">
+    <div class="wrap wrap--narrow">
+      <p class="footer__name">Your Karate School</p>
+      <p class="footer__detail">
+        <!-- TODO: real address + map link -->
+        <a href="https://maps.google.com/?q=TODO+address">123 Example Street, Yourtown, ST 00000</a>
+      </p>
+      <p class="footer__detail">
+        <a href="tel:+10000000000">(000) 000-0000</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Mobile-only sticky CTA — scrolls to the hero form. Revealed once the form
+       scrolls out of view; hidden again while the form is on screen or after submit. -->
+  <a href="#book" class="sticky-cta" id="sticky-cta">Save My Child's Spot</a>
+
+</body>
+</html>

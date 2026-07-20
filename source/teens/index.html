@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TODO: replace with the real school name + teen program name before launch -->
+  <title>Free Teen Karate Class — Ages 12–17 · Teens-Only, Real Training</title>
+  <!-- TODO: tune meta description to match the live ad angle -->
+  <meta name="description" content="A free intro karate class for teens 12–17 — teens-only, no children in the room. Real technique, real conditioning, real rank he has to earn. No experience needed.">
+
+  <!-- Fonts: Bricolage Grotesque (headings) + Manrope (body) + Archivo (accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Bricolage+Grotesque:wght@600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- HTMX 2.0 blocks cross-origin requests by default (selfRequestsOnly).
+       Formspree is cross-origin, so we must opt in or the form silently won't POST. -->
+  <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
+
+  <!-- HTMX (latest stable 2.x) -->
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+
+  <!-- Meta pixel base -->
+  <!-- TODO: replace PIXEL_ID with the real Meta Pixel ID (SAME pixel as the 4–12,
+       preschool, and elementary pages). Lead events on this page carry
+       content_category: teens for ad-set attribution — keep it distinct so
+       reporting isn't cannibalized. -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','PIXEL_ID'); fbq('track','PageView');
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- ============================================================= -->
+  <!-- HERO — headline + subhead + trust strip + form                -->
+  <!-- Locked imagery principle: ONE teen, tight, documentary        -->
+  <!-- realism. Teen version: a 14–16 y/o mid-technique — sweat,      -->
+  <!-- effort, focus. Athletic, NOT cute. Darker/moodier temperature. -->
+  <!-- HARD RULE: no child under 12 appears anywhere on this page.    -->
+  <!-- ============================================================= -->
+  <header class="hero" id="top">
+    <div class="hero__inner">
+
+      <!-- Left column: the pitch -->
+      <div class="hero__copy">
+        <!-- Hero: the only above-fold image. 4:5 — a teen in a white gi and black
+             belt mid-front-kick, visible effort, dramatic window side-lighting,
+             heavy bags in the dojo behind. Athletic intensity, zero cuteness.
+             No child under 12. -->
+        <img class="hero__photo" src="assets/hero.jpg"
+             alt="A teenage boy in a white karate gi and black belt holding a strong front-kick mid-technique in a sunlit dojo, heavy bags behind him"
+             width="432" height="544" fetchpriority="high">
+
+
+        <span class="badge">100% FREE · AGES 12–17</span>
+
+        <!-- Recommended headline (teen-proof — kills the "little kids" veto above
+             the fold). Match to the live ad angle. -->
+        <h1 class="hero__headline">
+          One free class. No little kids. <span class="accent-purple">Real training.</span>
+        </h1>
+
+        <p class="hero__subhead">
+          A free intro class for teens 12–17. Teens-only — no children in the
+          room. He trains with people his own age from day one.
+        </p>
+
+        <!-- Trust strip -->
+        <ul class="trust-strip">
+          <li>Ages 12–17</li>
+          <li>Teens-only class</li>
+          <li>No experience needed</li>
+        </ul>
+      </div>
+
+      <!-- Right column: the form card -->
+      <div class="hero__form-wrap" id="book">
+        <div class="form-card">
+          <h2 class="form-card__title">Claim his free class</h2>
+          <p class="form-card__sub">Takes 60 seconds. We'll email to confirm his time.</p>
+
+          <!-- action+method = no-JS fallback (browser posts, Formspree confirms).
+               hx-post = JS path (HTMX posts, JSON response, we swap to thank-you).
+               TODO: replace FORM_ID with a NEW Formspree form ID — teen leads
+               MUST be segmented from the preschool, elementary, and 4–12 pages. -->
+          <form id="lead-form" class="lead-form"
+                action="https://formspree.io/f/FORM_ID" method="POST"
+                hx-post="https://formspree.io/f/FORM_ID"
+                hx-swap="none"
+                hx-headers='{"Accept":"application/json"}'>
+            <label class="field">
+              <span class="field__label">Parent's name</span>
+              <input type="text" name="parent_name" autocomplete="name" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Email</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Teen's first name</span>
+              <input type="text" name="teen_name" autocomplete="off" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Teen's age</span>
+              <!-- Teen age gates routing to the right teens-only session. -->
+              <select name="teen_age" required>
+                <option value="" disabled selected>Select age</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Preferred class night</span>
+              <!-- TODO: replace with the school's REAL teens-only schedule -->
+              <select name="class_night" required>
+                <option value="" disabled selected>Select a night</option>
+                <option value="TODO-night-1">TODO: weeknight A</option>
+                <option value="TODO-night-2">TODO: weeknight B</option>
+                <option value="TODO-saturday">TODO: Saturday session</option>
+              </select>
+            </label>
+
+            <!-- Honeypot anti-spam: hidden from humans -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp">
+
+            <button type="submit" class="btn btn--cta">Claim His Free Class</button>
+            <p class="form-status" role="alert" hidden></p>
+            <p class="form-card__micro">60-second signup · no card · no experience needed</p>
+          </form>
+
+          <!-- Age-routing integrity — send under-12 to the elementary page. -->
+          <p class="route-link"><a href="https://karate-landing-elementary.vercel.app">Under 12? This class is built for them →</a></p>
+
+          <!-- Thank-you state — revealed on successful submit by main.js -->
+          <!-- TODO: confirm follow-up wording matches the school's real process. -->
+          <div id="thanks" class="thanks" hidden>
+            <p class="thanks__lead">He's booked. 🥋</p>
+            <p>Check your email — we'll confirm his class night shortly.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================= -->
+  <!-- PROOF BAR — teens-only proof points.                          -->
+  <!-- TODO: fill [N] from school records + Google.                  -->
+  <!-- ============================================================= -->
+  <section class="proof-bar">
+    <div class="wrap proof-bar__inner">
+      <div class="proof-stat">
+        <span class="proof-stat__num">TODO: [N]</span>
+        <span class="proof-stat__label">teens currently training</span>
+      </div>
+      <div class="proof-stat">
+        <span class="proof-stat__num">TODO: [X] nights</span>
+        <span class="proof-stat__label">teens-only classes a week</span>
+      </div>
+      <div class="proof-stat">
+        <span class="proof-stat__num">TODO: [N]★</span>
+        <span class="proof-stat__label">Google rating</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- PROBLEM — the five parent worry triggers as a recognition     -->
+  <!-- list, in the parent's voice. Empathy checklist pattern.       -->
+  <!-- ============================================================= -->
+  <section class="section problem">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2 class="section__title">You're not worried he's a bad kid. You're worried he's drifting.</h2>
+      <p class="problem__lead">
+        He didn't ask for karate. The worry came from somewhere else — and if
+        you're watching one of these, you already know which one.
+      </p>
+      <ul class="worries">
+        <li>"Screens have swallowed him — gaming till 1am, no outlet, no friends he sees in person."</li>
+        <li>"He shrank at the middle-school jump. Slouching, mumbling, won't try anything new."</li>
+        <li>"He quits everything. Two weeks of guitar, one season of soccer, a drawer of dropped hobbies."</li>
+        <li>"He's walking home alone now. I want him able to handle himself."</li>
+        <li>"He's not in trouble — he's just drifting. No structure, nothing he's working toward."</li>
+      </ul>
+      <p class="problem__body">
+        Every activity you've suggested got an eye-roll. This one he'll actually
+        want — because it's nothing like the karate he's picturing.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- "THIS ISN'T LITTLE-KID KARATE" — the structural answer to the -->
+  <!-- teen veto. Written second-person TO THE TEEN. The forwardable -->
+  <!-- "show this to your teen" moment. Every claim must be true for  -->
+  <!-- the actual school (acceptance criteria). -->
+  <!-- TODO: confirm the school actually runs sparring + earned rank  -->
+  <!-- exactly as claimed. Do NOT promise programs the school doesn't -->
+  <!-- run. -->
+  <!-- ============================================================= -->
+  <section class="section notkid">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Read this part yourself</p>
+      <h2 class="section__title">This isn't little-kid karate.</h2>
+      <p class="notkid__lead">
+        Whatever you're picturing — forget it. This is a teens-only room. No
+        6-year-olds. No participation trophies. Here's the actual trade:
+      </p>
+
+      <ul class="swap">
+        <li class="swap__row">
+          <span class="swap__from"><s>Kiddie games and pool-noodle "hi-ya"</s></span>
+          <span class="swap__arrow" aria-hidden="true">→</span>
+          <span class="swap__to">Real technique, drilled until it's yours</span>
+        </li>
+        <li class="swap__row">
+          <span class="swap__from"><s>Standing in lines waiting your turn</s></span>
+          <span class="swap__arrow" aria-hidden="true">→</span>
+          <span class="swap__to">Real conditioning — you'll actually get strong</span>
+        </li>
+        <li class="swap__row">
+          <span class="swap__from"><s>Trophies for showing up</s></span>
+          <span class="swap__arrow" aria-hidden="true">→</span>
+          <span class="swap__to">Real sparring, when you're ready and geared up</span>
+        </li>
+        <li class="swap__row">
+          <span class="swap__from"><s>Belts handed out on a schedule</s></span>
+          <span class="swap__arrow" aria-hidden="true">→</span>
+          <span class="swap__to">Real rank you have to earn — nobody can hand it to you</span>
+        </li>
+      </ul>
+
+      <p class="notkid__reassure">
+        And you're not going to be the oldest beginner in the room. Half our teen
+        class started at 13 or later. Everyone in there was new once — recently.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- HOW IT WORKS — first-class walkthrough, teen-anxiety-aware.    -->
+  <!-- The "no spotlight" promise answers the embarrassment fear.     -->
+  <!-- ============================================================= -->
+  <section class="section how">
+    <div class="wrap">
+      <p class="eyebrow">His first class, start to finish</p>
+      <h2 class="section__title">No spotlight. No ceremony. Just train.</h2>
+      <!-- Teens-only wide training shot: a line of teens (mixed gender) throwing
+           punches in unison while a black-belt instructor watches — everyone
+           visibly 12–17. This image IS the "no little kids" proof. No under-12. -->
+      <img class="how__photo" src="assets/class.webp"
+           alt="A line of teenage students in gis and gym clothes throwing punches in unison in a sunlit dojo while a black-belt instructor watches"
+           width="1692" height="1148" loading="lazy">
+      <ol class="steps steps--timeline">
+        <li class="step">
+          <span class="step__num">1</span>
+          <h3 class="step__title">Book the free class</h3>
+          <p>Pick a teens-only session — a night when the room is nothing but people his age.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">2</span>
+          <h3 class="step__title">Show up in gym clothes</h3>
+          <p>No gi, no bowing ceremony, no getting singled out. He joins the warm-up like everyone else.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">3</span>
+          <h3 class="step__title">Train the full class, then decide</h3>
+          <p>He does the real thing end to end. No pressure, no sales pitch in front of him.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- BENEFITS — split panel. What the parent sees / what the teen   -->
+  <!-- gets. The headline sells the parent; the right column survives -->
+  <!-- the teen's over-the-shoulder read. -->
+  <!-- ============================================================= -->
+  <section class="section benefits">
+    <div class="wrap">
+      <p class="eyebrow">Two people have to say yes</p>
+      <h2 class="section__title">One class. What each of you actually gets.</h2>
+
+      <div class="split">
+        <div class="split__col split__col--parent">
+          <p class="split__who">What you see</p>
+          <ul class="split__list">
+            <li>An hour a night off the screen — a real, physical outlet.</li>
+            <li>Confidence you can see: in his posture, his voice, how he carries himself.</li>
+            <li>Structure and a goal ladder — belts he works toward, week over week.</li>
+            <li>A coach in his corner who isn't you.</li>
+          </ul>
+        </div>
+        <div class="split__col split__col--teen">
+          <p class="split__who">What he gets</p>
+          <ul class="split__list">
+            <li>Get strong — real conditioning, not warm-up games.</li>
+            <li>Learn to actually defend yourself.</li>
+            <li>Train with people your own age, not a room of little kids.</li>
+            <li>Earn rank nobody can hand you.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">Claim His Free Class</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SOCIAL PROOF — one parent + one teen testimonial.             -->
+  <!-- ⚠️ HARD GATE: real photos + quotes REQUIRED before any paid   -->
+  <!-- traffic (FTC/deception risk). AI/stock = launch-only stopgap,  -->
+  <!-- swap before scaling spend (same rule as the sibling pages).    -->
+  <!-- ============================================================= -->
+  <section class="section proof">
+    <div class="wrap">
+      <p class="eyebrow">From a parent — and a teen who tried it</p>
+      <h2 class="section__title">"I thought it would be babyish."</h2>
+
+      <div class="proof__quotes">
+        <!-- TODO: replace with a REAL parent quote + name + photo. HARD GATE. -->
+        <blockquote class="quote">
+          <p>"He used to disappear into his room after school and not come out. Now
+            he's got two nights a week he won't miss — and he's standing up
+            straighter. I didn't expect that part."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/parent.jpg" alt="Portrait of a parent in her 40s" width="56" height="56" loading="lazy">
+            <cite>— TODO: real parent</cite>
+          </footer>
+        </blockquote>
+
+        <!-- TODO: replace with a REAL teen quote + name + photo. HARD GATE.
+             The segment-unique asset — a teen in his own words. -->
+        <blockquote class="quote quote--teen">
+          <p>"I thought it would be babyish. It's the hardest workout I do. I'm
+            the only one of my friends who can actually say I train."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/teen.jpg" alt="Portrait of a teenage student in a gym" width="56" height="56" loading="lazy">
+            <cite>— TODO: real teen student, age 15</cite>
+          </footer>
+        </blockquote>
+      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">Claim His Free Class</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- RISK REVERSAL — the free class + the teen-veto promise.        -->
+  <!-- ============================================================= -->
+  <section class="section reversal">
+    <div class="wrap wrap--narrow">
+      <h2 class="reversal__title">If he walks out and says it's not for him, that's a complete answer.</h2>
+      <p class="reversal__body">
+        The free class costs you nothing and commits you to nothing. No contract,
+        month-to-month after. If it's not for him, you'll know — and you'll never
+        get a sales call. And if he asks when he can go back? That's the only sign
+        you need.
+      </p>
+      <!-- TODO: swap for the school owner's real name + signed personal promise
+           (Caveat-font signature variant per the design system). -->
+      <p class="reversal__signoff">— TODO: school owner's name</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FAQ — teen-specific objections (expandable via <details>).     -->
+  <!-- TODO: replace answers with the school's real specifics.        -->
+  <!-- ============================================================= -->
+  <section class="section faq">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Good questions</p>
+      <h2 class="section__title">What teen parents usually ask…</h2>
+
+      <details class="faq__item">
+        <summary>Is 14, 15, 16 too old to start?</summary>
+        <div class="faq__a">
+          <p>No — there's a dedicated beginner-friendly teens class, and late
+            starters are the norm, not the exception. Most of the room started as
+            teenagers. Nobody expects him to know anything on day one.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What if he tries it and quits like everything else?</summary>
+        <div class="faq__a">
+          <p>Then you've spent nothing to find out. The class is free, and after
+            that it's month-to-month — no contract trap. But teens who stick past
+            the first month tend to stay, because for once they're not being
+            dragged; they're choosing it.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Is sparring safe?</summary>
+        <div class="faq__a">
+          <!-- TODO: confirm the school's real sparring policy + required gear. -->
+          <p>TODO: confirm with the school. (Common honest answer: sparring is
+            earned, supervised, opt-in, and gear is required — beginners drill
+            technique long before they ever spar.)</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Does he need to be in shape first?</summary>
+        <div class="faq__a">
+          <p>No — getting in shape is what the class builds. Conditioning is part
+            of the training, not a prerequisite for it. He starts where he is.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Can girls join?</summary>
+        <div class="faq__a">
+          <!-- TODO: fill [N] girls currently training from school records. -->
+          <p>Yes — the teens class is co-ed. TODO: [N] girls currently train in it.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What happens when he turns 18?</summary>
+        <div class="faq__a">
+          <!-- Only teen→adult mention allowed (non-goal §4: no adult upsell). -->
+          <p>At 16+ he can train alongside the adult program, and there's a natural
+            path into it at 18 — so the progress he builds now doesn't hit a wall.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FINAL CTA — scrolls back to the hero form                     -->
+  <!-- ============================================================= -->
+  <section class="section final-cta">
+    <div class="wrap wrap--narrow final-cta__inner">
+      <h2 class="final-cta__title">Ready to claim his free class?</h2>
+      <p class="final-cta__sub">Free · teens-only · no experience needed</p>
+      <a href="#book" class="btn btn--cta btn--inline">Claim His Free Class</a>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FOOTER — minimal, no nav, no extra exits                      -->
+  <!-- TODO: replace school name, address, phone, and map link.      -->
+  <!-- ============================================================= -->
+  <footer class="footer">
+    <div class="wrap wrap--narrow">
+      <p class="footer__name">Your Karate School</p>
+      <p class="footer__detail">
+        <!-- TODO: real address + map link -->
+        <a href="https://maps.google.com/?q=TODO+address">123 Example Street, Yourtown, ST 00000</a>
+      </p>
+      <p class="footer__detail">
+        <a href="tel:+10000000000">(000) 000-0000</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Mobile-only sticky CTA — scrolls to the hero form. Revealed once the form
+       scrolls out of view; hidden again while the form is on screen or after submit. -->
+  <a href="#book" class="sticky-cta" id="sticky-cta">Claim His Free Class</a>
+
+</body>
+</html>

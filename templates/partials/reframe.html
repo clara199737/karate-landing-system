@@ -1,0 +1,39 @@
+{{#reframe}}  <!-- ============================================================= -->
+  <!-- REFRAME                                                       -->
+  <!-- ============================================================= -->
+  <section class="section {{{variant}}}">
+    <div class="wrap{{#wrap_narrow}} wrap--narrow{{/wrap_narrow}}">
+      <p class="eyebrow">{{{eyebrow}}}</p>
+      <h2 class="section__title">{{{headline}}}</h2>
+      <p class="{{{variant}}}__lead">
+        {{{body}}}
+      </p>
+
+{{#swaps.length}}      <ul class="swap">
+{{#swaps}}        <li class="swap__row">
+          <span class="swap__from"><s>{{{from}}}</s></span>
+          <span class="swap__arrow" aria-hidden="true">→</span>
+          <span class="swap__to">{{{to}}}</span>
+        </li>
+{{/swaps}}      </ul>
+
+{{/swaps.length}}{{#items.length}}      <div class="reframe__grid">
+{{#items}}        <div class="reframe__item">
+          <span class="reframe__icon" aria-hidden="true">
+            {{{icon_svg}}}
+          </span>
+          <h3 class="reframe__title">{{{title}}}</h3>
+          <p>{{{description}}}</p>
+        </div>
+{{/items}}      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">{{{cta_label}}}</a>
+      </div>
+{{/items.length}}{{#reassurance}}      <p class="{{{variant}}}__reassure">
+        {{{.}}}
+      </p>
+{{/reassurance}}    </div>
+  </section>
+
+{{/reframe}}

@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TODO: replace with the real school name + elementary program name before launch -->
+  <title>Free Elementary Karate Class — Ages 6–11 · Focus, Listening, Confidence</title>
+  <!-- TODO: tune meta description to match the live ad angle -->
+  <meta name="description" content="A free 45-minute intro karate class for ages 6–11 — where focus, listening, and confidence are taught as physical skills, disguised as fun. No experience needed.">
+
+  <!-- Fonts: Bricolage Grotesque (headings) + Manrope (body) + Archivo (accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Bricolage+Grotesque:wght@600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- HTMX 2.0 blocks cross-origin requests by default (selfRequestsOnly).
+       Formspree is cross-origin, so we must opt in or the form silently won't POST. -->
+  <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
+
+  <!-- HTMX (latest stable 2.x) -->
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+
+  <!-- Meta pixel base -->
+  <!-- TODO: replace PIXEL_ID with the real Meta Pixel ID (SAME pixel as the 4–12 and
+       preschool pages). Lead events on this page carry content_category: elementary
+       for ad-set attribution — keep it distinct so reporting isn't cannibalized. -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','PIXEL_ID'); fbq('track','PageView');
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- ============================================================= -->
+  <!-- HERO — headline + subhead + trust strip + form                -->
+  <!-- Locked imagery principle: ONE child, tight emotional shot,    -->
+  <!-- documentary realism. Elementary version: an 8–9 y/o in a      -->
+  <!-- focused, chin-up "stands taller" moment — NOT action/sparring.-->
+  <!-- ============================================================= -->
+  <header class="hero" id="top">
+    <div class="hero__inner">
+
+      <!-- Left column: the pitch -->
+      <div class="hero__copy">
+        <!-- Hero: the only above-fold image. 3:2 with left negative space —
+             an elementary-age boy holding a focused front stance in a white gi.
+             Same dojo + window light as the preschool page so the site reads
+             as one real place. -->
+        <img class="hero__photo" src="assets/hero-2.webp"
+             alt="A focused elementary-age boy in a white karate gi holding a front stance in the dojo, other students lined up behind him"
+             width="1181" height="787" fetchpriority="high">
+
+
+        <span class="badge">100% FREE · AGES 6–11</span>
+
+        <!-- Recommended headline (worry→hope, elementary). Match to the live ad angle.
+             A/B note: if the discipline ad set dominates traffic, test promoting the
+             "said it five times" hook to the hero for tighter ad-to-page match. -->
+        <h1 class="hero__headline">
+          Focus at school. Listening at home. <span class="accent-purple">Confidence everywhere else.</span>
+        </h1>
+
+        <p class="hero__subhead">
+          A free 45-minute intro class for ages 6–11 — where kids think they're
+          just having fun.
+        </p>
+
+        <!-- Trust strip -->
+        <ul class="trust-strip">
+          <li>Ages 6–11</li>
+          <li>45 minutes</li>
+          <li>No experience needed</li>
+        </ul>
+      </div>
+
+      <!-- Right column: the form card -->
+      <div class="hero__form-wrap" id="book">
+        <div class="form-card">
+          <h2 class="form-card__title">Save your child's spot</h2>
+          <p class="form-card__sub">Takes 60 seconds. We'll email to confirm your time.</p>
+
+          <!-- action+method = no-JS fallback (browser posts, Formspree confirms).
+               hx-post = JS path (HTMX posts, JSON response, we swap to thank-you).
+               TODO: replace FORM_ID with a NEW Formspree form ID — elementary leads
+               MUST be segmented from the preschool and 4–12 pages at the source. -->
+          <form id="lead-form" class="lead-form"
+                action="https://formspree.io/f/FORM_ID" method="POST"
+                hx-post="https://formspree.io/f/FORM_ID"
+                hx-swap="none"
+                hx-headers='{"Accept":"application/json"}'>
+            <label class="field">
+              <span class="field__label">Parent's name</span>
+              <input type="text" name="parent_name" autocomplete="name" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Child's first name</span>
+              <input type="text" name="child_name" autocomplete="off" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Child's age</span>
+              <select name="child_age" required>
+                <option value="" disabled selected>Select age</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Email</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Preferred class time</span>
+              <!-- TODO: replace with the school's REAL elementary schedule -->
+              <select name="class_time" required>
+                <option value="" disabled selected>Select a time</option>
+                <option value="TODO-weekday-pm">Weekday afternoons</option>
+                <option value="TODO-weekday-evening">Weekday evenings</option>
+                <option value="TODO-saturday">Saturday mornings</option>
+              </select>
+            </label>
+
+            <!-- Honeypot anti-spam: hidden from humans -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp">
+
+            <button type="submit" class="btn btn--cta">Save My Child's Spot</button>
+            <p class="form-status" role="alert" hidden></p>
+            <p class="form-card__micro">60-second signup · no card · no experience needed</p>
+          </form>
+
+          <!-- US-3: age-routing integrity — send under-6 to the preschool page. -->
+          <p class="route-link"><a href="https://karate-landing-preschool.vercel.app">Ages 3–5? This class is built for them →</a></p>
+
+          <!-- Thank-you state — revealed on successful submit by main.js -->
+          <!-- TODO: confirm follow-up wording matches the school's real process. -->
+          <div id="thanks" class="thanks" hidden>
+            <p class="thanks__lead">You're in! 🎉</p>
+            <p>Check your email — we'll confirm your class time shortly.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================= -->
+  <!-- PROBLEM — four observed behaviors in the parent's voice.      -->
+  <!-- Leads with the proven "said it five times" hook VERBATIM so   -->
+  <!-- discipline-angle ad traffic feels seen (US-2 message-match).  -->
+  <!-- ============================================================= -->
+  <section class="section problem">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2 class="section__title">You've said it five times. They still aren't moving.</h2>
+      <p class="problem__lead">
+        Getting through shouldn't feel like a battle. If you're watching one of
+        these on repeat, you're not imagining it — and you're not the only one.
+      </p>
+      <ul class="worries">
+        <li>"He won't listen until I've raised my voice."</li>
+        <li>"She can't focus long enough to finish anything."</li>
+        <li>"He shrinks around other kids and won't speak up."</li>
+        <li>"She's glued to a screen the second she's bored."</li>
+      </ul>
+      <p class="problem__body">
+        You've probably already tried a season of something — soccer, swim,
+        gymnastics — hoping it would stick. The question isn't whether your kid is
+        busy. It's whether anything is actually changing what you're seeing at home.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- REFRAME — focus/self-control/confidence are trainable skills  -->
+  <!-- ============================================================= -->
+  <section class="section reframe">
+    <div class="wrap">
+      <p class="eyebrow">Here's the reframe</p>
+      <h2 class="section__title">You can't lecture a kid into focus. You can train it.</h2>
+      <p class="reframe__lead">
+        Focus, self-control, and confidence aren't personality traits your child
+        either has or doesn't. They're physical skills — and karate teaches them
+        the way kids actually learn: by doing, repeating, and winning small.
+        Disguised, the whole time, as fun.
+      </p>
+      <div class="reframe__grid">
+        <div class="reframe__item">
+          <span class="reframe__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></svg>
+          </span>
+          <h3 class="reframe__title">Focus</h3>
+          <p>Holding a stance without wobbling — a whole body learning to stay put on purpose.</p>
+        </div>
+        <div class="reframe__item">
+          <span class="reframe__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h8"/><circle cx="12" cy="12" r="10"/></svg>
+          </span>
+          <h3 class="reframe__title">Self-control</h3>
+          <p>Stopping the instant the instructor says "stop" — the pause button, practiced until it's a habit.</p>
+        </div>
+        <div class="reframe__item">
+          <span class="reframe__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 15 8.5 22 9.5 17 14.5 18.5 21.5 12 18 5.5 21.5 7 14.5 2 9.5 9 8.5z"/></svg>
+          </span>
+          <h3 class="reframe__title">Confidence</h3>
+          <p>Testing for the next belt in front of the whole class — earning it, out loud, in public.</p>
+        </div>
+      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">Save My Child's Spot</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- HOW THE CLASS WORKS — 4-step, 45-minute timeline + belt ladder -->
+  <!-- US-4: the belt ladder is always visible — no accordion/tabs.   -->
+  <!-- ============================================================= -->
+  <section class="section how">
+    <div class="wrap">
+      <p class="eyebrow">45 minutes, start to finish</p>
+      <h2 class="section__title">What the class actually looks like</h2>
+      <img class="how__photo" src="assets/class-2.webp"
+           alt="Two elementary-age students bowing to each other in white gis as a black-belt instructor watches, other kids seated behind them on the dojo mat"
+           width="1198" height="798" loading="lazy">
+      <ol class="steps steps--timeline">
+        <li class="step">
+          <span class="step__num">1</span>
+          <h3 class="step__title">Warm-up game</h3>
+          <p>A fast, laughing game to burn off the after-school jitters and get everyone in the room, together.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">2</span>
+          <h3 class="step__title">Technique of the day</h3>
+          <p>One move — a punch, a block, a kick — taught step by step, slow enough to get right and celebrated when they do.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">3</span>
+          <h3 class="step__title">Partner drill</h3>
+          <p>Working with another kid: taking turns, waiting, controlling the move. Self-control and respect, built in reps.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">4</span>
+          <h3 class="step__title">Mat chat</h3>
+          <p>A 3-minute character lesson to close — focus, honesty, standing up for a friend. The part parents notice at home.</p>
+        </li>
+      </ol>
+
+      <!-- Belt ladder — the visible progress system. Elementary parents buy
+           trackable improvement, so this is a first-class selling point.
+           TODO: replace belts + timeframes with the school's ACTUAL system.
+           Do NOT ship a generic ladder — parents will ask about the real one. -->
+      <div class="belt-ladder">
+        <p class="belt-ladder__caption">Progress you <em>and</em> your kid can both see</p>
+        <ol class="belt-ladder__track">
+          <li class="belt-rung">
+            <span class="belt-chip" style="--belt:#ffffff;--belt-line:#c9c9c9;"></span>
+            <span class="belt-rung__name">White belt</span>
+            <span class="belt-rung__time">Day one</span>
+          </li>
+          <li class="belt-rung">
+            <span class="belt-chip belt-chip--striped" style="--belt:#ffffff;--belt-line:#c9c9c9;"></span>
+            <span class="belt-rung__name">First stripe</span>
+            <span class="belt-rung__time">TODO: ~weeks</span>
+          </li>
+          <li class="belt-rung">
+            <span class="belt-chip" style="--belt:#f2c200;--belt-line:#d4a900;"></span>
+            <span class="belt-rung__name">Yellow belt</span>
+            <span class="belt-rung__time">TODO: ~months</span>
+          </li>
+          <li class="belt-rung">
+            <span class="belt-chip" style="--belt:#f08a00;--belt-line:#cf7500;"></span>
+            <span class="belt-rung__name">Orange belt</span>
+            <span class="belt-rung__time">TODO: ~months</span>
+          </li>
+          <li class="belt-rung belt-rung--more">
+            <span class="belt-chip" style="--belt:#2a9d3f;--belt-line:#1f7a30;"></span>
+            <span class="belt-rung__name">…and up</span>
+            <span class="belt-rung__time">Keep going</span>
+          </li>
+        </ol>
+        <p class="belt-ladder__note">
+          Every stripe and belt is a milestone your child earns and can point to —
+          concrete proof that the focus and confidence are actually building.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SOCIAL PROOF — outcome-matched testimonials                   -->
+  <!-- ⚠️ HARD GATE: real parent photos + quotes REQUIRED before any  -->
+  <!-- paid traffic (FTC/deception risk). AI/stock quotes = blocker. -->
+  <!-- Story targets: teacher-noticed-focus / homework-battles-eased /-->
+  <!-- stood-up-for-themselves.                                       -->
+  <!-- ============================================================= -->
+  <section class="section proof">
+    <div class="wrap">
+      <p class="eyebrow">From parents who were watching the same things</p>
+      <h2 class="section__title">"Something actually changed."</h2>
+
+      <div class="proof__quotes">
+        <!-- TODO: replace with REAL parent quote + name. AI/stock quotes are a HARD GATE. -->
+        <blockquote class="quote">
+          <p>"His teacher pulled me aside at pickup — not to complain, for once — to
+            ask what changed. He'd started raising his hand and finishing his work.
+            That was three months into karate."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/review-4.webp" alt="" width="56" height="56" loading="lazy">
+            <cite>— TODO: real parent</cite>
+          </footer>
+        </blockquote>
+
+        <!-- TODO: replace with REAL parent quote + name. -->
+        <blockquote class="quote">
+          <p>"Homework used to be a nightly fight. Now she sets a timer and just does
+            it. I don't fully understand it, but I'll take it."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/review-5.webp" alt="" width="56" height="56" loading="lazy">
+            <cite>— TODO: real parent</cite>
+          </footer>
+        </blockquote>
+
+        <!-- TODO: replace with REAL parent quote + name. -->
+        <blockquote class="quote">
+          <p>"He was the kid who never spoke up. Last week he told an older boy to
+            stop picking on his friend — calm, not aggressive. I nearly cried."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/review-6.webp" alt="" width="56" height="56" loading="lazy">
+            <cite>— TODO: real parent</cite>
+          </footer>
+        </blockquote>
+      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">Save My Child's Spot</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- INSTRUCTOR — one photo, one paragraph, credential             -->
+  <!-- ============================================================= -->
+  <section class="section instructor">
+    <div class="wrap wrap--narrow instructor__inner">
+      <img class="instructor__photo" src="assets/instructor-2.webp"
+           alt="A black-belt karate instructor standing on the dojo mat, holding out a folded yellow belt toward the camera"
+           width="1181" height="787" loading="lazy">
+      <div class="instructor__body">
+        <p class="eyebrow">Who's teaching</p>
+        <!-- TODO: real instructor name, bio, and credential. -->
+        <h2 class="section__title">Meet <span class="accent-purple">TODO: Instructor name</span></h2>
+        <p>
+          TODO: one warm paragraph — years teaching this age, why they love the
+          6–11 stretch (the age where the lessons really stick), and a human
+          detail. Keep it about the kids, not the trophies.
+        </p>
+        <p class="instructor__cred">
+          <!-- TODO: real credential/rank -->
+          TODO: rank/credential · <strong>trained specifically for ages 6–11</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- RISK REVERSAL — free class + the kid-veto line                -->
+  <!-- ============================================================= -->
+  <section class="section reversal">
+    <div class="wrap wrap--narrow">
+      <h2 class="reversal__title">If they don't ask to come back, that's your answer.</h2>
+      <p class="reversal__body">
+        The class is free, and there's no contract to talk about. Your kid gets a
+        vote — a real one. If they walk out and don't ask when they can go again,
+        you've lost nothing but 45 minutes. And if they <strong>do</strong> ask?
+        That's the only sign you need.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FAQ — 6 elementary-specific questions (expandable via <details>) -->
+  <!-- TODO: replace answers with the school's real specifics.       -->
+  <!-- ============================================================= -->
+  <section class="section faq">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Good questions</p>
+      <h2 class="section__title">Elementary parents usually ask…</h2>
+
+      <details class="faq__item">
+        <summary>Will it make him more aggressive?</summary>
+        <div class="faq__a">
+          <p>It's the opposite — and it's structural, not a marketing line. Every
+            class ends with a mat chat on self-control and respect, and the whole
+            point of the training is learning when <em>not</em> to use it. Kids
+            who feel more capable pick fewer fights, not more.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What if she's not athletic?</summary>
+        <div class="faq__a">
+          <p>Perfect — this isn't a sport where the fastest kid wins. Progress is
+            measured against your own child, one belt at a time. Plenty of our
+            students started as the kid who sat out in gym class.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>How long until we see changes?</summary>
+        <div class="faq__a">
+          <!-- TODO: set realistic expectations that match the school's experience. -->
+          <p>TODO: confirm with the school. (Common honest answer: small things —
+            posture, eye contact, "yes ma'am" — show up in the first few weeks;
+            the bigger focus-and-confidence shifts build over the first few months.)</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What does it cost after the free class?</summary>
+        <div class="faq__a">
+          <!-- TODO: real pricing / program structure. -->
+          <p>TODO: real program pricing. No hard sell at the free class — if your
+            kid loved it, we'll walk you through the elementary program and the
+            schedule, plainly, with the real numbers.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Are there belt-testing fees?</summary>
+        <div class="faq__a">
+          <!-- TODO: elementary parents specifically ask about hidden costs. Be exact. -->
+          <p>TODO: confirm with the school and state it plainly — whether testing is
+            included, and if there's a fee, exactly what it is. Don't leave this
+            vague; hidden costs are the #1 trust-killer for this age group.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Can siblings try together?</summary>
+        <div class="faq__a">
+          <!-- TODO: confirm sibling / multi-age policy for the free class. -->
+          <p>TODO: confirm with the school. (Common answer: yes — siblings in the
+            6–11 range are welcome in the same free class; a younger sibling under 6
+            is a better fit for the preschool class linked above.)</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FINAL CTA — scrolls back to the hero form                     -->
+  <!-- ============================================================= -->
+  <section class="section final-cta">
+    <div class="wrap wrap--narrow final-cta__inner">
+      <h2 class="final-cta__title">Ready to save your child's spot?</h2>
+      <p class="final-cta__sub">Free · 45 minutes · no experience needed</p>
+      <a href="#book" class="btn btn--cta btn--inline">Save My Child's Spot</a>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FOOTER — minimal, no nav, no extra exits                      -->
+  <!-- TODO: replace school name, address, phone, and map link.      -->
+  <!-- ============================================================= -->
+  <footer class="footer">
+    <div class="wrap wrap--narrow">
+      <p class="footer__name">Your Karate School</p>
+      <p class="footer__detail">
+        <!-- TODO: real address + map link -->
+        <a href="https://maps.google.com/?q=TODO+address">123 Example Street, Yourtown, ST 00000</a>
+      </p>
+      <p class="footer__detail">
+        <a href="tel:+10000000000">(000) 000-0000</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Mobile-only sticky CTA — scrolls to the hero form. Revealed once the form
+       scrolls out of view; hidden again while the form is on screen or after submit. -->
+  <a href="#book" class="sticky-cta" id="sticky-cta">Save My Child's Spot</a>
+
+</body>
+</html>

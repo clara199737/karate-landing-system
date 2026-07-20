@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TODO: replace with the real school name + value prop before launch -->
+  <title>Free Karate Class — Book Your Child's First Lesson</title>
+  <!-- TODO: tune meta description to match the live ad angle -->
+  <meta name="description" content="Book a free intro karate class for ages 4–12. Small beginner groups, patient instructors, zero pressure.">
+
+  <!-- Fonts: Bricolage Grotesque (headings) + Manrope (body) + Archivo (accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Bricolage+Grotesque:wght@600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- HTMX 2.0 blocks cross-origin requests by default (selfRequestsOnly).
+       Formspree is cross-origin, so we must opt in or the form silently won't POST. -->
+  <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
+
+  <!-- HTMX (latest stable 2.x) -->
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+
+  <!-- Meta pixel base -->
+  <!-- TODO: replace PIXEL_ID with the real Meta Pixel ID (see README placeholder register) -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','PIXEL_ID'); fbq('track','PageView');
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- ============================================================= -->
+  <!-- HERO — eyebrow + headline + subhead + bullets + form          -->
+  <!-- Desktop: copy left, form card right. Mobile: copy then form.  -->
+  <!-- ============================================================= -->
+  <header class="hero" id="top">
+    <div class="hero__inner">
+
+      <!-- Left column: the pitch -->
+      <div class="hero__copy">
+        <!-- TODO: swap assets/hero.jpg for the real school photo; keep alt descriptive -->
+        <img class="hero__photo" src="assets/hero.jpg"
+             alt="A smiling young karate student in a white gi"
+             width="620" height="720">
+        <span class="badge">100% FREE</span>
+        <p class="eyebrow">Ages 4–12 · beginners welcome</p>
+
+        <!-- TODO: HEADLINE must match the live ad angle. Default = Confidence.
+             Swap for one of these if the ad changes:
+             Discipline: "The class that gets your kid to listen the first time."
+             Anti-bully: "Give your kid the quiet confidence that makes bullies look elsewhere." -->
+        <h1 class="hero__headline">
+          A few weeks in, you'll catch your kid <span class="accent-purple">standing taller</span>.
+        </h1>
+
+        <p class="hero__subhead">
+          A first lesson built for nervous beginners — small groups, patient
+          instructors, zero pressure.
+        </p>
+
+        <ul class="hero__bullets">
+          <li>Small beginner groups — your kid won't be lost in a crowd</li>
+          <!-- TODO: swap "hundreds" for the real instructor stat -->
+          <li>Instructors who've taught hundreds of first-timers</li>
+          <li>No uniform to buy, no commitment — just come try it</li>
+        </ul>
+      </div>
+
+      <!-- Right column: the form card -->
+      <div class="hero__form-wrap" id="book">
+        <div class="form-card">
+          <h2 class="form-card__title">Book your free class</h2>
+          <p class="form-card__sub">Takes 60 seconds. We'll call to set your time.</p>
+
+          <!-- action+method = no-JS fallback (browser posts, Formspree confirms).
+               hx-post = JS path (HTMX posts, JSON response, we swap to thank-you).
+               Formspree form ID: xgojaznw -->
+          <form id="lead-form" class="lead-form"
+                action="https://formspree.io/f/xgojaznw" method="POST"
+                hx-post="https://formspree.io/f/xgojaznw"
+                hx-swap="none"
+                hx-headers='{"Accept":"application/json"}'>
+            <label class="field">
+              <span class="field__label">Parent's name</span>
+              <input type="text" name="parent_name" autocomplete="name" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Email</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Child's age</span>
+              <select name="child_age" required>
+                <option value="" disabled selected>Select age</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </label>
+
+            <!-- Honeypot anti-spam: hidden from humans -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp">
+
+            <button type="submit" class="btn btn--cta">Book my free class</button>
+            <p class="form-status" role="alert" hidden></p>
+            <p class="form-card__micro">60-second signup · no card · no pressure to join</p>
+          </form>
+
+          <!-- Thank-you state — revealed on successful submit in Phase 4 -->
+          <!-- TODO: confirm "24 hours" matches the school's real follow-up speed -->
+          <div id="thanks" class="thanks" hidden>
+            <p class="thanks__lead">You're in! 🎉</p>
+            <p>We'll text you within 24 hours to lock in your time.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================= -->
+  <!-- SOCIAL PROOF                                                  -->
+  <!-- TODO: replace rating, family count, and all testimonials with -->
+  <!-- REAL content before launch (names + first initial OK).        -->
+  <!-- ============================================================= -->
+  <section class="section proof">
+    <div class="wrap">
+      <div class="proof__stats">
+        <!-- TODO: real star rating -->
+        <div class="proof__stat">
+          <span class="proof__stars" aria-label="5 out of 5 stars">★★★★★</span>
+          <span class="proof__statlabel">Rated 5.0 by local parents</span>
+        </div>
+        <!-- TODO: real family/student count -->
+        <div class="proof__stat">
+          <span class="proof__bignum">500+</span>
+          <span class="proof__statlabel">families taught</span>
+        </div>
+      </div>
+
+      <div class="proof__quotes">
+        <!-- TODO: real testimonial #1 -->
+        <blockquote class="quote">
+          <p>“My son was so shy at the first class. Three months later he's the one
+            helping new kids feel welcome. I can't believe the change.”</p>
+          <footer class="quote__person">
+            <!-- TODO: swap for the real parent's photo (or remove if none) -->
+            <img class="quote__avatar" src="assets/testimonial-1.jpg" alt="" width="56" height="56">
+            <cite>— Sarah M.</cite>
+          </footer>
+        </blockquote>
+        <!-- TODO: real testimonial #2 -->
+        <blockquote class="quote">
+          <p>“No pressure, no hard sell. They genuinely care about the kids. My
+            daughter asks to go every single week.”</p>
+          <footer class="quote__person">
+            <!-- TODO: swap for the real parent's photo (or remove if none) -->
+            <img class="quote__avatar" src="assets/testimonial-2.jpg" alt="" width="56" height="56">
+            <cite>— James T.</cite>
+          </footer>
+        </blockquote>
+        <!-- TODO: real testimonial #3 (optional) -->
+        <blockquote class="quote">
+          <p>“The instructors are so patient. My twins have more focus at home and
+            they're burning off all that energy. Worth every minute.”</p>
+          <footer class="quote__person">
+            <!-- TODO: swap for the real parent's photo (or remove if none) -->
+            <img class="quote__avatar" src="assets/testimonial-3.jpg" alt="" width="56" height="56">
+            <cite>— Priya K.</cite>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- THE PROBLEM — name the parent's real worry                    -->
+  <!-- TODO: match this to the live ad angle (confidence shown).     -->
+  <!-- ============================================================= -->
+  <section class="section problem">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2 class="section__title">You can see your kid holding back.</h2>
+      <p class="problem__body">
+        Maybe they shrink in new situations. Maybe they'd rather watch a screen than
+        try something hard. You're not worried they're a "problem kid" — you just want
+        them to believe in themselves. The hard part is finding a place that builds
+        that without being loud, scary, or all about competition.
+      </p>
+      <p class="problem__body">
+        You don't commit to anything. Bring your child for one free class, watch from
+        the side, and see how they take to it. If it's not for them, no problem — and
+        no sales pitch at the door.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- HOW THE FIRST CLASS WORKS — 3 steps                           -->
+  <!-- ============================================================= -->
+  <section class="section how">
+    <div class="wrap">
+      <p class="eyebrow">Dead simple</p>
+      <h2 class="section__title">How your first class works</h2>
+      <!-- TODO: swap assets/how-it-works.jpg for a real class photo -->
+      <img class="how__photo" src="assets/how-it-works.jpg"
+           alt="An instructor kneeling with a group of young students in karate uniforms"
+           width="1232" height="800">
+      <ol class="steps">
+        <li class="step">
+          <span class="step__num">1</span>
+          <h3 class="step__title">Book your spot</h3>
+          <p>Fill in the quick form. We'll call to set a day and time that fits you.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">2</span>
+          <h3 class="step__title">Come watch</h3>
+          <p>Show up, relax, and watch from the side. No gear, no commitment, no pressure.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">3</span>
+          <h3 class="step__title">See if it clicks</h3>
+          <p>If your kid loves it, we'll talk next steps. If not, no hard feelings.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- WHAT YOUR KID GAINS — benefits, not features                  -->
+  <!-- ============================================================= -->
+  <section class="section gains">
+    <div class="wrap">
+      <p class="eyebrow">Why parents stick with it</p>
+      <h2 class="section__title">What your kid actually gains</h2>
+      <div class="gains__grid">
+        <div class="gain">
+          <!-- TODO: swap for a real photo -->
+          <img class="gain__photo" src="assets/gain-confidence.jpg"
+               alt="A young karate student standing proudly in the dojo" width="808" height="808">
+          <h3 class="gain__title">Confidence</h3>
+          <p>Small wins, week after week, until standing tall becomes their default.</p>
+        </div>
+        <div class="gain">
+          <!-- TODO: swap for a real photo -->
+          <img class="gain__photo" src="assets/gain-focus.jpg"
+               alt="A young karate student concentrating in a fighting stance" width="808" height="808">
+          <h3 class="gain__title">Focus</h3>
+          <p>Learning to listen, wait their turn, and follow through — skills that follow them home.</p>
+        </div>
+        <div class="gain">
+          <!-- TODO: swap for a real photo -->
+          <img class="gain__photo" src="assets/gain-respect.jpg"
+               alt="An instructor and a young student bowing to each other in the dojo" width="808" height="808">
+          <h3 class="gain__title">Respect</h3>
+          <p>For instructors, for classmates, and for themselves. The good kind of discipline.</p>
+        </div>
+        <div class="gain">
+          <!-- TODO: swap for a real photo -->
+          <img class="gain__photo" src="assets/gain-energy.jpg"
+               alt="A group of young karate students leaping with energy in the dojo" width="808" height="808">
+          <h3 class="gain__title">Energy out</h3>
+          <p>A real physical outlet so the wiggles come out on the mat, not at bedtime.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- OBJECTIONS / FAQ — expandable via native <details>            -->
+  <!-- TODO: replace answers with school-specific specifics.         -->
+  <!-- ============================================================= -->
+  <section class="section faq">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Good questions</p>
+      <h2 class="section__title">Parents usually ask…</h2>
+
+      <details class="faq__item">
+        <summary>Is it too aggressive for a young kid?</summary>
+        <div class="faq__a">
+          <p>No. Beginner classes are about control, focus, and fun — not fighting.
+            Kids learn discipline and confidence in a safe, supportive group.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What if my child is really shy?</summary>
+        <div class="faq__a">
+          <p>Shy kids are exactly who this is built for. Small groups and patient
+            instructors mean no one gets lost or put on the spot.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Do we need a uniform or any gear?</summary>
+        <div class="faq__a">
+          <p>Nothing to buy for the free class. Comfy clothes they can move in is all
+            you need.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What's the catch with "free"?</summary>
+        <div class="faq__a">
+          <p>There isn't one. The first class is genuinely free so you and your child
+            can try it with zero risk. No card, no contract, no pressure to join.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What exactly happens on the day?</summary>
+        <div class="faq__a">
+          <ul class="faq__checks">
+            <li>Arrive 10 minutes early — we'll meet you at the door, no wandering around lost.</li>
+            <li>We lend your child a uniform — nothing to buy, nothing to prepare.</li>
+            <li>30 minutes of real class, with kids their own age and skill level.</li>
+            <li>You watch from the side, comfortable. No pressure to join in.</li>
+          </ul>
+          <p class="faq__note">When it's over, there's no sales pitch. If it's not for
+            them, we'll wave you off with a smile.</p>
+        </div>
+      </details>
+
+      <!-- TODO: add/remove FAQs specific to your school (e.g. parking, ages, schedule). -->
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- RISK REVERSAL                                                 -->
+  <!-- ============================================================= -->
+  <section class="section reversal">
+    <div class="wrap wrap--narrow">
+      <!-- TODO: swap assets/risk-reversal.jpg for a real class photo -->
+      <img class="reversal__photo" src="assets/risk-reversal.jpg"
+           alt="An instructor high-fiving a smiling young student on the dojo mat"
+           width="1196" height="797">
+      <h2 class="reversal__title">It's free. It's one class. There's nothing to lose.</h2>
+      <p class="reversal__body">
+        No card. No commitment. No pressure to join. Just bring your child, watch how
+        they take to it, and decide for yourself.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FINAL CTA — scrolls back to the hero form                     -->
+  <!-- ============================================================= -->
+  <section class="section final-cta">
+    <div class="wrap wrap--narrow final-cta__inner">
+      <h2 class="final-cta__title">Ready to book your free class?</h2>
+      <p class="final-cta__sub">60-second signup · no card · no pressure to join</p>
+      <a href="#book" class="btn btn--cta btn--inline">Book my free class</a>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FOOTER — minimal, no nav, no extra exits                      -->
+  <!-- TODO: replace school name, address, phone with real details.  -->
+  <!-- ============================================================= -->
+  <footer class="footer">
+    <div class="wrap wrap--narrow">
+      <p class="footer__name">Your Karate School</p>
+      <p class="footer__detail">123 Example Street, Yourtown, ST 00000</p>
+      <p class="footer__detail">
+        <a href="tel:+10000000000">(000) 000-0000</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Mobile-only sticky CTA — scrolls to the hero form. Revealed once the form
+       scrolls out of view; hidden again while the form is on screen or after submit. -->
+  <a href="#book" class="sticky-cta" id="sticky-cta">Book my free class</a>
+
+</body>
+</html>

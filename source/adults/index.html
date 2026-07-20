@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TODO: replace with the real school name + adult program name before launch -->
+  <title>Free Adult Karate Class — Adults 18+ · Beginners Welcome, Start Where You Are</title>
+  <!-- TODO: tune meta description to match the live ad angle -->
+  <meta name="description" content="A free intro karate class for adults 18+. Beginners-only welcome — you won't be the only white belt, and nobody cares what shape you're in when you walk in. Real martial arts, adults-only classes.">
+
+  <!-- Fonts: Bricolage Grotesque (headings) + Manrope (body) + Archivo (accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Bricolage+Grotesque:wght@600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- HTMX 2.0 blocks cross-origin requests by default (selfRequestsOnly).
+       Formspree is cross-origin, so we must opt in or the form silently won't POST. -->
+  <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
+
+  <!-- HTMX (latest stable 2.x) -->
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+
+  <!-- Meta pixel base -->
+  <!-- TODO: replace PIXEL_ID with the real Meta Pixel ID (SAME pixel as the 4–12,
+       preschool, elementary, and teen pages). Events on this page carry
+       content_category: adult for ad-set attribution — keep it distinct so the
+       adult spend never blends with the preschool/elementary/teen reporting. -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','PIXEL_ID');
+  fbq('track','PageView');
+  // Segment-tagged content view — separates adult ad-set reporting (PRD §9).
+  fbq('track','ViewContent',{content_category:'adult'});
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <!-- ============================================================= -->
+  <!-- HERO — headline + subhead + trust strip + form                -->
+  <!-- Locked imagery principle: ONE adult, tight, documentary        -->
+  <!-- realism. Adult version: a 35–50 y/o mid-technique or mid-breath -->
+  <!-- between reps — sweat, focus, ordinary athletic build.          -->
+  <!-- HARD RULES (US-5): no one under 18 appears anywhere on this     -->
+  <!-- page; no fitness-model physiques in hero or class imagery. The  -->
+  <!-- reader must see someone their age and their shape succeeding.   -->
+  <!-- ============================================================= -->
+  <header class="hero" id="top">
+    <div class="hero__inner">
+
+      <!-- Left column: the pitch -->
+      <div class="hero__copy">
+        <!-- Hero: the only above-fold image. 4:5 — an adult 35–50 in a white gi
+             mid-technique or catching breath between reps, visible effort, sweat,
+             ordinary athletic build (NOT a fitness model), dramatic window
+             side-lighting, dojo behind. Same dojo + late-morning camera-left
+             window light as the sibling pages. No one under 18. -->
+        <img class="hero__photo" src="assets/hero.jpg"
+             alt="An adult in their 40s in a white karate gi holding a strong technique mid-class in a sunlit dojo, visible effort and focus, ordinary athletic build"
+             width="432" height="544" fetchpriority="high">
+
+
+        <span class="badge">100% FREE · ADULTS 18+</span>
+
+        <!-- LIVE headline (variant 2 — pre-answers "too old" + "wrong shape" in
+             nine words). A/B: test against the bolder variant 1 below. -->
+        <h1 class="hero__headline">
+          One free class. Adults only. <span class="accent-purple">Start where you are.</span>
+        </h1>
+        <!-- A/B VARIANT 1 (bolder, identity hook — swap in to test):
+             You've been meaning to for <span class="accent-purple">twenty years.</span> -->
+
+        <p class="hero__subhead">
+          A free intro class for adults 18+. Beginners welcome — you will not be
+          the only white belt in the room, and nobody cares what shape you're in
+          when you walk through the door.
+        </p>
+
+        <!-- Trust strip -->
+        <ul class="trust-strip">
+          <li>Adults 18+</li>
+          <li>Beginners welcome</li>
+          <li>Start where you are</li>
+        </ul>
+      </div>
+
+      <!-- Right column: the form card -->
+      <div class="hero__form-wrap" id="book">
+        <div class="form-card">
+          <h2 class="form-card__title">Claim your free class</h2>
+          <p class="form-card__sub">Takes 60 seconds. We'll email to confirm your time.</p>
+
+          <!-- action+method = no-JS fallback (browser posts, Formspree confirms).
+               hx-post = JS path (HTMX posts, JSON response, we swap to thank-you).
+               TODO: replace FORM_ID with a NEW Formspree form ID — adult leads MUST
+               be segmented from the preschool, elementary, teen, and 4–12 pages.
+               Never reuse a sibling ID (US-4). -->
+          <form id="lead-form" class="lead-form"
+                action="https://formspree.io/f/FORM_ID" method="POST"
+                hx-post="https://formspree.io/f/FORM_ID"
+                hx-swap="none"
+                hx-headers='{"Accept":"application/json"}'>
+            <label class="field">
+              <span class="field__label">Your name</span>
+              <input type="text" name="name" autocomplete="name" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Phone</span>
+              <input type="tel" name="phone" autocomplete="tel" required>
+            </label>
+
+            <label class="field">
+              <span class="field__label">Email</span>
+              <input type="email" name="email" autocomplete="email" required>
+            </label>
+
+            <!-- Segment tag — lands in Formspree so adult leads are unambiguously
+                 separable from the sibling pages (US-4). -->
+            <input type="hidden" name="segment" value="adult">
+
+            <!-- UTM passthrough (US-3) — populated by main.js from the query string
+                 so lobby-QR (utm_source=lobby) and newsletter bookings are
+                 attributable WITHOUT a separate page. Empty for direct/cold traffic. -->
+            <input type="hidden" name="utm_source" value="">
+            <input type="hidden" name="utm_medium" value="">
+            <input type="hidden" name="utm_campaign" value="">
+
+            <!-- Honeypot anti-spam: hidden from humans -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp">
+
+            <button type="submit" class="btn btn--cta">Claim Your Free Class</button>
+            <p class="form-status" role="alert" hidden></p>
+            <p class="form-card__micro">60-second signup · no card · no experience needed</p>
+          </form>
+
+          <!-- Thank-you state — revealed on successful submit by main.js.
+               Appointment tone matters more here than any sibling page: adults
+               no-show free classes at higher rates (pre-mortem §11). -->
+          <!-- TODO: confirm follow-up wording matches the school's real process. -->
+          <div id="thanks" class="thanks" hidden>
+            <p class="thanks__lead">You're booked. 🥋</p>
+            <p>Check your email — we're saving you a spot with the instructor and
+              we'll confirm your class time shortly.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================= -->
+  <!-- PROOF BAR — adult-specific proof points.                      -->
+  <!-- TODO (soft gate): fill [N] from school records + Google before -->
+  <!-- paid spend. The oldest-black-belt line is the strongest single -->
+  <!-- stat on the page — chase it down; if it can't be verified, CUT -->
+  <!-- the line entirely, never estimate (§10).                       -->
+  <!-- ============================================================= -->
+  <section class="proof-bar">
+    <div class="wrap proof-bar__inner">
+      <div class="proof-stat">
+        <span class="proof-stat__num">TODO: [N]</span>
+        <span class="proof-stat__label">adults currently training</span>
+      </div>
+      <div class="proof-stat">
+        <span class="proof-stat__num">TODO: [X] nights</span>
+        <span class="proof-stat__label">adults-only classes a week</span>
+      </div>
+      <div class="proof-stat">
+        <!-- TODO: verify or CUT this whole stat — do not estimate an age. -->
+        <span class="proof-stat__num">TODO: age [N]</span>
+        <span class="proof-stat__label">oldest student to earn black belt</span>
+      </div>
+      <div class="proof-stat">
+        <span class="proof-stat__num">TODO: [N]★</span>
+        <span class="proof-stat__label">Google rating</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- PROBLEM — the five positive triggers as a self-recognition     -->
+  <!-- list, voiced INWARD (second person). Empathy checklist.        -->
+  <!-- The buyer and the user are the same person — no "your child".  -->
+  <!-- ============================================================= -->
+  <section class="section problem">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2 class="section__title">You didn't click this by accident.</h2>
+      <p class="problem__lead">
+        Something's been nagging at you. It's probably one of these — and if it is,
+        you already know which one.
+      </p>
+      <ul class="worries">
+        <li>"I've paid for three gym memberships I stopped using by March."</li>
+        <li>"I need one hour a week where I physically cannot think about work."</li>
+        <li>"I want to know I could actually protect myself if I had to."</li>
+        <li>"I've watched from the bench for months thinking — I wish I'd done this."</li>
+        <li>"I'm not done starting things. I want to prove that to myself."</li>
+      </ul>
+      <p class="problem__body">
+        It's not discipline you're missing. It's a reason to show up. The treadmill
+        never gave you one. A belt you have to earn does.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- "YOU WON'T BE THE ONLY BEGINNER" — the structural answer to    -->
+  <!-- self-disqualification. THE persuasion payload of this page.    -->
+  <!-- Concreteness is the persuasion: the first class, minute by     -->
+  <!-- minute, then the age spread in plain numbers.                  -->
+  <!-- ============================================================= -->
+  <section class="section beginner">
+    <div class="wrap">
+      <p class="eyebrow">Your first class, minute by minute</p>
+      <h2 class="section__title">You won't be the only beginner in the room.</h2>
+      <p class="beginner__lead">
+        The fear is being the conspicuous white belt — worse, next to teenagers who
+        outrank you. Here's how the first class actually goes. Read it and the fear
+        loses its grip.
+      </p>
+
+      <!-- Supporting shot: an adults-only class mid-drill — a mix of ages and
+           builds, all visibly 18+, an instructor coaching one adult one-on-one.
+           This image IS the "people like me" proof. No one under 18. No
+           fitness-model physiques. -->
+      <img class="beginner__photo" src="assets/class.jpg"
+           alt="A mix of adult students of different ages and builds drilling technique in a sunlit dojo while a black-belt instructor coaches one of them one-on-one"
+           width="1692" height="1148" loading="lazy">
+
+      <ol class="steps steps--timeline">
+        <li class="step">
+          <span class="step__num">1</span>
+          <h3 class="step__title">You're paired, not thrown in</h3>
+          <p>You're set up with an instructor or a senior adult student from the first minute — not dropped into a line to fend for yourself.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">2</span>
+          <h3 class="step__title">We ask about your body first</h3>
+          <p>Knees, back, shoulders, old injuries — the instructor asks before you bow in. Modifications exist for all of it. The program scales to the body you have now, not the one you had at 25.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">3</span>
+          <h3 class="step__title">You go at your own pace</h3>
+          <p>Nobody spars on day one. Nobody spars until they decide they're ready. Day one is technique, movement, and catching your breath — that's it.</p>
+        </li>
+        <li class="step">
+          <span class="step__num">4</span>
+          <h3 class="step__title">You finish, then you decide</h3>
+          <p>You do the real class end to end. No spotlight, no ceremony, no sales pitch on the mat. Then you decide if you're coming back.</p>
+        </li>
+      </ol>
+
+      <!-- Age spread — HARD GATE (§10): this box does NOT ship with brackets.
+           Real youngest/oldest/median from the school's actual adult class.
+           It's the persuasion payload — placeholder numbers here are a launch
+           blocker, not a soft TODO. -->
+      <div class="agespread">
+        <p class="agespread__caption">Our adult class right now</p>
+        <ul class="agespread__stats">
+          <li><span class="agespread__num">TODO: [N]</span><span class="agespread__label">youngest</span></li>
+          <li><span class="agespread__num">TODO: [N]</span><span class="agespread__label">oldest</span></li>
+          <li><span class="agespread__num">TODO: ~[N]</span><span class="agespread__label">median</span></li>
+        </ul>
+        <p class="agespread__line">You will fit.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- WHAT YOU ACTUALLY GET — four adult-outcome benefit blocks,    -->
+  <!-- 1:1 thumbnail pattern (inherited from the sibling pages).      -->
+  <!-- ============================================================= -->
+  <section class="section benefits">
+    <div class="wrap">
+      <p class="eyebrow">What an hour on the mat actually gives you</p>
+      <h2 class="section__title">Not for the kids. Not for work. Yours.</h2>
+      <div class="gains__grid">
+        <div class="gain">
+          <!-- TODO: swap for a real class photo. Adult subject, ordinary build, 18+. -->
+          <img class="gain__photo" src="assets/benefit-fitness.jpg"
+               alt="An adult student mid-technique in the dojo, working up a sweat" width="808" height="808" loading="lazy">
+          <h3 class="gain__title">Fitness that compounds</h3>
+          <p>Not reps for the sake of reps — skill that stacks. Every class you're measurably better at something than you were last week. The gym never gave you that.</p>
+        </div>
+        <div class="gain">
+          <!-- TODO: swap for a real class photo. Adult subject, ordinary build, 18+. -->
+          <img class="gain__photo" src="assets/benefit-focus.jpg"
+               alt="An adult student in a focused stance, fully absorbed in the training" width="808" height="808" loading="lazy">
+          <h3 class="gain__title">An hour your phone can't reach</h3>
+          <p>You physically cannot check email while someone's teaching you to move. One hour where the job, the kids, and the noise are gone. Most people don't know how badly they needed it until they have it.</p>
+        </div>
+        <div class="gain">
+          <!-- TODO: swap for a real class photo. Adult subject, ordinary build, 18+. -->
+          <img class="gain__photo" src="assets/benefit-confidence.jpg"
+               alt="An adult student standing tall and composed on the dojo mat" width="808" height="808" loading="lazy">
+          <h3 class="gain__title">Confidence that shows up everywhere</h3>
+          <p>In how you carry yourself, how you take up a room, and yes — in knowing you could handle yourself if it ever came to that. It follows you off the mat.</p>
+        </div>
+        <div class="gain">
+          <!-- TODO: swap for a real class photo. Adult subject, ordinary build, 18+. -->
+          <img class="gain__photo" src="assets/benefit-yours.jpg"
+               alt="An adult student tying a belt, a moment that is entirely their own" width="808" height="808" loading="lazy">
+          <h3 class="gain__title">Something that's yours</h3>
+          <p>Not for your kids. Not for your job. A rank you earn, a skill nobody can hand you, a thing you did for yourself. When was the last time you had one of those?</p>
+        </div>
+      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">Claim Your Free Class</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- INSTRUCTOR — trust transfer. Credential emphasis shifts to     -->
+  <!-- adults: years training adults, modifying for injuries and late -->
+  <!-- starters. If the instructor started late themselves, that's a  -->
+  <!-- proof point — use it (§6.6).                                    -->
+  <!-- ============================================================= -->
+  <section class="section instructor">
+    <div class="wrap wrap--narrow instructor__inner">
+      <!-- TODO (soft gate): real instructor photo before spend. 18+ subject. -->
+      <img class="instructor__photo" src="assets/instructor.jpg"
+           alt="A black-belt karate instructor standing on the dojo mat, mid-explanation to an adult student"
+           width="1181" height="787" loading="lazy">
+      <div class="instructor__body">
+        <p class="eyebrow">Who's teaching</p>
+        <!-- TODO: real instructor name, bio, and credential. -->
+        <h2 class="section__title">Meet <span class="accent-purple">TODO: Instructor name</span></h2>
+        <p>
+          TODO: one grounded paragraph — years spent teaching <em>adults</em>
+          specifically, experience modifying training for bad knees, old backs,
+          and late starters, and a human detail. If they started training late
+          themselves (say, at 30), lead with it — an instructor who was once
+          exactly where you are is the whole point.
+        </p>
+        <p class="instructor__cred">
+          <!-- TODO: real credential/rank -->
+          TODO: rank/credential · <strong>years coaching adult beginners</strong>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- SIDELINE-PARENT BRIDGE — short section, low on the page.       -->
+  <!-- Cold traffic skims past it; warm lobby/newsletter traffic      -->
+  <!-- (utm_source=lobby / newsletter) feels seen. If scroll          -->
+  <!-- analytics show cold-traffic drop-off here, move it below the   -->
+  <!-- testimonials or gate it behind the lobby UTM (pre-mortem §11).  -->
+  <!-- ============================================================= -->
+  <section class="section sideline">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">If you've been watching from the bench</p>
+      <p class="sideline__body">
+        You've watched them bow in three nights a week for months, and every time
+        you've thought about it. This is the sign. <strong>Your first class is free
+        too</strong> — and yes, there's a schedule that works around drop-off.
+      </p>
+      <!-- TODO: confirm the family plan exists before mentioning it; no pricing on page. -->
+      <p class="sideline__note">Ask about the family plan when you come in.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- TESTIMONIALS — three adult stories: the late starter, the      -->
+  <!-- stress case, the sideline convert.                             -->
+  <!-- ⚠️ HARD GATE (§10): AI-generated testimonial photos do NOT go  -->
+  <!-- live with paid spend (deceptive-endorsement risk). Real adult- -->
+  <!-- student photos or NO photos — standing funnel rule.            -->
+  <!-- ============================================================= -->
+  <section class="section proof">
+    <div class="wrap">
+      <p class="eyebrow">From adults who walked in exactly where you are</p>
+      <h2 class="section__title">"I thought I was too old to start."</h2>
+
+      <div class="proof__quotes">
+        <!-- TODO: replace with a REAL adult quote + name + photo. HARD GATE.
+             Story type: the late starter. -->
+        <blockquote class="quote">
+          <p>"I started at 43 convinced I'd be the oldest person there by twenty
+            years. I wasn't even close. Two years later I'm testing for my next
+            belt and I move better now than I did at 35."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/testimonial-1.jpg" alt="" width="56" height="56" loading="lazy">
+            <cite>— TODO: real adult student, started at 43</cite>
+          </footer>
+        </blockquote>
+
+        <!-- TODO: replace with a REAL adult quote + name + photo. HARD GATE.
+             Story type: the stress case. -->
+        <blockquote class="quote">
+          <p>"It's the only hour of my week that's actually mine. My phone's in a
+            cubby, nobody needs anything from me, and for sixty minutes I'm just
+            learning something. I didn't know how much I needed that."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/testimonial-2.jpg" alt="" width="56" height="56" loading="lazy">
+            <cite>— TODO: real adult student</cite>
+          </footer>
+        </blockquote>
+
+        <!-- TODO: replace with a REAL adult quote + name + photo. HARD GATE.
+             Story type: the sideline convert. -->
+        <blockquote class="quote">
+          <p>"I watched my daughter train for a year from the bench. Now we compare
+            notes at dinner and she's genuinely impressed I can keep up. Best
+            decision I've made in a decade."</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="assets/testimonial-3.jpg" alt="" width="56" height="56" loading="lazy">
+            <cite>— TODO: real adult student, sideline parent</cite>
+          </footer>
+        </blockquote>
+      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">Claim Your Free Class</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- RISK REVERSAL — the free class + no-pressure promise.          -->
+  <!-- ============================================================= -->
+  <section class="section reversal">
+    <div class="wrap wrap--narrow">
+      <h2 class="reversal__title">Walk in, wear gym clothes, and see for yourself.</h2>
+      <p class="reversal__body">
+        The free class costs you nothing and commits you to nothing. No contract
+        talk at the first visit — a gi comes later, if you decide to stay. Wear
+        clothes you can move in, walk in or book online, and find out. If it's not
+        for you, you'll know, and you'll never get a sales call.
+      </p>
+      <!-- TODO: swap for the school owner's real name + signed personal promise. -->
+      <p class="reversal__signoff">— TODO: school owner's name</p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FAQ — the residue objections (expandable via <details>).       -->
+  <!-- TODO: replace answers with the school's real specifics.        -->
+  <!-- ============================================================= -->
+  <section class="section faq">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Good questions</p>
+      <h2 class="section__title">What adults usually ask…</h2>
+
+      <details class="faq__item">
+        <summary>Do I need to be in shape first?</summary>
+        <div class="faq__a">
+          <p>No — that's backwards. The class <em>is</em> the getting-in-shape.
+            Conditioning is built into the training, not a prerequisite for it. You
+            start exactly where you are, and you'll be surprised how fast that
+            moves.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What about my knee / back / shoulder?</summary>
+        <div class="faq__a">
+          <p>Tell the instructor before class — everyone does, and everything
+            modifies. Training around old injuries is routine here, not a special
+            case. Nobody's going to throw you; you'll be taught.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>Will I be training with teenagers?</summary>
+        <div class="faq__a">
+          <!-- HARD GATE (§10): this answer MUST reflect the real schedule. If 16+
+               share the adult mat, say so HERE — never let a new student discover
+               it in person. If the schedule mixes teens in, either state it plainly
+               or change the schedule before launch. -->
+          <p>TODO — HARD GATE: state the real schedule. (If the adult classes are
+            genuinely adults-only, say so and list the nights. If 16–17-year-olds
+            share the mat on certain nights, say exactly which ones — honesty here
+            is a launch requirement, not a nicety.)</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>How long until I'm not terrible?</summary>
+        <div class="faq__a">
+          <p>Honest answer: about a month until it starts to click. Everyone feels
+            clumsy for the first few classes — that's universal, not a sign you're
+            behind. The free class is where you find out it's more doable than it
+            looks.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What do I wear and bring?</summary>
+        <div class="faq__a">
+          <p>Gym clothes you can move in, and water. That's it — no gi to buy for
+            the free class, no gear, no card. If you decide to keep training, a
+            uniform comes later.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary>What if I haven't worked out in years?</summary>
+        <div class="faq__a">
+          <p>Then you're in the majority of people who walk in. The program scales
+            to the body you have today. You set the pace, you take the breaks you
+            need, and nobody is watching you the way you think they are.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FINAL CTA — scrolls back to the hero form                     -->
+  <!-- ============================================================= -->
+  <section class="section final-cta">
+    <div class="wrap wrap--narrow final-cta__inner">
+      <h2 class="final-cta__title">Ready to claim your free class?</h2>
+      <p class="final-cta__sub">Free · adults 18+ · no experience needed</p>
+      <a href="#book" class="btn btn--cta btn--inline">Claim Your Free Class</a>
+      <p class="final-cta__close">
+        The class runs Tuesday whether you're there or not. Twenty years from now
+        it'll still be running. The only variable is you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================= -->
+  <!-- FOOTER — minimal, no nav, no extra exits                      -->
+  <!-- TODO: replace school name, address, phone, and map link.      -->
+  <!-- ============================================================= -->
+  <footer class="footer">
+    <div class="wrap wrap--narrow">
+      <p class="footer__name">Your Karate School</p>
+      <p class="footer__detail">
+        <!-- TODO: real address + map link -->
+        <a href="https://maps.google.com/?q=TODO+address">123 Example Street, Yourtown, ST 00000</a>
+      </p>
+      <p class="footer__detail">
+        <a href="tel:+10000000000">(000) 000-0000</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Mobile-only sticky CTA — scrolls to the hero form. Revealed once the form
+       scrolls out of view; hidden again while the form is on screen or after submit. -->
+  <a href="#book" class="sticky-cta" id="sticky-cta">Claim Your Free Class</a>
+
+</body>
+</html>

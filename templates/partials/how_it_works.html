@@ -1,0 +1,38 @@
+{{#how_it_works}}  <!-- ============================================================= -->
+  <!-- HOW IT WORKS                                                  -->
+  <!-- ============================================================= -->
+  <section class="section how">
+    <div class="wrap">
+      <p class="eyebrow">{{{eyebrow}}}</p>
+      <h2 class="section__title">{{{headline}}}</h2>
+      <img class="how__photo" src="{{{image.src}}}"
+           alt="{{{image.alt}}}"
+           width="{{{image.width}}}" height="{{{image.height}}}" loading="lazy">
+      <ol class="steps steps--timeline">
+{{#steps}}        <li class="step">
+          <span class="step__num">{{{step_num}}}</span>
+          <h3 class="step__title">{{{title}}}</h3>
+          <p>{{{body}}}</p>
+        </li>
+{{/steps}}      </ol>
+{{#note}}      <p class="how__note">
+        {{{.}}}
+      </p>
+{{/note}}{{#belt_ladder}}
+      <div class="belt-ladder">
+        <p class="belt-ladder__caption">{{{caption}}}</p>
+        <ol class="belt-ladder__track">
+{{#rungs}}          <li class="belt-rung{{#more}} belt-rung--more{{/more}}">
+            <span class="belt-chip{{#striped}} belt-chip--striped{{/striped}}" style="--belt:{{{color}}};--belt-line:{{{line}}};"></span>
+            <span class="belt-rung__name">{{{name}}}</span>
+            <span class="belt-rung__time">{{{time}}}</span>
+          </li>
+{{/rungs}}        </ol>
+        <p class="belt-ladder__note">
+          {{{note}}}
+        </p>
+      </div>
+{{/belt_ladder}}    </div>
+  </section>
+
+{{/how_it_works}}

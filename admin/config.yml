@@ -1,0 +1,522 @@
+########################################################################
+# Decap CMS config for the karate landing-page system.
+#
+# Every field in every content/*.json is editable through this form
+# (schema §3.1–§3.16). Shape rules from schema §4 (required fields,
+# alt text, [[…]] highlight, <em>/<strong> inline allowed) are also
+# enforced by build.js at deploy time, so if a Decap edit slips a
+# malformed value through, `npm run build:prod` blocks the deploy
+# with a specific field-path error.
+########################################################################
+
+backend:
+  name: github
+  # Replace with your GitHub owner/repo after pushing this repo to GitHub.
+  repo: TODO_OWNER/TODO_REPO
+  branch: main
+  # decapbridge.com brokers the OAuth flow so we don't run a server.
+  # Sign up at decapbridge.com, create a site, paste the site_id here.
+  base_url: https://api.decapbridge.com
+  site_id: TODO_SITE_ID
+
+# Where Decap uploads land in the repo. Overridden per-file below so each
+# segment's photos land in that segment's assets/ folder.
+media_folder: source
+public_folder: assets
+
+# Direct save — no draft/review flow. Every save commits to main and
+# triggers a Vercel rebuild. Flip to `editorial_workflow` if you want
+# a draft → review → publish pipeline.
+publish_mode: simple
+
+# Uncomment and set once your custom domain is live so Decap shows a
+# "View live site" link for each entry.
+# site_url: https://TODO_DOMAIN
+# display_url: https://TODO_DOMAIN
+
+########################################################################
+# Field definitions — anchored so all four segment files share one spec.
+########################################################################
+
+_field_definitions: &segment_fields
+  - name: meta
+    label: "Head + SEO"
+    widget: object
+    fields:
+      - {name: segment, label: "Segment slug", widget: string, hint: "Must match this file's slug (preschool / elementary / teens / adults). Change it and the build refuses."}
+      - {name: page_title, label: "<title>", widget: string}
+      - {name: meta_description, label: "Meta description", widget: text}
+
+  - name: config
+    label: "Wiring (Formspree + pixel)"
+    widget: object
+    fields:
+      - {name: formspree_id, label: "Formspree form ID", widget: string, hint: "Just the id part after /f/ in the Formspree URL. Leave placeholder to skip production ship."}
+      - {name: pixel_content_category, label: "Pixel content_category", widget: string, required: false, hint: "e.g. 'teens', 'adult'. Omit to fire generic Lead."}
+      - {name: pixel_view_content, label: "Fire pixel ViewContent on load?", widget: boolean, default: false, required: false}
+      - {name: utm_passthrough, label: "UTM query-string passthrough?", widget: boolean, default: false, required: false, hint: "Enables hidden utm_source/medium/campaign fields populated from ?utm_* URL params. Adults uses this."}
+
+  - name: hero
+    label: "Hero (top of page)"
+    widget: object
+    fields:
+      - {name: badge, label: "Badge (e.g. '100% FREE · AGES 12–17')", widget: string}
+      - {name: headline, label: "Headline", widget: string, hint: "Wrap purple highlight text in [[double brackets]]."}
+      - {name: subheadline, label: "Subheadline", widget: text}
+      - name: image
+        label: "Hero image"
+        widget: object
+        fields:
+          - {name: src, label: "Image", widget: image}
+          - {name: alt, label: "Alt text (accessibility)", widget: string}
+          - {name: width, label: "Width (px)", widget: number, value_type: int}
+          - {name: height, label: "Height (px)", widget: number, value_type: int}
+      - name: trust_items
+        label: "Trust strip pills (optional)"
+        widget: list
+        required: false
+        summary: "{{fields.item}}"
+        field: {name: item, label: "Pill text", widget: string}
+      - name: route_link
+        label: "Route link (optional — send off-audience visitors elsewhere)"
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - {name: label, label: "Link text", widget: string, required: false}
+          - {name: href, label: "URL", widget: string, required: false}
+      - name: form
+        label: "Form card"
+        widget: object
+        fields:
+          - {name: heading, label: "Form heading", widget: string}
+          - {name: subheading, label: "Form subheading", widget: string}
+          - {name: button_label, label: "Submit button label", widget: string}
+          - {name: disclaimer, label: "Small disclaimer under button", widget: string}
+          - name: fields
+            label: "Form fields (order shown in editor = order on page)"
+            widget: list
+            summary: "{{fields.label}} ({{fields.type}})"
+            fields:
+              - {name: name, label: "Field name (form key)", widget: string, hint: "Sent to Formspree with this name."}
+              - {name: label, label: "Visible label", widget: string}
+              - name: type
+                label: "Type"
+                widget: select
+                options:
+                  - {label: "Text", value: text}
+                  - {label: "Phone (tel)", value: tel}
+                  - {label: "Email", value: email}
+                  - {label: "Dropdown (select)", value: select}
+                default: text
+              - {name: autocomplete, label: "HTML autocomplete", widget: string, required: false, hint: "e.g. name, tel, email, off."}
+              - {name: required, label: "Required?", widget: boolean, default: true, required: false}
+              - {name: placeholder_label, label: "Dropdown placeholder text", widget: string, required: false, hint: "Only used for type=select. E.g. 'Select age'."}
+              - name: options
+                label: "Dropdown options"
+                widget: list
+                required: false
+                summary: "{{fields.label}}"
+                fields:
+                  - {name: value, label: "Option value", widget: string}
+                  - {name: label, label: "Option label", widget: string}
+              - {name: field_comment, label: "Internal note (renders as HTML comment)", widget: string, required: false}
+          - name: hidden_fields
+            label: "Hidden form fields (optional)"
+            widget: list
+            required: false
+            collapsed: true
+            summary: "{{fields.name}}={{fields.value}}"
+            fields:
+              - {name: name, label: "Field name", widget: string}
+              - {name: value, label: "Field value", widget: string}
+
+  - name: thank_you
+    label: "Thank-you swap (revealed on successful submit)"
+    widget: object
+    fields:
+      - {name: lead, label: "Lead line", widget: string, hint: "e.g. \"You're booked. 🥋\""}
+      - {name: body, label: "Body paragraph", widget: text}
+
+  - name: proof_bar
+    label: "Proof bar (optional — stat row)"
+    widget: object
+    required: false
+    collapsed: true
+    fields:
+      - name: stats
+        label: "Stats"
+        widget: list
+        summary: "{{fields.value}} — {{fields.label}}"
+        fields:
+          - {name: value, label: "Big number", widget: string}
+          - {name: label, label: "Caption", widget: string}
+
+  - name: problem
+    label: "Problem section"
+    widget: object
+    fields:
+      - {name: eyebrow, label: "Eyebrow", widget: string}
+      - {name: headline, label: "Section headline", widget: string}
+      - {name: body, label: "Lead paragraph (optional)", widget: text, required: false}
+      - name: checklist
+        label: "Worry checklist (optional)"
+        widget: list
+        required: false
+        summary: "{{fields.item}}"
+        field: {name: item, label: "Worry statement", widget: string}
+      - {name: closing, label: "Closing paragraph (optional)", widget: text, required: false}
+
+  - name: reframe
+    label: "Reframe section (optional)"
+    widget: object
+    required: false
+    collapsed: true
+    fields:
+      - {name: eyebrow, label: "Eyebrow", widget: string, required: false}
+      - {name: headline, label: "Section headline", widget: string, required: false}
+      - {name: body, label: "Lead paragraph", widget: text, required: false, hint: "<em> allowed inline."}
+      - name: variant
+        label: "CSS variant"
+        widget: select
+        required: false
+        options:
+          - {label: "Default (.reframe)", value: reframe}
+          - {label: "Teens (.notkid)", value: notkid}
+        default: reframe
+      - name: swaps
+        label: "Swap list (mutually exclusive with items[])"
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{fields.from}} → {{fields.to}}"
+        fields:
+          - {name: from, label: "Kids' expectation (strikethrough)", widget: string}
+          - {name: to, label: "What it really is", widget: string}
+      - name: items
+        label: "Icon grid (mutually exclusive with swaps[])"
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{fields.icon}}: {{fields.title}}"
+        fields:
+          - name: icon
+            label: "Icon slug"
+            widget: select
+            hint: "Fixed set — pick one. Adding a 7th requires editing build.js ICONS dict first."
+            options:
+              - {label: "Listening (ear)", value: listening}
+              - {label: "Taking turns (arrows)", value: taking-turns}
+              - {label: "Following directions (checklist)", value: following-directions}
+              - {label: "Focus (target)", value: focus}
+              - {label: "Self-control (stop sign)", value: self-control}
+              - {label: "Confidence (star)", value: confidence}
+          - {name: title, label: "Card title", widget: string}
+          - {name: description, label: "Card description", widget: text}
+      - {name: reassurance, label: "Reassurance paragraph (optional)", widget: text, required: false}
+
+  - name: how_it_works
+    label: "How it works (walkthrough)"
+    widget: object
+    required: false
+    collapsed: true
+    fields:
+      - {name: eyebrow, label: "Eyebrow", widget: string, required: false}
+      - {name: headline, label: "Section headline", widget: string, required: false}
+      - name: image
+        label: "Supporting image"
+        widget: object
+        required: false
+        fields:
+          - {name: src, label: "Image", widget: image, required: false}
+          - {name: alt, label: "Alt text", widget: string, required: false}
+          - {name: width, label: "Width (px)", widget: number, required: false, value_type: int}
+          - {name: height, label: "Height (px)", widget: number, required: false, value_type: int}
+      - name: steps
+        label: "Steps (numbered timeline)"
+        widget: list
+        required: false
+        summary: "{{fields.title}}"
+        fields:
+          - {name: title, label: "Step title", widget: string}
+          - {name: body, label: "Step body", widget: text}
+      - {name: note, label: "Tail note (optional; <strong> allowed)", widget: text, required: false}
+      - name: belt_ladder
+        label: "Belt ladder (elementary only)"
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - {name: caption, label: "Caption (e.g. 'Progress you and your kid can both see')", widget: text, required: false, hint: "<em> allowed inline."}
+          - name: rungs
+            label: "Belt rungs"
+            widget: list
+            required: false
+            summary: "{{fields.name}} — {{fields.time}}"
+            fields:
+              - {name: color, label: "Chip fill color (hex)", widget: string, hint: "e.g. #ffffff"}
+              - {name: line, label: "Chip outline color (hex)", widget: string}
+              - {name: name, label: "Belt name", widget: string}
+              - {name: time, label: "Time-to-earn caption", widget: string}
+              - {name: striped, label: "Striped chip?", widget: boolean, default: false, required: false}
+              - {name: more, label: "'...and up' modifier?", widget: boolean, default: false, required: false}
+          - {name: note, label: "Belt ladder tail note", widget: text, required: false}
+
+  - name: benefits
+    label: "Benefits section (optional)"
+    widget: object
+    required: false
+    collapsed: true
+    fields:
+      - {name: eyebrow, label: "Eyebrow", widget: string, required: false}
+      - {name: headline, label: "Section headline", widget: string, required: false}
+      - name: items
+        label: "Grid variant — cards with thumbnails (mutually exclusive with columns[])"
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{fields.title}}"
+        fields:
+          - name: thumbnail
+            label: "Thumbnail image"
+            widget: object
+            required: false
+            fields:
+              - {name: src, label: "Image", widget: image, required: false}
+              - {name: alt, label: "Alt text", widget: string, required: false}
+              - {name: width, label: "Width", widget: number, required: false, value_type: int}
+              - {name: height, label: "Height", widget: number, required: false, value_type: int}
+          - {name: title, label: "Card title", widget: string}
+          - {name: body, label: "Card body", widget: text}
+      - name: columns
+        label: "Split variant — two columns (mutually exclusive with items[])"
+        widget: list
+        required: false
+        collapsed: true
+        max: 2
+        min: 2
+        summary: "{{fields.title}}"
+        fields:
+          - {name: modifier, label: "Column modifier (e.g. parent, teen)", widget: string}
+          - {name: title, label: "Column heading", widget: string}
+          - name: items
+            label: "Column bullet points"
+            widget: list
+            summary: "{{fields.item}}"
+            field: {name: item, label: "Bullet", widget: string}
+
+  - name: beginner_objection
+    label: "Beginner objection (adults only)"
+    widget: object
+    required: false
+    collapsed: true
+    fields:
+      - {name: eyebrow, label: "Eyebrow", widget: string, required: false}
+      - {name: headline, label: "Section headline", widget: string, required: false}
+      - {name: body, label: "Lead paragraph", widget: text, required: false}
+      - name: image
+        label: "Supporting image"
+        widget: object
+        required: false
+        fields:
+          - {name: src, label: "Image", widget: image, required: false}
+          - {name: alt, label: "Alt text", widget: string, required: false}
+          - {name: width, label: "Width", widget: number, required: false, value_type: int}
+          - {name: height, label: "Height", widget: number, required: false, value_type: int}
+      - name: steps
+        label: "First-class walkthrough steps"
+        widget: list
+        required: false
+        summary: "{{fields.title}}"
+        fields:
+          - {name: title, label: "Step title", widget: string}
+          - {name: body, label: "Step body", widget: text}
+      - name: age_spread
+        label: "Age spread box"
+        widget: object
+        required: false
+        fields:
+          - {name: caption, label: "Caption", widget: string, required: false}
+          - name: stats
+            label: "Age stats"
+            widget: list
+            required: false
+            summary: "{{fields.value}} — {{fields.label}}"
+            fields:
+              - {name: value, label: "Value", widget: string}
+              - {name: label, label: "Label", widget: string}
+          - {name: line, label: "Closing line (e.g. 'You will fit.')", widget: string, required: false}
+
+  - name: testimonials
+    label: "Testimonials"
+    widget: object
+    required: false
+    collapsed: true
+    fields:
+      - {name: eyebrow, label: "Eyebrow", widget: string, required: false}
+      - {name: headline, label: "Section headline", widget: string, required: false}
+      - name: items
+        label: "Quotes"
+        widget: list
+        summary: "{{fields.name}}: {{fields.quote}}"
+        fields:
+          - {name: quote, label: "Quote text (usually wrapped in quotes)", widget: text}
+          - {name: name, label: "Attribution", widget: string, hint: "e.g. 'Sarah M.' or 'TODO: real parent'"}
+          - {name: descriptor, label: "Descriptor (optional, e.g. 'Parent of two')", widget: string, required: false}
+          - {name: variant, label: "CSS variant modifier (optional, e.g. 'teen')", widget: string, required: false}
+          - name: avatar
+            label: "Avatar"
+            widget: object
+            required: false
+            fields:
+              - {name: src, label: "Image", widget: image, required: false}
+              - {name: alt, label: "Alt text", widget: string, required: false}
+              - {name: width, label: "Width", widget: number, required: false, value_type: int}
+              - {name: height, label: "Height", widget: number, required: false, value_type: int}
+          - {name: placeholder, label: "Placeholder photo? (must be false before production ship)", widget: boolean, default: false, required: false}
+          - {name: comment, label: "Internal note (HTML comment)", widget: string, required: false}
+
+  - name: instructor
+    label: "Instructor bio"
+    widget: object
+    required: false
+    collapsed: true
+    fields:
+      - {name: eyebrow, label: "Eyebrow (e.g. 'Who's teaching')", widget: string, required: false}
+      - {name: name, label: "Instructor name (rendered as 'Meet [name]')", widget: string, required: false}
+      - {name: bio, label: "Bio paragraph", widget: text, required: false, hint: "<em> and <strong> allowed."}
+      - name: photo
+        label: "Instructor photo"
+        widget: object
+        required: false
+        fields:
+          - {name: src, label: "Image", widget: image, required: false}
+          - {name: alt, label: "Alt text", widget: string, required: false}
+          - {name: width, label: "Width", widget: number, required: false, value_type: int}
+          - {name: height, label: "Height", widget: number, required: false, value_type: int}
+          - {name: placeholder, label: "Placeholder photo?", widget: boolean, default: false, required: false}
+      - {name: credential_line, label: "Credential line (<strong> allowed)", widget: text, required: false}
+
+  - name: sideline_bridge
+    label: "Sideline bridge (adults only)"
+    widget: object
+    required: false
+    collapsed: true
+    fields:
+      - {name: eyebrow, label: "Eyebrow", widget: string, required: false}
+      - {name: body, label: "Body paragraph (<strong> allowed inline)", widget: text, required: false}
+      - {name: note, label: "Tail note (optional)", widget: text, required: false}
+
+  - name: risk_reversal
+    label: "Risk reversal"
+    widget: object
+    fields:
+      - {name: headline, label: "Headline", widget: string}
+      - {name: body, label: "Body paragraph (<em>/<strong> allowed)", widget: text}
+      - name: not_list
+        label: "'Not this' bullet list (optional)"
+        widget: list
+        required: false
+        summary: "{{fields.item}}"
+        field: {name: item, label: "Bullet", widget: string}
+      - name: signature
+        label: "Signature (optional)"
+        widget: object
+        required: false
+        fields:
+          - {name: name, label: "Signer name", widget: string, required: false}
+          - {name: title, label: "Signer title", widget: string, required: false}
+
+  - name: faq
+    label: "FAQ"
+    widget: object
+    fields:
+      - {name: eyebrow, label: "Eyebrow", widget: string, required: false}
+      - {name: headline, label: "Section headline", widget: string}
+      - name: items
+        label: "Questions"
+        widget: list
+        summary: "{{fields.q}}"
+        fields:
+          - {name: q, label: "Question", widget: string}
+          - {name: a, label: "Answer (<em> allowed)", widget: text}
+          - {name: comment, label: "Internal note", widget: string, required: false}
+
+  - name: final_cta
+    label: "Final CTA (bottom of page)"
+    widget: object
+    fields:
+      - {name: headline, label: "Headline", widget: string}
+      - {name: subheadline, label: "Subheadline", widget: string}
+      - {name: button_label, label: "Button label", widget: string}
+      - {name: closing_line, label: "Closing line under button (optional)", widget: text, required: false}
+
+  - name: footer
+    label: "Footer"
+    widget: object
+    fields:
+      - {name: school_name, label: "School name", widget: string}
+      - name: address
+        label: "Address"
+        widget: object
+        fields:
+          - {name: text, label: "Address text", widget: string}
+          - {name: href, label: "Google Maps link", widget: string}
+      - name: phone
+        label: "Phone"
+        widget: object
+        fields:
+          - {name: text, label: "Phone display text (e.g. '(555) 555-1234')", widget: string}
+          - {name: href, label: "Phone tel: link (e.g. 'tel:+15555551234')", widget: string}
+
+########################################################################
+# Collections — one file per segment, all sharing the field spec above.
+########################################################################
+
+collections:
+  - name: content
+    label: "Landing pages"
+    label_singular: "landing page"
+    editor:
+      preview: false  # Decap's default preview doesn't run the real template
+    files:
+      - name: preschool
+        label: "Preschool (ages 3–5)"
+        file: content/preschool.json
+        format: json
+        json:
+          indent_style: space
+          indent_size: 2
+        media_folder: "/source/preschool/assets"
+        public_folder: "assets"
+        fields: *segment_fields
+      - name: elementary
+        label: "Elementary (ages 6–11)"
+        file: content/elementary.json
+        format: json
+        json:
+          indent_style: space
+          indent_size: 2
+        media_folder: "/source/elementary/assets"
+        public_folder: "assets"
+        fields: *segment_fields
+      - name: teens
+        label: "Teens (ages 12–17)"
+        file: content/teens.json
+        format: json
+        json:
+          indent_style: space
+          indent_size: 2
+        media_folder: "/source/teens/assets"
+        public_folder: "assets"
+        fields: *segment_fields
+      - name: adults
+        label: "Adults (18+)"
+        file: content/adults.json
+        format: json
+        json:
+          indent_style: space
+          indent_size: 2
+        media_folder: "/source/adults/assets"
+        public_folder: "assets"
+        fields: *segment_fields

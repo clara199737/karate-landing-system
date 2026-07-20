@@ -1,0 +1,26 @@
+{{#testimonials}}  <!-- ============================================================= -->
+  <!-- TESTIMONIALS                                                  -->
+  <!-- ============================================================= -->
+  <section class="section proof">
+    <div class="wrap">
+      <p class="eyebrow">{{{eyebrow}}}</p>
+      <h2 class="section__title">{{{headline}}}</h2>
+
+      <div class="proof__quotes">
+{{#items}}{{^_first}}
+{{/_first}}        <blockquote class="quote{{#variant}} quote--{{{.}}}{{/variant}}">
+          <p>{{{quote}}}</p>
+          <footer class="quote__person">
+            <img class="quote__avatar" src="{{{avatar.src}}}" alt="{{{avatar.alt}}}" width="{{{avatar.width}}}" height="{{{avatar.height}}}" loading="lazy">
+            <cite>— {{{name}}}</cite>
+          </footer>
+        </blockquote>
+{{/items}}      </div>
+
+      <div class="section-cta">
+        <a href="#book" class="btn btn--cta btn--inline">{{{cta_label}}}</a>
+      </div>
+    </div>
+  </section>
+
+{{/testimonials}}

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{{{meta.page_title}}}</title>
+  <meta name="description" content="{{{meta.meta_description}}}">
+
+  <!-- Fonts: Bricolage Grotesque (headings) + Manrope (body) + Archivo (accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Bricolage+Grotesque:wght@600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- HTMX 2.0 blocks cross-origin requests by default (selfRequestsOnly).
+       Formspree is cross-origin, so we must opt in or the form silently won't POST. -->
+  <meta name="htmx-config" content='{"selfRequestsOnly":false}'>
+
+  <!-- HTMX (latest stable 2.x) -->
+  <script src="https://unpkg.com/htmx.org@2.0.4" defer></script>
+
+  <!-- Meta pixel base -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','PIXEL_ID'); fbq('track','PageView');{{#config.pixel_view_content}}
+  fbq('track','ViewContent',{content_category:'{{{config.pixel_content_category}}}'});{{/config.pixel_view_content}}
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script>window.LP_CONFIG = {{{lp_config_json}}};</script>
+  <script src="js/main.js" defer></script>
+</head>
+<body class="segment-{{{meta.segment}}}">
+
+  <!-- ============================================================= -->
+  <!-- HERO                                                          -->
+  <!-- ============================================================= -->
+  <header class="hero" id="top">
+    <div class="hero__inner">
+
+      <!-- Left column: the pitch -->
+      <div class="hero__copy">
+        <img class="hero__photo" src="{{{hero.image.src}}}"
+             alt="{{{hero.image.alt}}}"
+             width="{{{hero.image.width}}}" height="{{{hero.image.height}}}" fetchpriority="high">
+
+
+        <span class="badge">{{{hero.badge}}}</span>
+
+        <h1 class="hero__headline">
+          {{{hero.headline_html}}}
+        </h1>
+
+        <p class="hero__subhead">
+          {{{hero.subheadline}}}
+        </p>
+
+{{#hero.trust_items.length}}
+        <!-- Trust strip -->
+        <ul class="trust-strip">
+{{#hero.trust_items}}          <li>{{{.}}}</li>
+{{/hero.trust_items}}        </ul>
+{{/hero.trust_items.length}}      </div>
+
+      <!-- Right column: the form card -->
+      <div class="hero__form-wrap" id="book">
+        <div class="form-card">
+          <h2 class="form-card__title">{{{hero.form.heading}}}</h2>
+          <p class="form-card__sub">{{{hero.form.subheading}}}</p>
+
+          <form id="lead-form" class="lead-form"
+                action="https://formspree.io/f/{{{config.formspree_id}}}" method="POST"
+                hx-post="https://formspree.io/f/{{{config.formspree_id}}}"
+                hx-swap="none"
+                hx-headers='{"Accept":"application/json"}'>
+{{#hero.form.fields}}            <label class="field">
+              <span class="field__label">{{{label}}}</span>
+{{#is_select}}              <select name="{{{name}}}"{{#required}} required{{/required}}>
+                <option value="" disabled selected>{{{placeholder_label}}}</option>
+{{#options}}                <option value="{{{value}}}">{{{label}}}</option>
+{{/options}}              </select>
+{{/is_select}}{{^is_select}}              <input type="{{{type}}}" name="{{{name}}}" autocomplete="{{{autocomplete}}}"{{#required}} required{{/required}}>
+{{/is_select}}            </label>
+
+{{/hero.form.fields}}{{#hero.form.hidden_fields}}            <input type="hidden" name="{{{name}}}" value="{{{value}}}">
+
+{{/hero.form.hidden_fields}}{{#config.utm_passthrough}}            <input type="hidden" name="utm_source" value="">
+            <input type="hidden" name="utm_medium" value="">
+            <input type="hidden" name="utm_campaign" value="">
+
+{{/config.utm_passthrough}}            <!-- Honeypot anti-spam: hidden from humans -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp">
+
+            <button type="submit" class="btn btn--cta">{{{hero.form.button_label}}}</button>
+            <p class="form-status" role="alert" hidden></p>
+            <p class="form-card__micro">{{{hero.form.disclaimer}}}</p>
+          </form>
+
+{{#hero.route_link}}          <p class="route-link"><a href="{{{href}}}">{{{label}}}</a></p>
+
+{{/hero.route_link}}          <!-- Thank-you state — revealed on successful submit by main.js -->
+          <div id="thanks" class="thanks" hidden>
+            <p class="thanks__lead">{{{thank_you.lead}}}</p>
+            <p>{{{thank_you.body}}}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+{{#proof_bar}}  <!-- ============================================================= -->
+  <!-- PROOF BAR                                                     -->
+  <!-- ============================================================= -->
+  <section class="proof-bar">
+    <div class="wrap proof-bar__inner">
+{{#stats}}      <div class="proof-stat">
+        <span class="proof-stat__num">{{{value}}}</span>
+        <span class="proof-stat__label">{{{label}}}</span>
+      </div>
+{{/stats}}    </div>
+  </section>
+
+{{/proof_bar}}{{#problem}}  <!-- ============================================================= -->
+  <!-- PROBLEM                                                       -->
+  <!-- ============================================================= -->
+  <section class="section problem">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">{{{eyebrow}}}</p>
+      <h2 class="section__title">{{{headline}}}</h2>
+{{#body}}      <p class="problem__lead">
+        {{{.}}}
+      </p>
+{{/body}}{{#checklist.length}}      <ul class="worries">
+{{#checklist}}        <li>{{{.}}}</li>
+{{/checklist}}      </ul>
+{{/checklist.length}}{{#closing}}      <p class="problem__body">
+        {{{.}}}
+      </p>
+{{/closing}}    </div>
+  </section>
+
+{{/problem}}{{! Mid-page section order differs between adults (beginner→benefits→instructor→sideline→testimonials) and non-adults (reframe→how→benefits→testimonials→instructor) }}{{#is_adults}}{{> beginner_objection}}{{> benefits}}{{> instructor}}{{> sideline_bridge}}{{> testimonials}}{{/is_adults}}{{^is_adults}}{{> reframe}}{{> how_it_works}}{{> benefits}}{{> testimonials}}{{> instructor}}{{/is_adults}}{{#risk_reversal}}  <!-- ============================================================= -->
+  <!-- RISK REVERSAL                                                 -->
+  <!-- ============================================================= -->
+  <section class="section reversal">
+    <div class="wrap wrap--narrow">
+      <h2 class="reversal__title">{{{headline}}}</h2>
+      <p class="reversal__body">
+        {{{body}}}
+      </p>
+{{#signature}}      <p class="reversal__signoff">— {{{name}}}</p>
+{{/signature}}    </div>
+  </section>
+
+{{/risk_reversal}}{{#faq}}  <!-- ============================================================= -->
+  <!-- FAQ                                                           -->
+  <!-- ============================================================= -->
+  <section class="section faq">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">{{{eyebrow}}}</p>
+      <h2 class="section__title">{{{headline}}}</h2>
+{{#items}}
+      <details class="faq__item">
+        <summary>{{{q}}}</summary>
+        <div class="faq__a">
+          <p>{{{a}}}</p>
+        </div>
+      </details>
+{{/items}}    </div>
+  </section>
+
+{{/faq}}{{#final_cta}}  <!-- ============================================================= -->
+  <!-- FINAL CTA                                                     -->
+  <!-- ============================================================= -->
+  <section class="section final-cta">
+    <div class="wrap wrap--narrow final-cta__inner">
+      <h2 class="final-cta__title">{{{headline}}}</h2>
+      <p class="final-cta__sub">{{{subheadline}}}</p>
+      <a href="#book" class="btn btn--cta btn--inline">{{{button_label}}}</a>
+{{#closing_line}}      <p class="final-cta__close">
+        {{{.}}}
+      </p>
+{{/closing_line}}    </div>
+  </section>
+
+{{/final_cta}}{{#footer}}  <!-- ============================================================= -->
+  <!-- FOOTER                                                        -->
+  <!-- ============================================================= -->
+  <footer class="footer">
+    <div class="wrap wrap--narrow">
+      <p class="footer__name">{{{school_name}}}</p>
+      <p class="footer__detail">
+        <a href="{{{address.href}}}">{{{address.text}}}</a>
+      </p>
+      <p class="footer__detail">
+        <a href="{{{phone.href}}}">{{{phone.text}}}</a>
+      </p>
+    </div>
+  </footer>
+
+{{/footer}}  <!-- Mobile-only sticky CTA -->
+  <a href="#book" class="sticky-cta" id="sticky-cta">{{{hero.form.button_label}}}</a>
+
+</body>
+</html>

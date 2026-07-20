@@ -1,0 +1,3973 @@
+/* =================================================================
+   Free Teen Karate Class — Landing Page (ages 12–17)
+   Locked design system, inherited from the 4–12 / preschool /
+   elementary pages: same :root tokens. Teen-page override is a
+   DARKER, MOODIER temperature (more ink, dramatic contrast) — the
+   palette holds; the backgrounds and photo direction do the age-shift.
+   ================================================================= */
+
+:root{
+  /* Ink / Paper — forced dark mode */
+  color-scheme: dark;
+  --ink:#ececee;
+  --paper:#101014;
+
+  /* Brand palette */
+  --purple:#7C3AED;   /* primary — CTA buttons, key emphasis */
+  --pink:#EC4899;     /* secondary — highlights, validation */
+  --pink-ink:#BE185D; /* darker pink — for white text ON pink (passes WCAG AA) */
+  --teal:#0D9488;     /* tertiary — trust signals, checks, labels */
+
+  /* Type */
+  --font-head:'Bricolage Grotesque',sans-serif;
+  --font-body:'Manrope',sans-serif;
+  --font-accent:'Archivo',sans-serif;
+
+  /* Shape */
+  --radius:12px;
+
+  /* Supporting neutrals — forced dark mode */
+  --muted:#9a9aa4;
+  --line:#2b2b33;
+  --field-bg:#1a1a20;
+
+  /* Teen art-direction override — darker temperature.
+     Dark surfaces for the moody hero/teen-facing sections. */
+  --ink-900:#0d0d0f;      /* deepest — hero base */
+  --ink-800:#17171b;      /* dark section surface */
+  --ink-700:#22222a;      /* raised card on dark */
+  --ink-line:#33333d;     /* hairlines on dark */
+  --on-dark:#f4f4f6;      /* body text on dark */
+  --on-dark-muted:#b9b9c2;/* muted text on dark */
+  --hero-tint:#17121f;    /* dark purple wash for the light sections */
+}
+
+/* ---- base reset ---- */
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+
+#book{ scroll-margin-top:1rem; }
+
+/* keyboard focus — visible on every interactive element */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+.sticky-cta:focus-visible{
+  outline:3px solid var(--purple);
+  outline-offset:2px;
+  border-radius:6px;
+}
+.btn--cta:focus-visible,
+.sticky-cta:focus-visible{ outline-color:var(--paper); }
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+h1,h2,h3,h4{
+  font-family:var(--font-head);
+  font-weight:800;
+  line-height:1.1;
+  margin:0 0 .4em;
+}
+
+p{ margin:0 0 1em; }
+
+img{ max-width:100%; height:auto; display:block; }
+
+a{ color:var(--purple); }
+
+/* accent helpers */
+.eyebrow{
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.8rem;
+  color:var(--teal);
+  margin:0 0 .6em;
+}
+
+.badge{
+  display:inline-block;
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:.75rem;
+  color:var(--paper);
+  background:var(--pink-ink);
+  padding:.35em .7em;
+  border-radius:999px;
+  margin-bottom:1rem;
+}
+
+.accent-purple{ color:#a879f7; } /* lifted purple — readable on the dark hero */
+
+/* =================================================================
+   IMAGE PLACEHOLDER — until real/AI teen photos land (see register).
+   Darker, moodier fill to match the teen art direction. Nothing
+   misleading ships; the slot holds the layout instead.
+   ================================================================= */
+.img-placeholder{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    repeating-linear-gradient(45deg,#1c1c22,#1c1c22 12px,#24242c 12px,#24242c 24px);
+  color:#9c8ff0;
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-size:.7rem;
+  line-height:1.5;
+  border:1px dashed #3d3550;
+  padding:1rem;
+}
+
+/* =================================================================
+   HERO — dark, moody. Light form card pops against it.
+   ================================================================= */
+.hero{
+  background:
+    radial-gradient(120% 90% at 15% 0%, #201a30 0%, var(--ink-900) 55%);
+  color:var(--on-dark);
+  padding:2.5rem 1.25rem 3rem;
+}
+
+.hero__inner{
+  max-width:1080px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:2rem;
+}
+
+.hero__photo{
+  width:100%;
+  aspect-ratio:4/5;              /* portrait — single teen mid-technique */
+  max-height:420px;
+  object-fit:cover;
+  object-position:center;
+  border-radius:var(--radius);
+  margin-bottom:1.5rem;
+}
+
+.hero__headline{
+  color:var(--on-dark);
+  font-size:clamp(2rem, 6vw, 3.25rem);
+  letter-spacing:-0.01em;
+  margin-bottom:.5em;
+}
+
+.hero__subhead{
+  font-size:1.125rem;
+  color:var(--on-dark-muted);
+  max-width:38ch;
+}
+
+/* trust strip — compact inline pills under the subhead */
+.trust-strip{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin:1.25rem 0 0;
+  padding:0;
+}
+.trust-strip li{
+  font-family:var(--font-accent);
+  font-weight:600;
+  font-size:.8rem;
+  color:#7ee0d6;
+  background:rgba(13,148,136,.16);
+  border:1px solid rgba(13,148,136,.35);
+  border-radius:999px;
+  padding:.35rem .8rem;
+}
+
+/* =================================================================
+   FORM CARD — stays light, for contrast against the dark hero
+   ================================================================= */
+.hero__form-wrap{ width:100%; }
+
+.form-card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 18px 50px rgba(0,0,0,.45);
+  padding:1.5rem;
+  color:var(--ink);
+}
+
+.form-card__title{
+  font-size:1.4rem;
+  margin-bottom:.15em;
+}
+
+.form-card__sub{
+  color:var(--muted);
+  font-size:.95rem;
+  margin-bottom:1.1rem;
+}
+
+.lead-form .field{
+  display:block;
+  margin-bottom:.85rem;
+}
+
+.field__label{
+  display:block;
+  font-size:.85rem;
+  font-weight:600;
+  margin-bottom:.3rem;
+}
+
+.lead-form input,
+.lead-form select{
+  width:100%;
+  font-family:var(--font-body);
+  font-size:1rem;
+  color:var(--ink);
+  background:var(--field-bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:.7rem .8rem;
+}
+
+.lead-form input:focus,
+.lead-form select:focus{
+  outline:none;
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px rgba(124,58,237,.18);
+}
+
+/* honeypot — hidden from people, visible to bots */
+.hp{ position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
+
+/* inline validation errors */
+.lead-form input[aria-invalid="true"],
+.lead-form select[aria-invalid="true"]{
+  border-color:var(--pink);
+  box-shadow:0 0 0 3px rgba(236,72,153,.15);
+}
+.field__error{
+  margin:.3rem 0 0;
+  color:var(--pink-ink);
+  font-size:.8rem;
+  font-weight:600;
+}
+
+/* buttons */
+.btn{
+  display:inline-block;
+  width:100%;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:1.05rem;
+  border:none;
+  border-radius:10px;
+  padding:.85rem 1rem;
+  cursor:pointer;
+}
+
+.btn--cta{
+  background:var(--purple);
+  color:var(--paper);
+  margin-top:.4rem;
+}
+
+.btn--cta:hover{ background:#6d28d9; }
+
+.form-card__micro{
+  text-align:center;
+  color:var(--muted);
+  font-size:.8rem;
+  margin:.7rem 0 0;
+}
+
+/* age-routing link to the elementary page */
+.route-link{
+  text-align:center;
+  font-size:.85rem;
+  font-weight:600;
+  margin:.9rem 0 0;
+}
+
+/* form-level error (failed submit) */
+.form-status{
+  color:#b91c1c;
+  font-size:.9rem;
+  font-weight:600;
+  margin:.7rem 0 0;
+}
+
+/* thank-you state */
+.thanks{ text-align:center; padding:1rem 0; }
+.thanks__lead{
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.4rem;
+  margin-bottom:.3em;
+}
+
+/* =================================================================
+   RESPONSIVE — desktop two-column hero
+   ================================================================= */
+@media (min-width:860px){
+  .hero{ padding:4rem 1.5rem 4.5rem; }
+  .hero__inner{
+    grid-template-columns:1.05fr .95fr;
+    gap:3rem;
+    align-items:start;
+  }
+  .hero__copy{ padding-top:.5rem; }
+  .hero__photo{ max-height:480px; }
+  .form-card{ padding:2rem; }
+}
+
+/* =================================================================
+   SHARED SECTION SCAFFOLD
+   ================================================================= */
+.section{ padding:3.5rem 1.25rem; }
+
+.wrap{ max-width:1080px; margin:0 auto; }
+.wrap--narrow{ max-width:680px; }
+
+.section__title{
+  font-size:clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom:.6em;
+}
+
+.section-cta{ text-align:center; margin-top:2.25rem; }
+
+/* dark-section helper — the moody teen-facing surfaces */
+.section--dark{ background:var(--ink-800); color:var(--on-dark); }
+.section--dark .section__title{ color:var(--on-dark); }
+.section--dark .eyebrow{ color:#7ee0d6; }
+
+/* =================================================================
+   PROOF BAR — teens-only proof points, thin dark strip under hero
+   ================================================================= */
+.proof-bar{
+  background:var(--ink-900);
+  color:var(--on-dark);
+  padding:1.25rem;
+  border-top:1px solid var(--ink-line);
+}
+.proof-bar__inner{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
+  text-align:center;
+}
+.proof-stat{ display:flex; flex-direction:column; gap:.15rem; }
+.proof-stat__num{
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.35rem;
+  color:#a879f7;
+}
+.proof-stat__label{
+  font-family:var(--font-accent);
+  font-weight:600;
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--on-dark-muted);
+}
+@media (min-width:760px){
+  .proof-bar__inner{ grid-template-columns:repeat(3,1fr); }
+  .proof-stat{ border-left:1px solid var(--ink-line); }
+  .proof-stat:first-child{ border-left:none; }
+}
+
+/* =================================================================
+   PROBLEM — empathy checklist in the parent's voice
+   ================================================================= */
+.problem{ background:var(--hero-tint); }
+.problem__body{ font-size:1.1rem; color:var(--ink); font-weight:600; max-width:52ch; }
+
+.worries{
+  list-style:none;
+  margin:0 0 1.5rem;
+  padding:0;
+  display:grid;
+  gap:.85rem;
+}
+.worries li{
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.1rem;
+  color:var(--ink);
+  background:var(--paper);
+  border-left:3px solid var(--pink);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1rem 1.2rem;
+}
+
+/* =================================================================
+   "THIS ISN'T LITTLE-KID KARATE" — dark, moody, teen-facing.
+   The forwardable "show this to your teen" moment.
+   ================================================================= */
+.notkid{ background:var(--ink-800); color:var(--on-dark); }
+.notkid .eyebrow{ color:#7ee0d6; }
+.notkid .section__title{ color:var(--on-dark); font-size:clamp(1.8rem,5vw,2.8rem); }
+.notkid__lead{ font-size:1.1rem; color:var(--on-dark-muted); max-width:52ch; margin-bottom:2rem; }
+
+.swap{
+  list-style:none;
+  margin:0 0 2rem;
+  padding:0;
+  display:grid;
+  gap:1rem;
+}
+.swap__row{
+  display:grid;
+  grid-template-columns:1fr;
+  align-items:center;
+  gap:.5rem;
+  background:var(--ink-700);
+  border:1px solid var(--ink-line);
+  border-radius:var(--radius);
+  padding:1.1rem 1.25rem;
+}
+.swap__from{
+  color:var(--on-dark-muted);
+  font-size:1rem;
+}
+.swap__from s{ text-decoration-color:var(--pink); text-decoration-thickness:2px; }
+.swap__arrow{
+  color:#a879f7;
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.2rem;
+  line-height:1;
+}
+.swap__to{
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.15rem;
+  color:var(--on-dark);
+}
+
+.notkid__reassure{
+  font-size:1.15rem;
+  font-weight:600;
+  color:var(--on-dark);
+  max-width:54ch;
+  margin:0;
+}
+
+@media (min-width:720px){
+  .swap__row{
+    grid-template-columns:1fr auto 1.2fr;
+    gap:1.25rem;
+  }
+  .swap__arrow{ font-size:1.5rem; }
+}
+
+/* =================================================================
+   HOW IT WORKS — first-class walkthrough
+   ================================================================= */
+.how{ background:var(--hero-tint); }
+
+.how__photo{
+  width:100%;
+  aspect-ratio:3/2;
+  object-fit:cover;
+  object-position:center;
+  border-radius:var(--radius);
+  margin-top:1.25rem;
+}
+
+.steps{
+  list-style:none;
+  margin:1.5rem 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+}
+
+.step{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.5rem;
+}
+
+.step__num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:2.4rem;
+  height:2.4rem;
+  border-radius:50%;
+  background:var(--purple);
+  color:var(--paper);
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.2rem;
+  margin-bottom:.75rem;
+}
+
+.step__title{ font-size:1.2rem; margin-bottom:.3em; }
+.step p{ margin:0; color:var(--muted); }
+
+@media (min-width:820px){
+  .steps--timeline{ grid-template-columns:repeat(3,1fr); }
+}
+
+/* =================================================================
+   BENEFITS — split panel: parent (light) / teen (dark)
+   ================================================================= */
+.benefits{ background:var(--paper); }
+
+.split{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+  margin-top:1.5rem;
+}
+
+.split__col{
+  border-radius:var(--radius);
+  padding:1.75rem 1.5rem;
+}
+.split__col--parent{
+  background:var(--field-bg);
+  border:1px solid var(--line);
+}
+.split__col--teen{
+  background:var(--ink-800);
+  border:1px solid var(--ink-line);
+  color:var(--on-dark);
+}
+
+.split__who{
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:.8rem;
+  margin:0 0 1rem;
+}
+.split__col--parent .split__who{ color:var(--teal); }
+.split__col--teen .split__who{ color:#a879f7; }
+
+.split__list{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:.9rem;
+}
+.split__list li{
+  position:relative;
+  padding-left:1.6rem;
+  font-size:1.05rem;
+  font-weight:500;
+}
+.split__list li::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:.5em;
+  width:.7rem;
+  height:.7rem;
+  border-radius:2px;
+  transform:rotate(45deg);
+}
+.split__col--parent .split__list li::before{ background:var(--teal); }
+.split__col--teen .split__list li::before{ background:#a879f7; }
+
+@media (min-width:820px){
+  .split{ grid-template-columns:1fr 1fr; gap:1.5rem; }
+}
+
+/* =================================================================
+   SOCIAL PROOF — parent + teen testimonial
+   ================================================================= */
+.proof{ background:var(--hero-tint); }
+
+.proof__quotes{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+  margin-top:1.5rem;
+}
+
+.quote{
+  margin:0;
+  background:var(--paper);
+  border-left:3px solid var(--teal);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1.4rem 1.5rem;
+}
+.quote--teen{
+  background:var(--ink-800);
+  border-left-color:#a879f7;
+  color:var(--on-dark);
+}
+.quote p{ margin:0 0 1rem; font-weight:500; font-size:1.05rem; }
+.quote--teen cite{ color:var(--on-dark-muted); }
+.quote__person{ display:flex; align-items:center; gap:.7rem; }
+.quote__avatar{
+  width:56px; height:56px;
+  border-radius:50%;
+  object-fit:cover;
+  flex:0 0 auto;
+  font-size:.55rem;
+}
+.quote cite{ color:var(--muted); font-style:normal; font-weight:600; font-size:.9rem; }
+
+@media (min-width:760px){
+  .proof__quotes{ grid-template-columns:1fr 1fr; }
+}
+
+/* =================================================================
+   RISK REVERSAL — teen-veto promise, deepest ink
+   ================================================================= */
+.reversal{
+  background:var(--ink-900);
+  color:var(--paper);
+  text-align:center;
+}
+.reversal__title{ color:var(--paper); font-size:clamp(1.5rem,4vw,2.2rem); max-width:24ch; margin:0 auto .5em; }
+.reversal__body{ color:#d6d6d6; font-size:1.1rem; max-width:54ch; margin:0 auto; }
+.reversal__body strong{ color:var(--paper); }
+.reversal__signoff{
+  font-family:var(--font-accent);
+  color:var(--on-dark-muted);
+  font-size:1rem;
+  margin:1.5rem 0 0;
+}
+
+/* =================================================================
+   FAQ
+   ================================================================= */
+.faq{ background:var(--paper); }
+
+.faq__item{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:0 1.2rem;
+  margin-bottom:.75rem;
+}
+
+.faq__item summary{
+  cursor:pointer;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.05rem;
+  padding:1rem 0;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+}
+.faq__item summary::-webkit-details-marker{ display:none; }
+
+.faq__item summary::after{
+  content:"+";
+  color:var(--purple);
+  font-size:1.4rem;
+  font-weight:700;
+  line-height:1;
+}
+.faq__item[open] summary::after{ content:"–"; }
+
+.faq__a{ padding:0 0 1rem; }
+.faq__a p{ margin:0; color:var(--muted); }
+
+/* =================================================================
+   FINAL CTA
+   ================================================================= */
+.final-cta{ background:var(--hero-tint); }
+.final-cta__inner{ text-align:center; }
+.final-cta__title{ font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:.3em; }
+.final-cta__sub{ color:var(--muted); margin-bottom:1.5rem; }
+
+.btn--inline{
+  width:auto;
+  text-decoration:none;
+  padding:.95rem 2rem;
+}
+
+/* =================================================================
+   FOOTER
+   ================================================================= */
+.footer{
+  background:var(--ink-900);
+  color:#cfcfcf;
+  text-align:center;
+  padding:2.5rem 1.25rem;
+}
+.footer__name{
+  font-family:var(--font-head);
+  font-weight:800;
+  color:var(--paper);
+  font-size:1.2rem;
+  margin-bottom:.4rem;
+}
+.footer__detail{ margin:.2rem 0; font-size:.95rem; }
+.footer__detail a{ color:#cfcfcf; }
+
+/* =================================================================
+   MOBILE STICKY CTA BAR
+   ================================================================= */
+.sticky-cta{ display:none; }
+
+@media (max-width:859px){
+  .sticky-cta{
+    position:fixed;
+    left:1rem;
+    right:1rem;
+    bottom:1rem;
+    z-index:50;
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:var(--purple);
+    color:var(--paper);
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:1.05rem;
+    padding:.95rem 1rem;
+    border-radius:999px;
+    box-shadow:0 8px 24px rgba(124,58,237,.45);
+    transform:translateY(150%);
+    transition:transform .25s ease;
+  }
+  .sticky-cta.is-visible{ transform:translateY(0); }
+
+  .footer{ padding-bottom:6rem; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .sticky-cta{ transition:none; }
+}
+
+
+/* =================================================================
+   segment-preschool overrides
+   Every rule below applies only when <body class="segment-preschool">.
+   Base rules above (from teens' baseline) still apply; anything defined
+   here wins by higher specificity (body-class prefix).
+   ================================================================= */
+
+/* =================================================================
+   Free Preschool Karate Class — Landing Page (ages 3–5)
+   Locked design system, inherited from the 4–12 page:
+   edit the palette/fonts here in one place (:root).
+   ================================================================= */
+
+body.segment-preschool {
+
+  /* Ink / Paper — forced dark mode */
+  color-scheme: dark;
+  --ink:#ececee;
+  --paper:#101014;
+
+  /* Brand palette */
+  --purple:#7C3AED;   /* primary — CTA buttons, key emphasis */
+  --pink:#EC4899;     /* secondary — the "free" hook, highlights */
+  --pink-ink:#BE185D; /* darker pink — for white text ON pink (passes WCAG AA) */
+  --teal:#0D9488;     /* tertiary — trust signals, checks, labels */
+
+  /* Type */
+  --font-head:'Bricolage Grotesque',sans-serif;
+  --font-body:'Manrope',sans-serif;
+  --font-accent:'Archivo',sans-serif;
+
+  /* Shape */
+  --radius:12px;
+
+  /* Supporting neutrals — forced dark mode */
+  --muted:#9a9aa4;
+  --line:#2b2b33;
+  --field-bg:#1a1a20;
+  --hero-tint:#17121f;   /* dark purple wash behind the hero */
+
+}
+
+/* ---- base reset ---- */
+
+body.segment-preschool *,
+body.segment-preschool *::before,
+body.segment-preschool *::after {
+ box-sizing:border-box; 
+}
+
+body.segment-preschool html {
+ -webkit-text-size-adjust:100%; scroll-behavior:smooth; 
+}
+
+/* anchor jumps land below nothing here, but give the form a little breathing room */
+
+body.segment-preschool #book {
+ scroll-margin-top:1rem; 
+}
+
+/* keyboard focus — visible on every interactive element */
+
+body.segment-preschool a:focus-visible,
+body.segment-preschool button:focus-visible,
+body.segment-preschool summary:focus-visible,
+body.segment-preschool input:focus-visible,
+body.segment-preschool select:focus-visible,
+body.segment-preschool .sticky-cta:focus-visible {
+
+  outline:3px solid var(--purple);
+  outline-offset:2px;
+  border-radius:6px;
+
+}
+
+/* purple buttons need a dark ring to stay visible against their own fill */
+
+body.segment-preschool .btn--cta:focus-visible,
+body.segment-preschool .sticky-cta:focus-visible {
+ outline-color:var(--ink); 
+}
+
+/* respect users who ask for less motion */
+
+@media (prefers-reduced-motion:reduce) {
+body.segment-preschool html {
+ scroll-behavior:auto; 
+}
+}
+
+body.segment-preschool {
+
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+
+}
+
+body.segment-preschool h1,
+body.segment-preschool h2,
+body.segment-preschool h3,
+body.segment-preschool h4 {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  line-height:1.1;
+  margin:0 0 .4em;
+
+}
+
+body.segment-preschool p {
+ margin:0 0 1em; 
+}
+
+body.segment-preschool img {
+ max-width:100%; height:auto; display:block; 
+}
+
+body.segment-preschool a {
+ color:var(--purple); 
+}
+
+/* accent helpers */
+
+body.segment-preschool .eyebrow {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.8rem;
+  color:var(--teal);
+  margin:0 0 .6em;
+
+}
+
+body.segment-preschool .badge {
+
+  display:inline-block;
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:.75rem;
+  color:var(--paper);
+  background:var(--pink-ink); /* darker pink so white text meets AA contrast */
+  padding:.35em .7em;
+  border-radius:999px;
+  margin-bottom:1rem;
+
+}
+
+body.segment-preschool .accent-purple {
+ color:var(--purple); 
+}
+
+/* =================================================================
+   IMAGE PLACEHOLDER — until real/AI photos land (see placeholder register).
+   Nothing misleading ships; the slot holds the layout instead.
+   ================================================================= */
+
+body.segment-preschool .img-placeholder {
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    repeating-linear-gradient(45deg,#f3effc,#f3effc 12px,#ece4fb 12px,#ece4fb 24px);
+  color:var(--purple);
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-size:.7rem;
+  border:1px dashed #c9b8f2;
+
+}
+
+/* =================================================================
+   HERO
+   ================================================================= */
+
+body.segment-preschool .hero {
+
+  background:var(--hero-tint);
+  padding:2.5rem 1.25rem 3rem;
+
+}
+
+body.segment-preschool .hero__inner {
+
+  max-width:1080px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;     /* mobile: single column, stacked */
+  gap:2rem;
+
+}
+
+body.segment-preschool .hero__photo {
+
+  width:100%;
+  aspect-ratio:3/2;              /* landscape scene — matches the source photo */
+  max-height:340px;
+  object-fit:cover;
+  object-position:70% center;    /* favor the laughing child on the right */
+  border-radius:var(--radius);
+  margin-bottom:1.5rem;
+
+}
+
+body.segment-preschool .hero__headline {
+
+  font-size:clamp(2rem, 6vw, 3.25rem);
+  letter-spacing:-0.01em;
+  margin-bottom:.5em;
+
+}
+
+body.segment-preschool .hero__subhead {
+
+  font-size:1.125rem;
+  color:var(--muted);
+  max-width:36ch;
+
+}
+
+/* trust strip — compact inline pills under the subhead */
+
+body.segment-preschool .trust-strip {
+
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin:1.25rem 0 0;
+  padding:0;
+
+}
+
+body.segment-preschool .trust-strip li {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  font-size:.8rem;
+  color:var(--teal);
+  background:#e7f5f3;
+  border-radius:999px;
+  padding:.35rem .8rem;
+
+}
+
+/* =================================================================
+   FORM CARD
+   ================================================================= */
+
+body.segment-preschool .hero__form-wrap {
+ width:100%; 
+}
+
+body.segment-preschool .form-card {
+
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 10px 30px rgba(20,20,20,.08);
+  padding:1.5rem;
+
+}
+
+body.segment-preschool .form-card__title {
+
+  font-size:1.4rem;
+  margin-bottom:.15em;
+
+}
+
+body.segment-preschool .form-card__sub {
+
+  color:var(--muted);
+  font-size:.95rem;
+  margin-bottom:1.1rem;
+
+}
+
+body.segment-preschool .lead-form .field {
+
+  display:block;
+  margin-bottom:.85rem;
+
+}
+
+body.segment-preschool .field__label {
+
+  display:block;
+  font-size:.85rem;
+  font-weight:600;
+  margin-bottom:.3rem;
+
+}
+
+body.segment-preschool .lead-form input,
+body.segment-preschool .lead-form select {
+
+  width:100%;
+  font-family:var(--font-body);
+  font-size:1rem;
+  color:var(--ink);
+  background:var(--field-bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:.7rem .8rem;
+
+}
+
+body.segment-preschool .lead-form input:focus,
+body.segment-preschool .lead-form select:focus {
+
+  outline:none;
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px rgba(124,58,237,.18);
+
+}
+
+/* honeypot — hidden from people, visible to bots */
+
+body.segment-preschool .hp {
+ position:absolute; left:-9999px; width:1px; height:1px; opacity:0; 
+}
+
+/* inline validation errors */
+
+body.segment-preschool .lead-form input[aria-invalid="true"],
+body.segment-preschool .lead-form select[aria-invalid="true"] {
+
+  border-color:var(--pink);
+  box-shadow:0 0 0 3px rgba(236,72,153,.15);
+
+}
+
+body.segment-preschool .field__error {
+
+  margin:.3rem 0 0;
+  color:var(--pink);
+  font-size:.8rem;
+  font-weight:600;
+
+}
+
+/* buttons */
+
+body.segment-preschool .btn {
+
+  display:inline-block;
+  width:100%;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:1.05rem;
+  border:none;
+  border-radius:10px;
+  padding:.85rem 1rem;
+  cursor:pointer;
+
+}
+
+body.segment-preschool .btn--cta {
+
+  background:var(--purple);
+  color:var(--paper);
+  margin-top:.4rem;
+
+}
+
+body.segment-preschool .btn--cta:hover {
+ background:#6d28d9; 
+}
+
+body.segment-preschool .form-card__micro {
+
+  text-align:center;
+  color:var(--muted);
+  font-size:.8rem;
+  margin:.7rem 0 0;
+
+}
+
+/* age-routing link to the 4–12 page (US-3) */
+
+body.segment-preschool .route-link {
+
+  text-align:center;
+  font-size:.85rem;
+  font-weight:600;
+  margin:.9rem 0 0;
+
+}
+
+/* form-level error (failed submit) */
+
+body.segment-preschool .form-status {
+
+  color:#b91c1c;
+  font-size:.9rem;
+  font-weight:600;
+  margin:.7rem 0 0;
+
+}
+
+/* thank-you state */
+
+body.segment-preschool .thanks {
+ text-align:center; padding:1rem 0; 
+}
+
+body.segment-preschool .thanks__lead {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.4rem;
+  margin-bottom:.3em;
+
+}
+
+/* =================================================================
+   RESPONSIVE — desktop two-column hero
+   ================================================================= */
+
+@media (min-width:860px) {
+body.segment-preschool .hero {
+ padding:4rem 1.5rem 4.5rem; 
+}
+
+body.segment-preschool .hero__inner {
+
+    grid-template-columns:1.05fr .95fr;  /* copy left, form right */
+    gap:3rem;
+    align-items:start;
+  
+}
+
+body.segment-preschool .hero__copy {
+ padding-top:.5rem; 
+}
+
+body.segment-preschool .hero__photo {
+ max-height:380px; object-position:70% center; 
+}
+
+body.segment-preschool .form-card {
+ padding:2rem; 
+}
+}
+
+/* =================================================================
+   SHARED SECTION SCAFFOLD
+   ================================================================= */
+
+body.segment-preschool .section {
+ padding:3.5rem 1.25rem; 
+}
+
+body.segment-preschool .wrap {
+ max-width:1080px; margin:0 auto; 
+}
+
+body.segment-preschool .wrap--narrow {
+ max-width:680px; 
+}
+
+body.segment-preschool .section__title {
+
+  font-size:clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom:.6em;
+
+}
+
+/* repeated CTA row (after reframe, social proof) */
+
+body.segment-preschool .section-cta {
+ text-align:center; margin-top:2.25rem; 
+}
+
+/* =================================================================
+   PROBLEM
+   ================================================================= */
+
+body.segment-preschool .problem {
+ background:var(--hero-tint); 
+}
+
+body.segment-preschool .problem__body {
+ font-size:1.1rem; color:var(--muted); 
+}
+
+body.segment-preschool .worries {
+
+  list-style:none;
+  margin:0 0 1.5rem;
+  padding:0;
+  display:grid;
+  gap:.85rem;
+
+}
+
+body.segment-preschool .worries li {
+
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.15rem;
+  color:var(--ink);
+  background:var(--paper);
+  border-left:3px solid var(--pink);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1rem 1.2rem;
+
+}
+
+/* =================================================================
+   REFRAME — readiness is the output
+   ================================================================= */
+
+body.segment-preschool .reframe {
+ background:var(--paper); 
+}
+
+body.segment-preschool .reframe__lead {
+
+  font-size:1.1rem;
+  color:var(--muted);
+  max-width:60ch;
+  margin-bottom:2rem;
+
+}
+
+body.segment-preschool .reframe__grid {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+
+}
+
+body.segment-preschool .reframe__item {
+
+  background:var(--field-bg);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.5rem;
+
+}
+
+body.segment-preschool .reframe__icon {
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:3rem;
+  height:3rem;
+  border-radius:50%;
+  background:#e7f5f3;
+  color:var(--teal);
+  margin-bottom:.9rem;
+
+}
+
+body.segment-preschool .reframe__icon svg {
+ width:1.5rem; height:1.5rem; 
+}
+
+body.segment-preschool .reframe__title {
+ font-size:1.2rem; margin-bottom:.3em; 
+}
+
+body.segment-preschool .reframe__item p {
+ margin:0; color:var(--muted); 
+}
+
+@media (min-width:760px) {
+body.segment-preschool .reframe__grid {
+ grid-template-columns:repeat(3,1fr); 
+}
+}
+
+/* =================================================================
+   HOW IT WORKS — 30-minute timeline
+   ================================================================= */
+
+body.segment-preschool .how {
+ background:var(--hero-tint); 
+}
+
+body.segment-preschool .how__photo {
+
+  width:100%;
+  aspect-ratio:3/2;              /* matches the source 1192×802 — shows uncropped */
+  object-fit:cover;
+  object-position:center;
+  border-radius:var(--radius);
+  margin-top:1.25rem;
+
+}
+
+body.segment-preschool .steps {
+
+  list-style:none;
+  margin:1.5rem 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+
+}
+
+body.segment-preschool .step {
+
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.5rem;
+
+}
+
+body.segment-preschool .step__num {
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:2.4rem;
+  height:2.4rem;
+  border-radius:50%;
+  background:var(--purple);
+  color:var(--paper);
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.2rem;
+  margin-bottom:.75rem;
+
+}
+
+body.segment-preschool .step__title {
+ font-size:1.2rem; margin-bottom:.3em; 
+}
+
+body.segment-preschool .step p {
+ margin:0; color:var(--muted); 
+}
+
+body.segment-preschool .how__note {
+
+  margin:1.75rem 0 0;
+  font-size:1.05rem;
+  text-align:center;
+  color:var(--muted);
+
+}
+
+body.segment-preschool .how__note strong {
+ color:var(--ink); 
+}
+
+@media (min-width:760px) {
+body.segment-preschool .steps--timeline {
+ grid-template-columns:repeat(2,1fr); 
+}
+}
+
+@media (min-width:1000px) {
+body.segment-preschool .steps--timeline {
+ grid-template-columns:repeat(4,1fr); 
+}
+}
+
+/* =================================================================
+   SOCIAL PROOF
+   ================================================================= */
+
+body.segment-preschool .proof {
+ background:var(--paper); 
+}
+
+body.segment-preschool .proof__quotes {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+  margin-top:1.5rem;
+
+}
+
+body.segment-preschool .quote {
+
+  margin:0;
+  background:var(--field-bg);
+  border-left:3px solid var(--teal);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1.25rem 1.4rem;
+
+}
+
+body.segment-preschool .quote p {
+ margin:0 0 .8rem; font-weight:500; 
+}
+
+body.segment-preschool .quote__person {
+ display:flex; align-items:center; gap:.7rem; 
+}
+
+body.segment-preschool .quote__avatar {
+
+  width:56px; height:56px;
+  border-radius:50%;
+  object-fit:cover;
+  flex:0 0 auto;
+
+}
+
+body.segment-preschool .quote cite {
+ color:var(--muted); font-style:normal; font-weight:600; font-size:.9rem; 
+}
+
+@media (min-width:760px) {
+body.segment-preschool .proof__quotes {
+ grid-template-columns:repeat(3,1fr); 
+}
+}
+
+/* =================================================================
+   INSTRUCTOR
+   ================================================================= */
+
+body.segment-preschool .instructor {
+ background:var(--hero-tint); 
+}
+
+body.segment-preschool .instructor__inner {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+  align-items:center;
+
+}
+
+body.segment-preschool .instructor__photo {
+
+  width:100%;
+  aspect-ratio:3/2;
+  object-fit:cover;
+  border-radius:var(--radius);
+
+}
+
+body.segment-preschool .instructor__body p {
+ color:var(--muted); 
+}
+
+body.segment-preschool .instructor__cred {
+
+  font-size:.95rem;
+  color:var(--ink);
+
+}
+
+body.segment-preschool .instructor__cred strong {
+ color:var(--teal); 
+}
+
+@media (min-width:760px) {
+body.segment-preschool .instructor__inner {
+ grid-template-columns:.8fr 1.2fr; gap:2.5rem; 
+}
+}
+
+/* =================================================================
+   RISK REVERSAL
+   ================================================================= */
+
+body.segment-preschool .reversal {
+
+  background:var(--ink);
+  color:var(--paper);
+  text-align:center;
+
+}
+
+body.segment-preschool .reversal__title {
+ color:var(--paper); font-size:clamp(1.5rem,4vw,2.2rem); max-width:20ch; margin:0 auto .5em; 
+}
+
+body.segment-preschool .reversal__body {
+ color:#d6d6d6; font-size:1.1rem; max-width:52ch; margin:0 auto; 
+}
+
+body.segment-preschool .reversal__body strong {
+ color:var(--paper); 
+}
+
+/* =================================================================
+   FAQ
+   ================================================================= */
+
+body.segment-preschool .faq {
+ background:var(--paper); 
+}
+
+body.segment-preschool .faq__item {
+
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:0 1.2rem;
+  margin-bottom:.75rem;
+
+}
+
+body.segment-preschool .faq__item summary {
+
+  cursor:pointer;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.05rem;
+  padding:1rem 0;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+
+}
+
+body.segment-preschool .faq__item summary::-webkit-details-marker {
+ display:none; 
+}
+
+body.segment-preschool .faq__item summary::after {
+
+  content:"+";
+  color:var(--purple);
+  font-size:1.4rem;
+  font-weight:700;
+  line-height:1;
+
+}
+
+body.segment-preschool .faq__item[open] summary::after {
+ content:"–"; 
+}
+
+body.segment-preschool .faq__a {
+ padding:0 0 1rem; 
+}
+
+body.segment-preschool .faq__a p {
+ margin:0; color:var(--muted); 
+}
+
+/* =================================================================
+   FINAL CTA
+   ================================================================= */
+
+body.segment-preschool .final-cta {
+ background:var(--hero-tint); 
+}
+
+body.segment-preschool .final-cta__inner {
+ text-align:center; 
+}
+
+body.segment-preschool .final-cta__title {
+ font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:.3em; 
+}
+
+body.segment-preschool .final-cta__sub {
+ color:var(--muted); margin-bottom:1.5rem; 
+}
+
+body.segment-preschool .btn--inline {
+
+  width:auto;
+  text-decoration:none;
+  padding:.95rem 2rem;
+
+}
+
+/* =================================================================
+   FOOTER
+   ================================================================= */
+
+body.segment-preschool .footer {
+
+  background:var(--ink);
+  color:#cfcfcf;
+  text-align:center;
+  padding:2.5rem 1.25rem;
+
+}
+
+body.segment-preschool .footer__name {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  color:var(--paper);
+  font-size:1.2rem;
+  margin-bottom:.4rem;
+
+}
+
+body.segment-preschool .footer__detail {
+ margin:.2rem 0; font-size:.95rem; 
+}
+
+body.segment-preschool .footer__detail a {
+ color:#cfcfcf; 
+}
+
+/* =================================================================
+   MOBILE STICKY CTA BAR
+   ================================================================= */
+
+body.segment-preschool .sticky-cta {
+ display:none; 
+}
+
+@media (max-width:859px) {
+body.segment-preschool .sticky-cta {
+
+    position:fixed;
+    left:1rem;
+    right:1rem;
+    bottom:1rem;
+    z-index:50;
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:var(--purple);
+    color:var(--paper);
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:1.05rem;
+    padding:.95rem 1rem;
+    border-radius:999px;
+    box-shadow:0 8px 24px rgba(124,58,237,.35);
+    transform:translateY(150%);
+    transition:transform .25s ease;
+  
+}
+
+body.segment-preschool .sticky-cta.is-visible {
+ transform:translateY(0); 
+}
+
+/* keep the bar from covering the footer's last line */
+
+body.segment-preschool .footer {
+ padding-bottom:6rem; 
+}
+}
+
+@media (prefers-reduced-motion:reduce) {
+body.segment-preschool .sticky-cta {
+ transition:none; 
+}
+}
+
+
+/* =================================================================
+   segment-elementary overrides
+   Every rule below applies only when <body class="segment-elementary">.
+   Base rules above (from teens' baseline) still apply; anything defined
+   here wins by higher specificity (body-class prefix).
+   ================================================================= */
+
+/* =================================================================
+   Free Elementary Karate Class — Landing Page (ages 6–11)
+   Locked design system, inherited from the 4–12 / preschool pages:
+   edit the palette/fonts here in one place (:root).
+   ================================================================= */
+
+body.segment-elementary {
+
+  /* Ink / Paper — forced dark mode */
+  color-scheme: dark;
+  --ink:#ececee;
+  --paper:#101014;
+
+  /* Brand palette */
+  --purple:#7C3AED;   /* primary — CTA buttons, key emphasis */
+  --pink:#EC4899;     /* secondary — the "free" hook, highlights */
+  --pink-ink:#BE185D; /* darker pink — for white text ON pink (passes WCAG AA) */
+  --teal:#0D9488;     /* tertiary — trust signals, checks, labels */
+
+  /* Type */
+  --font-head:'Bricolage Grotesque',sans-serif;
+  --font-body:'Manrope',sans-serif;
+  --font-accent:'Archivo',sans-serif;
+
+  /* Shape */
+  --radius:12px;
+
+  /* Supporting neutrals — forced dark mode */
+  --muted:#9a9aa4;
+  --line:#2b2b33;
+  --field-bg:#1a1a20;
+  --hero-tint:#17121f;   /* dark purple wash behind the hero */
+
+}
+
+/* ---- base reset ---- */
+
+body.segment-elementary *,
+body.segment-elementary *::before,
+body.segment-elementary *::after {
+ box-sizing:border-box; 
+}
+
+body.segment-elementary html {
+ -webkit-text-size-adjust:100%; scroll-behavior:smooth; 
+}
+
+/* anchor jumps land below nothing here, but give the form a little breathing room */
+
+body.segment-elementary #book {
+ scroll-margin-top:1rem; 
+}
+
+/* keyboard focus — visible on every interactive element */
+
+body.segment-elementary a:focus-visible,
+body.segment-elementary button:focus-visible,
+body.segment-elementary summary:focus-visible,
+body.segment-elementary input:focus-visible,
+body.segment-elementary select:focus-visible,
+body.segment-elementary .sticky-cta:focus-visible {
+
+  outline:3px solid var(--purple);
+  outline-offset:2px;
+  border-radius:6px;
+
+}
+
+/* purple buttons need a dark ring to stay visible against their own fill */
+
+body.segment-elementary .btn--cta:focus-visible,
+body.segment-elementary .sticky-cta:focus-visible {
+ outline-color:var(--ink); 
+}
+
+/* respect users who ask for less motion */
+
+@media (prefers-reduced-motion:reduce) {
+body.segment-elementary html {
+ scroll-behavior:auto; 
+}
+}
+
+body.segment-elementary {
+
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+
+}
+
+body.segment-elementary h1,
+body.segment-elementary h2,
+body.segment-elementary h3,
+body.segment-elementary h4 {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  line-height:1.1;
+  margin:0 0 .4em;
+
+}
+
+body.segment-elementary p {
+ margin:0 0 1em; 
+}
+
+body.segment-elementary img {
+ max-width:100%; height:auto; display:block; 
+}
+
+body.segment-elementary a {
+ color:var(--purple); 
+}
+
+/* accent helpers */
+
+body.segment-elementary .eyebrow {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.8rem;
+  color:var(--teal);
+  margin:0 0 .6em;
+
+}
+
+body.segment-elementary .badge {
+
+  display:inline-block;
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:.75rem;
+  color:var(--paper);
+  background:var(--pink-ink); /* darker pink so white text meets AA contrast */
+  padding:.35em .7em;
+  border-radius:999px;
+  margin-bottom:1rem;
+
+}
+
+body.segment-elementary .accent-purple {
+ color:var(--purple); 
+}
+
+/* =================================================================
+   IMAGE PLACEHOLDER — until real/AI photos land (see placeholder register).
+   Nothing misleading ships; the slot holds the layout instead.
+   ================================================================= */
+
+body.segment-elementary .img-placeholder {
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:
+    repeating-linear-gradient(45deg,#f3effc,#f3effc 12px,#ece4fb 12px,#ece4fb 24px);
+  color:var(--purple);
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-size:.7rem;
+  border:1px dashed #c9b8f2;
+
+}
+
+/* =================================================================
+   HERO
+   ================================================================= */
+
+body.segment-elementary .hero {
+
+  background:var(--hero-tint);
+  padding:2.5rem 1.25rem 3rem;
+
+}
+
+body.segment-elementary .hero__inner {
+
+  max-width:1080px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;     /* mobile: single column, stacked */
+  gap:2rem;
+
+}
+
+body.segment-elementary .hero__photo {
+
+  width:100%;
+  aspect-ratio:3/2;              /* landscape scene — matches the source photo */
+  max-height:340px;
+  object-fit:cover;
+  object-position:center;        /* subject is centered in the frame */
+  border-radius:var(--radius);
+  margin-bottom:1.5rem;
+
+}
+
+body.segment-elementary .hero__headline {
+
+  font-size:clamp(2rem, 6vw, 3.25rem);
+  letter-spacing:-0.01em;
+  margin-bottom:.5em;
+
+}
+
+body.segment-elementary .hero__subhead {
+
+  font-size:1.125rem;
+  color:var(--muted);
+  max-width:36ch;
+
+}
+
+/* trust strip — compact inline pills under the subhead */
+
+body.segment-elementary .trust-strip {
+
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin:1.25rem 0 0;
+  padding:0;
+
+}
+
+body.segment-elementary .trust-strip li {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  font-size:.8rem;
+  color:var(--teal);
+  background:#e7f5f3;
+  border-radius:999px;
+  padding:.35rem .8rem;
+
+}
+
+/* =================================================================
+   FORM CARD
+   ================================================================= */
+
+body.segment-elementary .hero__form-wrap {
+ width:100%; 
+}
+
+body.segment-elementary .form-card {
+
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 10px 30px rgba(20,20,20,.08);
+  padding:1.5rem;
+
+}
+
+body.segment-elementary .form-card__title {
+
+  font-size:1.4rem;
+  margin-bottom:.15em;
+
+}
+
+body.segment-elementary .form-card__sub {
+
+  color:var(--muted);
+  font-size:.95rem;
+  margin-bottom:1.1rem;
+
+}
+
+body.segment-elementary .lead-form .field {
+
+  display:block;
+  margin-bottom:.85rem;
+
+}
+
+body.segment-elementary .field__label {
+
+  display:block;
+  font-size:.85rem;
+  font-weight:600;
+  margin-bottom:.3rem;
+
+}
+
+body.segment-elementary .lead-form input,
+body.segment-elementary .lead-form select {
+
+  width:100%;
+  font-family:var(--font-body);
+  font-size:1rem;
+  color:var(--ink);
+  background:var(--field-bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:.7rem .8rem;
+
+}
+
+body.segment-elementary .lead-form input:focus,
+body.segment-elementary .lead-form select:focus {
+
+  outline:none;
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px rgba(124,58,237,.18);
+
+}
+
+/* honeypot — hidden from people, visible to bots */
+
+body.segment-elementary .hp {
+ position:absolute; left:-9999px; width:1px; height:1px; opacity:0; 
+}
+
+/* inline validation errors */
+
+body.segment-elementary .lead-form input[aria-invalid="true"],
+body.segment-elementary .lead-form select[aria-invalid="true"] {
+
+  border-color:var(--pink);
+  box-shadow:0 0 0 3px rgba(236,72,153,.15);
+
+}
+
+body.segment-elementary .field__error {
+
+  margin:.3rem 0 0;
+  color:var(--pink);
+  font-size:.8rem;
+  font-weight:600;
+
+}
+
+/* buttons */
+
+body.segment-elementary .btn {
+
+  display:inline-block;
+  width:100%;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:1.05rem;
+  border:none;
+  border-radius:10px;
+  padding:.85rem 1rem;
+  cursor:pointer;
+
+}
+
+body.segment-elementary .btn--cta {
+
+  background:var(--purple);
+  color:var(--paper);
+  margin-top:.4rem;
+
+}
+
+body.segment-elementary .btn--cta:hover {
+ background:#6d28d9; 
+}
+
+body.segment-elementary .form-card__micro {
+
+  text-align:center;
+  color:var(--muted);
+  font-size:.8rem;
+  margin:.7rem 0 0;
+
+}
+
+/* age-routing link to the 4–12 page (US-3) */
+
+body.segment-elementary .route-link {
+
+  text-align:center;
+  font-size:.85rem;
+  font-weight:600;
+  margin:.9rem 0 0;
+
+}
+
+/* form-level error (failed submit) */
+
+body.segment-elementary .form-status {
+
+  color:#b91c1c;
+  font-size:.9rem;
+  font-weight:600;
+  margin:.7rem 0 0;
+
+}
+
+/* thank-you state */
+
+body.segment-elementary .thanks {
+ text-align:center; padding:1rem 0; 
+}
+
+body.segment-elementary .thanks__lead {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.4rem;
+  margin-bottom:.3em;
+
+}
+
+/* =================================================================
+   RESPONSIVE — desktop two-column hero
+   ================================================================= */
+
+@media (min-width:860px) {
+body.segment-elementary .hero {
+ padding:4rem 1.5rem 4.5rem; 
+}
+
+body.segment-elementary .hero__inner {
+
+    grid-template-columns:1.05fr .95fr;  /* copy left, form right */
+    gap:3rem;
+    align-items:start;
+  
+}
+
+body.segment-elementary .hero__copy {
+ padding-top:.5rem; 
+}
+
+body.segment-elementary .hero__photo {
+ max-height:380px; object-position:center; 
+}
+
+body.segment-elementary .form-card {
+ padding:2rem; 
+}
+}
+
+/* =================================================================
+   SHARED SECTION SCAFFOLD
+   ================================================================= */
+
+body.segment-elementary .section {
+ padding:3.5rem 1.25rem; 
+}
+
+body.segment-elementary .wrap {
+ max-width:1080px; margin:0 auto; 
+}
+
+body.segment-elementary .wrap--narrow {
+ max-width:680px; 
+}
+
+body.segment-elementary .section__title {
+
+  font-size:clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom:.6em;
+
+}
+
+/* repeated CTA row (after reframe, social proof) */
+
+body.segment-elementary .section-cta {
+ text-align:center; margin-top:2.25rem; 
+}
+
+/* =================================================================
+   PROBLEM
+   ================================================================= */
+
+body.segment-elementary .problem {
+ background:var(--hero-tint); 
+}
+
+body.segment-elementary .problem__body {
+ font-size:1.1rem; color:var(--muted); 
+}
+
+body.segment-elementary .worries {
+
+  list-style:none;
+  margin:0 0 1.5rem;
+  padding:0;
+  display:grid;
+  gap:.85rem;
+
+}
+
+body.segment-elementary .worries li {
+
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.15rem;
+  color:var(--ink);
+  background:var(--paper);
+  border-left:3px solid var(--pink);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1rem 1.2rem;
+
+}
+
+/* =================================================================
+   REFRAME — readiness is the output
+   ================================================================= */
+
+body.segment-elementary .reframe {
+ background:var(--paper); 
+}
+
+body.segment-elementary .reframe__lead {
+
+  font-size:1.1rem;
+  color:var(--muted);
+  max-width:60ch;
+  margin-bottom:2rem;
+
+}
+
+body.segment-elementary .reframe__grid {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+
+}
+
+body.segment-elementary .reframe__item {
+
+  background:var(--field-bg);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.5rem;
+
+}
+
+body.segment-elementary .reframe__icon {
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:3rem;
+  height:3rem;
+  border-radius:50%;
+  background:#e7f5f3;
+  color:var(--teal);
+  margin-bottom:.9rem;
+
+}
+
+body.segment-elementary .reframe__icon svg {
+ width:1.5rem; height:1.5rem; 
+}
+
+body.segment-elementary .reframe__title {
+ font-size:1.2rem; margin-bottom:.3em; 
+}
+
+body.segment-elementary .reframe__item p {
+ margin:0; color:var(--muted); 
+}
+
+@media (min-width:760px) {
+body.segment-elementary .reframe__grid {
+ grid-template-columns:repeat(3,1fr); 
+}
+}
+
+/* =================================================================
+   HOW IT WORKS — 30-minute timeline
+   ================================================================= */
+
+body.segment-elementary .how {
+ background:var(--hero-tint); 
+}
+
+body.segment-elementary .how__photo {
+
+  width:100%;
+  aspect-ratio:3/2;              /* matches the source 1192×802 — shows uncropped */
+  object-fit:cover;
+  object-position:center;
+  border-radius:var(--radius);
+  margin-top:1.25rem;
+
+}
+
+body.segment-elementary .steps {
+
+  list-style:none;
+  margin:1.5rem 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+
+}
+
+body.segment-elementary .step {
+
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.5rem;
+
+}
+
+body.segment-elementary .step__num {
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:2.4rem;
+  height:2.4rem;
+  border-radius:50%;
+  background:var(--purple);
+  color:var(--paper);
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.2rem;
+  margin-bottom:.75rem;
+
+}
+
+body.segment-elementary .step__title {
+ font-size:1.2rem; margin-bottom:.3em; 
+}
+
+body.segment-elementary .step p {
+ margin:0; color:var(--muted); 
+}
+
+@media (min-width:760px) {
+body.segment-elementary .steps--timeline {
+ grid-template-columns:repeat(2,1fr); 
+}
+}
+
+@media (min-width:1000px) {
+body.segment-elementary .steps--timeline {
+ grid-template-columns:repeat(4,1fr); 
+}
+}
+
+/* =================================================================
+   BELT LADDER — the visible progress system (US-4: always visible,
+   no accordion). Built in-page with the design system, not an image.
+   ================================================================= */
+
+body.segment-elementary .belt-ladder {
+
+  margin-top:2.5rem;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.75rem 1.5rem;
+
+}
+
+body.segment-elementary .belt-ladder__caption {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:clamp(1.15rem,3vw,1.5rem);
+  text-align:center;
+  margin:0 0 1.5rem;
+
+}
+
+body.segment-elementary .belt-ladder__caption em {
+ color:var(--purple); font-style:normal; 
+}
+
+/* mobile: vertical ladder with a connecting spine */
+
+body.segment-elementary .belt-ladder__track {
+
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:1rem;
+
+}
+
+body.segment-elementary .belt-rung {
+
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:.9rem;
+  padding:.7rem .9rem;
+  background:var(--field-bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+
+}
+
+/* the belt "chip" — a colored bar knotted like a belt end */
+
+body.segment-elementary .belt-chip {
+
+  width:2.6rem;
+  height:1rem;
+  border-radius:3px;
+  background:var(--belt);
+  border:1px solid var(--belt-line);
+  flex:0 0 auto;
+
+}
+
+body.segment-elementary .belt-chip--striped {
+
+  background:
+    linear-gradient(90deg, var(--belt) 62%, #141414 62%, #141414 78%, var(--belt) 78%);
+
+}
+
+body.segment-elementary .belt-rung__name {
+
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.05rem;
+
+}
+
+body.segment-elementary .belt-rung__time {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--teal);
+  text-align:right;
+
+}
+
+body.segment-elementary .belt-rung--more {
+ opacity:.85; 
+}
+
+body.segment-elementary .belt-ladder__note {
+
+  margin:1.5rem 0 0;
+  text-align:center;
+  color:var(--muted);
+  font-size:1rem;
+  max-width:52ch;
+  margin-left:auto;
+  margin-right:auto;
+
+}
+
+/* desktop: lay the rungs out as a left-to-right progress track */
+
+@media (min-width:760px) {
+body.segment-elementary .belt-ladder {
+ padding:2rem; 
+}
+
+body.segment-elementary .belt-ladder__track {
+
+    grid-auto-flow:column;
+    grid-auto-columns:1fr;
+    gap:.75rem;
+    align-items:stretch;
+  
+}
+
+body.segment-elementary .belt-rung {
+
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto auto;
+    justify-items:center;
+    text-align:center;
+    gap:.5rem;
+    padding:1.1rem .75rem;
+    position:relative;
+  
+}
+
+/* connector arrows between rungs */
+
+body.segment-elementary .belt-rung:not(:last-child)::after {
+
+    content:"";
+    position:absolute;
+    right:-.55rem;
+    top:50%;
+    width:.5rem;
+    height:.5rem;
+    border-top:2px solid var(--line);
+    border-right:2px solid var(--line);
+    transform:translateY(-50%) rotate(45deg);
+  
+}
+
+body.segment-elementary .belt-chip {
+ width:3.4rem; height:1.15rem; 
+}
+
+body.segment-elementary .belt-rung__time {
+ text-align:center; 
+}
+}
+
+/* =================================================================
+   SOCIAL PROOF
+   ================================================================= */
+
+body.segment-elementary .proof {
+ background:var(--paper); 
+}
+
+body.segment-elementary .proof__quotes {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+  margin-top:1.5rem;
+
+}
+
+body.segment-elementary .quote {
+
+  margin:0;
+  background:var(--field-bg);
+  border-left:3px solid var(--teal);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1.25rem 1.4rem;
+
+}
+
+body.segment-elementary .quote p {
+ margin:0 0 .8rem; font-weight:500; 
+}
+
+body.segment-elementary .quote__person {
+ display:flex; align-items:center; gap:.7rem; 
+}
+
+body.segment-elementary .quote__avatar {
+
+  width:56px; height:56px;
+  border-radius:50%;
+  object-fit:cover;
+  flex:0 0 auto;
+
+}
+
+body.segment-elementary .quote cite {
+ color:var(--muted); font-style:normal; font-weight:600; font-size:.9rem; 
+}
+
+@media (min-width:760px) {
+body.segment-elementary .proof__quotes {
+ grid-template-columns:repeat(3,1fr); 
+}
+}
+
+/* =================================================================
+   INSTRUCTOR
+   ================================================================= */
+
+body.segment-elementary .instructor {
+ background:var(--hero-tint); 
+}
+
+body.segment-elementary .instructor__inner {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+  align-items:center;
+
+}
+
+body.segment-elementary .instructor__photo {
+
+  width:100%;
+  aspect-ratio:3/2;
+  object-fit:cover;
+  border-radius:var(--radius);
+
+}
+
+body.segment-elementary .instructor__body p {
+ color:var(--muted); 
+}
+
+body.segment-elementary .instructor__cred {
+
+  font-size:.95rem;
+  color:var(--ink);
+
+}
+
+body.segment-elementary .instructor__cred strong {
+ color:var(--teal); 
+}
+
+@media (min-width:760px) {
+body.segment-elementary .instructor__inner {
+ grid-template-columns:.8fr 1.2fr; gap:2.5rem; 
+}
+}
+
+/* =================================================================
+   RISK REVERSAL
+   ================================================================= */
+
+body.segment-elementary .reversal {
+
+  background:var(--ink);
+  color:var(--paper);
+  text-align:center;
+
+}
+
+body.segment-elementary .reversal__title {
+ color:var(--paper); font-size:clamp(1.5rem,4vw,2.2rem); max-width:20ch; margin:0 auto .5em; 
+}
+
+body.segment-elementary .reversal__body {
+ color:#d6d6d6; font-size:1.1rem; max-width:52ch; margin:0 auto; 
+}
+
+body.segment-elementary .reversal__body strong {
+ color:var(--paper); 
+}
+
+/* =================================================================
+   FAQ
+   ================================================================= */
+
+body.segment-elementary .faq {
+ background:var(--paper); 
+}
+
+body.segment-elementary .faq__item {
+
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:0 1.2rem;
+  margin-bottom:.75rem;
+
+}
+
+body.segment-elementary .faq__item summary {
+
+  cursor:pointer;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.05rem;
+  padding:1rem 0;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+
+}
+
+body.segment-elementary .faq__item summary::-webkit-details-marker {
+ display:none; 
+}
+
+body.segment-elementary .faq__item summary::after {
+
+  content:"+";
+  color:var(--purple);
+  font-size:1.4rem;
+  font-weight:700;
+  line-height:1;
+
+}
+
+body.segment-elementary .faq__item[open] summary::after {
+ content:"–"; 
+}
+
+body.segment-elementary .faq__a {
+ padding:0 0 1rem; 
+}
+
+body.segment-elementary .faq__a p {
+ margin:0; color:var(--muted); 
+}
+
+/* =================================================================
+   FINAL CTA
+   ================================================================= */
+
+body.segment-elementary .final-cta {
+ background:var(--hero-tint); 
+}
+
+body.segment-elementary .final-cta__inner {
+ text-align:center; 
+}
+
+body.segment-elementary .final-cta__title {
+ font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:.3em; 
+}
+
+body.segment-elementary .final-cta__sub {
+ color:var(--muted); margin-bottom:1.5rem; 
+}
+
+body.segment-elementary .btn--inline {
+
+  width:auto;
+  text-decoration:none;
+  padding:.95rem 2rem;
+
+}
+
+/* =================================================================
+   FOOTER
+   ================================================================= */
+
+body.segment-elementary .footer {
+
+  background:var(--ink);
+  color:#cfcfcf;
+  text-align:center;
+  padding:2.5rem 1.25rem;
+
+}
+
+body.segment-elementary .footer__name {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  color:var(--paper);
+  font-size:1.2rem;
+  margin-bottom:.4rem;
+
+}
+
+body.segment-elementary .footer__detail {
+ margin:.2rem 0; font-size:.95rem; 
+}
+
+body.segment-elementary .footer__detail a {
+ color:#cfcfcf; 
+}
+
+/* =================================================================
+   MOBILE STICKY CTA BAR
+   ================================================================= */
+
+body.segment-elementary .sticky-cta {
+ display:none; 
+}
+
+@media (max-width:859px) {
+body.segment-elementary .sticky-cta {
+
+    position:fixed;
+    left:1rem;
+    right:1rem;
+    bottom:1rem;
+    z-index:50;
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:var(--purple);
+    color:var(--paper);
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:1.05rem;
+    padding:.95rem 1rem;
+    border-radius:999px;
+    box-shadow:0 8px 24px rgba(124,58,237,.35);
+    transform:translateY(150%);
+    transition:transform .25s ease;
+  
+}
+
+body.segment-elementary .sticky-cta.is-visible {
+ transform:translateY(0); 
+}
+
+/* keep the bar from covering the footer's last line */
+
+body.segment-elementary .footer {
+ padding-bottom:6rem; 
+}
+}
+
+@media (prefers-reduced-motion:reduce) {
+body.segment-elementary .sticky-cta {
+ transition:none; 
+}
+}
+
+
+/* =================================================================
+   segment-adults overrides
+   Every rule below applies only when <body class="segment-adults">.
+   Base rules above (from teens' baseline) still apply; anything defined
+   here wins by higher specificity (body-class prefix).
+   ================================================================= */
+
+/* =================================================================
+   Free Adult Karate Class — Landing Page (adults 18+)
+   Locked design system, inherited from the 4–12 / preschool /
+   elementary / teen pages: same :root tokens, same fonts, same
+   palette. Adult art-direction is a LIGHTER, SERIOUS temperature —
+   a grounded editorial look, not the teen page's moody dark hero.
+   Proof bar + risk-reversal stay ink-dark for gravitas; everything
+   else reads clean and adult.
+   ================================================================= */
+
+body.segment-adults {
+
+  /* Ink / Paper — forced dark mode */
+  color-scheme: dark;
+  --ink:#ececee;
+  --paper:#101014;
+
+  /* Brand palette */
+  --purple:#7C3AED;   /* primary — CTA buttons, key emphasis */
+  --pink:#EC4899;     /* secondary — highlights, validation */
+  --pink-ink:#BE185D; /* darker pink — for white text ON pink (passes WCAG AA) */
+  --teal:#0D9488;     /* tertiary — trust signals, checks, labels */
+
+  /* Type */
+  --font-head:'Bricolage Grotesque',sans-serif;
+  --font-body:'Manrope',sans-serif;
+  --font-accent:'Archivo',sans-serif;
+
+  /* Shape */
+  --radius:12px;
+
+  /* Supporting neutrals — forced dark mode */
+  --muted:#9a9aa4;
+  --line:#2b2b33;
+  --field-bg:#1a1a20;
+
+  /* Ink surfaces — used for the proof bar + risk-reversal bands. */
+  --ink-900:#0d0d0f;      /* deepest — dark bands */
+  --ink-line:#33333d;     /* hairlines on dark */
+  --on-dark:#f4f4f6;      /* body text on dark */
+  --on-dark-muted:#b9b9c2;/* muted text on dark */
+
+  --hero-tint:#17121f;    /* dark purple wash for the light sections */
+  --purple-lift:#a879f7;  /* lifted purple — readable on the dark bands */
+
+}
+
+/* ---- base reset ---- */
+
+body.segment-adults *,
+body.segment-adults *::before,
+body.segment-adults *::after {
+ box-sizing:border-box; 
+}
+
+body.segment-adults html {
+ -webkit-text-size-adjust:100%; scroll-behavior:smooth; 
+}
+
+body.segment-adults #book {
+ scroll-margin-top:1rem; 
+}
+
+/* keyboard focus — visible on every interactive element */
+
+body.segment-adults a:focus-visible,
+body.segment-adults button:focus-visible,
+body.segment-adults summary:focus-visible,
+body.segment-adults input:focus-visible,
+body.segment-adults select:focus-visible,
+body.segment-adults .sticky-cta:focus-visible {
+
+  outline:3px solid var(--purple);
+  outline-offset:2px;
+  border-radius:6px;
+
+}
+
+body.segment-adults .btn--cta:focus-visible,
+body.segment-adults .sticky-cta:focus-visible {
+ outline-color:var(--paper); 
+}
+
+@media (prefers-reduced-motion:reduce) {
+body.segment-adults html {
+ scroll-behavior:auto; 
+}
+}
+
+body.segment-adults {
+
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+
+}
+
+body.segment-adults h1,
+body.segment-adults h2,
+body.segment-adults h3,
+body.segment-adults h4 {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  line-height:1.1;
+  margin:0 0 .4em;
+
+}
+
+body.segment-adults p {
+ margin:0 0 1em; 
+}
+
+body.segment-adults img {
+ max-width:100%; height:auto; display:block; 
+}
+
+body.segment-adults a {
+ color:var(--purple); 
+}
+
+/* accent helpers */
+
+body.segment-adults .eyebrow {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.8rem;
+  color:var(--teal);
+  margin:0 0 .6em;
+
+}
+
+body.segment-adults .badge {
+
+  display:inline-block;
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:.75rem;
+  color:var(--paper);
+  background:var(--pink-ink);
+  padding:.35em .7em;
+  border-radius:999px;
+  margin-bottom:1rem;
+
+}
+
+body.segment-adults .accent-purple {
+ color:var(--purple); 
+}
+
+/* real purple — readable on light surfaces */
+
+/* =================================================================
+   HERO — light, serious. Grounded editorial temperature; the form
+   card sits on a soft purple wash rather than a moody dark field.
+   ================================================================= */
+
+body.segment-adults .hero {
+
+  background:
+    radial-gradient(120% 90% at 12% 0%, var(--hero-tint) 0%, var(--paper) 60%);
+  color:var(--ink);
+  padding:2.5rem 1.25rem 3rem;
+  border-bottom:1px solid var(--line);
+
+}
+
+body.segment-adults .hero__inner {
+
+  max-width:1080px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:2rem;
+
+}
+
+body.segment-adults .hero__photo {
+
+  width:100%;
+  aspect-ratio:4/5;              /* portrait — single adult mid-technique */
+  max-height:420px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:var(--radius);
+  margin-bottom:1.5rem;
+
+}
+
+body.segment-adults .hero__headline {
+
+  color:var(--ink);
+  font-size:clamp(2rem, 6vw, 3.25rem);
+  letter-spacing:-0.01em;
+  margin-bottom:.5em;
+
+}
+
+body.segment-adults .hero__subhead {
+
+  font-size:1.125rem;
+  color:var(--muted);
+  max-width:40ch;
+
+}
+
+/* trust strip — compact inline pills under the subhead */
+
+body.segment-adults .trust-strip {
+
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin:1.25rem 0 0;
+  padding:0;
+
+}
+
+body.segment-adults .trust-strip li {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  font-size:.8rem;
+  color:var(--teal);
+  background:rgba(13,148,136,.10);
+  border:1px solid rgba(13,148,136,.30);
+  border-radius:999px;
+  padding:.35rem .8rem;
+
+}
+
+/* =================================================================
+   FORM CARD
+   ================================================================= */
+
+body.segment-adults .hero__form-wrap {
+ width:100%; 
+}
+
+body.segment-adults .form-card {
+
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 14px 44px rgba(20,20,20,.12);
+  padding:1.5rem;
+  color:var(--ink);
+
+}
+
+body.segment-adults .form-card__title {
+
+  font-size:1.4rem;
+  margin-bottom:.15em;
+
+}
+
+body.segment-adults .form-card__sub {
+
+  color:var(--muted);
+  font-size:.95rem;
+  margin-bottom:1.1rem;
+
+}
+
+body.segment-adults .lead-form .field {
+
+  display:block;
+  margin-bottom:.85rem;
+
+}
+
+body.segment-adults .field__label {
+
+  display:block;
+  font-size:.85rem;
+  font-weight:600;
+  margin-bottom:.3rem;
+
+}
+
+body.segment-adults .lead-form input,
+body.segment-adults .lead-form select {
+
+  width:100%;
+  font-family:var(--font-body);
+  font-size:1rem;
+  color:var(--ink);
+  background:var(--field-bg);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:.7rem .8rem;
+
+}
+
+body.segment-adults .lead-form input:focus,
+body.segment-adults .lead-form select:focus {
+
+  outline:none;
+  border-color:var(--purple);
+  box-shadow:0 0 0 3px rgba(124,58,237,.18);
+
+}
+
+/* honeypot — hidden from people, visible to bots */
+
+body.segment-adults .hp {
+ position:absolute; left:-9999px; width:1px; height:1px; opacity:0; 
+}
+
+/* inline validation errors */
+
+body.segment-adults .lead-form input[aria-invalid="true"],
+body.segment-adults .lead-form select[aria-invalid="true"] {
+
+  border-color:var(--pink);
+  box-shadow:0 0 0 3px rgba(236,72,153,.15);
+
+}
+
+body.segment-adults .field__error {
+
+  margin:.3rem 0 0;
+  color:var(--pink-ink);
+  font-size:.8rem;
+  font-weight:600;
+
+}
+
+/* buttons */
+
+body.segment-adults .btn {
+
+  display:inline-block;
+  width:100%;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:1.05rem;
+  border:none;
+  border-radius:10px;
+  padding:.85rem 1rem;
+  cursor:pointer;
+
+}
+
+body.segment-adults .btn--cta {
+
+  background:var(--purple);
+  color:var(--paper);
+  margin-top:.4rem;
+
+}
+
+body.segment-adults .btn--cta:hover {
+ background:#6d28d9; 
+}
+
+body.segment-adults .form-card__micro {
+
+  text-align:center;
+  color:var(--muted);
+  font-size:.8rem;
+  margin:.7rem 0 0;
+
+}
+
+/* form-level error (failed submit) */
+
+body.segment-adults .form-status {
+
+  color:#b91c1c;
+  font-size:.9rem;
+  font-weight:600;
+  margin:.7rem 0 0;
+
+}
+
+/* thank-you state */
+
+body.segment-adults .thanks {
+ text-align:center; padding:1rem 0; 
+}
+
+body.segment-adults .thanks__lead {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.4rem;
+  margin-bottom:.3em;
+
+}
+
+/* =================================================================
+   RESPONSIVE — desktop two-column hero
+   ================================================================= */
+
+@media (min-width:860px) {
+body.segment-adults .hero {
+ padding:4rem 1.5rem 4.5rem; 
+}
+
+body.segment-adults .hero__inner {
+
+    grid-template-columns:1.05fr .95fr;
+    gap:3rem;
+    align-items:start;
+  
+}
+
+body.segment-adults .hero__copy {
+ padding-top:.5rem; 
+}
+
+body.segment-adults .hero__photo {
+ max-height:480px; 
+}
+
+body.segment-adults .form-card {
+ padding:2rem; 
+}
+}
+
+/* =================================================================
+   SHARED SECTION SCAFFOLD
+   ================================================================= */
+
+body.segment-adults .section {
+ padding:3.5rem 1.25rem; 
+}
+
+body.segment-adults .wrap {
+ max-width:1080px; margin:0 auto; 
+}
+
+body.segment-adults .wrap--narrow {
+ max-width:680px; 
+}
+
+body.segment-adults .section__title {
+
+  font-size:clamp(1.6rem, 4vw, 2.4rem);
+  margin-bottom:.6em;
+
+}
+
+body.segment-adults .section-cta {
+ text-align:center; margin-top:2.25rem; 
+}
+
+/* =================================================================
+   PROOF BAR — adult proof points, thin ink strip under the hero
+   ================================================================= */
+
+body.segment-adults .proof-bar {
+
+  background:var(--ink-900);
+  color:var(--on-dark);
+  padding:1.5rem 1.25rem;
+
+}
+
+body.segment-adults .proof-bar__inner {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+  text-align:center;
+
+}
+
+body.segment-adults .proof-stat {
+ display:flex; flex-direction:column; gap:.15rem; 
+}
+
+body.segment-adults .proof-stat__num {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.35rem;
+  color:var(--purple-lift);
+
+}
+
+body.segment-adults .proof-stat__label {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--on-dark-muted);
+
+}
+
+@media (min-width:560px) {
+body.segment-adults .proof-bar__inner {
+ grid-template-columns:repeat(2,1fr); 
+}
+}
+
+@media (min-width:920px) {
+body.segment-adults .proof-bar__inner {
+ grid-template-columns:repeat(4,1fr); 
+}
+
+body.segment-adults .proof-stat {
+ border-left:1px solid var(--ink-line); 
+}
+
+body.segment-adults .proof-stat:first-child {
+ border-left:none; 
+}
+}
+
+/* =================================================================
+   PROBLEM — self-recognition checklist, voiced inward
+   ================================================================= */
+
+body.segment-adults .problem {
+ background:var(--hero-tint); 
+}
+
+body.segment-adults .problem__lead {
+ font-size:1.1rem; color:var(--muted); max-width:52ch; margin-bottom:1.5rem; 
+}
+
+body.segment-adults .problem__body {
+ font-size:1.1rem; color:var(--ink); font-weight:600; max-width:52ch; 
+}
+
+body.segment-adults .worries {
+
+  list-style:none;
+  margin:0 0 1.5rem;
+  padding:0;
+  display:grid;
+  gap:.85rem;
+
+}
+
+body.segment-adults .worries li {
+
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.1rem;
+  color:var(--ink);
+  background:var(--paper);
+  border-left:3px solid var(--pink);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1rem 1.2rem;
+
+}
+
+/* =================================================================
+   BEGINNER — "you won't be the only beginner" first-class
+   walkthrough + age spread. The persuasion payload of the page.
+   ================================================================= */
+
+body.segment-adults .beginner {
+ background:var(--paper); 
+}
+
+body.segment-adults .beginner__lead {
+ font-size:1.1rem; color:var(--muted); max-width:56ch; margin-bottom:1rem; 
+}
+
+body.segment-adults .beginner__photo {
+
+  width:100%;
+  aspect-ratio:3/2;
+  object-fit:cover;
+  object-position:center;
+  border-radius:var(--radius);
+  margin:1.25rem 0 .5rem;
+
+}
+
+/* numbered walkthrough — shared step scaffold */
+
+body.segment-adults .steps {
+
+  list-style:none;
+  margin:1.5rem 0 0;
+  padding:0;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+
+}
+
+body.segment-adults .step {
+
+  background:var(--hero-tint);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.5rem;
+
+}
+
+body.segment-adults .step__num {
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:2.4rem;
+  height:2.4rem;
+  border-radius:50%;
+  background:var(--purple);
+  color:var(--paper);
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.2rem;
+  margin-bottom:.75rem;
+
+}
+
+body.segment-adults .step__title {
+ font-size:1.2rem; margin-bottom:.3em; 
+}
+
+body.segment-adults .step p {
+ margin:0; color:var(--muted); 
+}
+
+@media (min-width:820px) {
+body.segment-adults .steps--timeline {
+ grid-template-columns:repeat(4,1fr); 
+}
+}
+
+/* age spread — HARD-GATE numbers (see index.html). A purple band that
+   reads as the proof it is. */
+
+body.segment-adults .agespread {
+
+  margin-top:2rem;
+  background:linear-gradient(180deg, #efe9fd 0%, var(--hero-tint) 100%);
+  border:1px solid #ddd0fb;
+  border-radius:var(--radius);
+  padding:1.75rem 1.5rem;
+  text-align:center;
+
+}
+
+body.segment-adults .agespread__caption {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  font-size:.8rem;
+  color:var(--purple);
+  margin:0 0 1.1rem;
+
+}
+
+body.segment-adults .agespread__stats {
+
+  list-style:none;
+  margin:0 auto 1rem;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  max-width:460px;
+
+}
+
+body.segment-adults .agespread__stats li {
+ display:flex; flex-direction:column; gap:.15rem; 
+}
+
+body.segment-adults .agespread__num {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.6rem;
+  color:var(--ink);
+
+}
+
+body.segment-adults .agespread__label {
+
+  font-family:var(--font-accent);
+  font-weight:600;
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--muted);
+
+}
+
+body.segment-adults .agespread__line {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  font-size:1.25rem;
+  color:var(--purple);
+  margin:0;
+
+}
+
+/* =================================================================
+   BENEFITS — four adult-outcome blocks, 1:1 thumbnail pattern
+   ================================================================= */
+
+body.segment-adults .benefits {
+ background:var(--hero-tint); 
+}
+
+body.segment-adults .gains__grid {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+  margin-top:1.5rem;
+
+}
+
+body.segment-adults .gain {
+
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1.4rem;
+
+}
+
+body.segment-adults .gain__photo {
+
+  display:block;
+  width:100%;
+  aspect-ratio:1/1;            /* 1:1 thumbnail per PRD §6.5 */
+  object-fit:cover;
+  border-radius:10px;
+  margin-bottom:1.1rem;
+
+}
+
+body.segment-adults .gain__title {
+ color:var(--teal); font-size:1.2rem; margin-bottom:.3em; 
+}
+
+body.segment-adults .gain p {
+ margin:0; color:var(--muted); 
+}
+
+@media (min-width:640px) {
+body.segment-adults .gains__grid {
+ grid-template-columns:repeat(2,1fr); 
+}
+}
+
+/* =================================================================
+   INSTRUCTOR — one photo, one paragraph, credential
+   ================================================================= */
+
+body.segment-adults .instructor {
+ background:var(--paper); 
+}
+
+body.segment-adults .instructor__inner {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.5rem;
+  align-items:center;
+
+}
+
+body.segment-adults .instructor__photo {
+
+  width:100%;
+  aspect-ratio:3/2;
+  object-fit:cover;
+  border-radius:var(--radius);
+
+}
+
+body.segment-adults .instructor__body p {
+ color:var(--muted); 
+}
+
+body.segment-adults .instructor__cred {
+
+  font-size:.95rem;
+  color:var(--ink);
+
+}
+
+body.segment-adults .instructor__cred strong {
+ color:var(--teal); 
+}
+
+@media (min-width:760px) {
+body.segment-adults .instructor__inner {
+ grid-template-columns:.8fr 1.2fr; gap:2.5rem; 
+}
+}
+
+/* =================================================================
+   SIDELINE-PARENT BRIDGE — short, low-key band for warm traffic
+   ================================================================= */
+
+body.segment-adults .sideline {
+ background:var(--hero-tint); padding-block:2.75rem; 
+}
+
+body.segment-adults .sideline .wrap {
+
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-left:4px solid var(--purple);
+  border-radius:var(--radius);
+  padding:1.75rem 1.75rem 1.5rem;
+
+}
+
+body.segment-adults .sideline__body {
+
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.2rem;
+  color:var(--ink);
+  margin:0 0 .6rem;
+
+}
+
+body.segment-adults .sideline__body strong {
+ color:var(--purple); 
+}
+
+body.segment-adults .sideline__note {
+ margin:0; color:var(--muted); font-size:.95rem; 
+}
+
+/* =================================================================
+   TESTIMONIALS — three adult stories, light cards
+   ================================================================= */
+
+body.segment-adults .proof {
+ background:var(--paper); 
+}
+
+body.segment-adults .proof__quotes {
+
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+  margin-top:1.5rem;
+
+}
+
+body.segment-adults .quote {
+
+  margin:0;
+  background:var(--hero-tint);
+  border-left:3px solid var(--teal);
+  border-radius:0 var(--radius) var(--radius) 0;
+  padding:1.4rem 1.5rem;
+
+}
+
+body.segment-adults .quote p {
+ margin:0 0 1rem; font-weight:500; font-size:1.05rem; 
+}
+
+body.segment-adults .quote__person {
+ display:flex; align-items:center; gap:.7rem; 
+}
+
+body.segment-adults .quote__avatar {
+
+  width:56px; height:56px;
+  border-radius:50%;
+  object-fit:cover;
+  flex:0 0 auto;
+  background:var(--line);
+
+}
+
+body.segment-adults .quote cite {
+ color:var(--muted); font-style:normal; font-weight:600; font-size:.9rem; 
+}
+
+@media (min-width:860px) {
+body.segment-adults .proof__quotes {
+ grid-template-columns:repeat(3,1fr); 
+}
+}
+
+/* =================================================================
+   RISK REVERSAL — no-pressure promise, deepest ink band
+   ================================================================= */
+
+body.segment-adults .reversal {
+
+  background:var(--ink-900);
+  color:var(--paper);
+  text-align:center;
+
+}
+
+body.segment-adults .reversal__title {
+ color:var(--paper); font-size:clamp(1.5rem,4vw,2.2rem); max-width:26ch; margin:0 auto .5em; 
+}
+
+body.segment-adults .reversal__body {
+ color:#d6d6d6; font-size:1.1rem; max-width:56ch; margin:0 auto; 
+}
+
+body.segment-adults .reversal__body strong {
+ color:var(--paper); 
+}
+
+body.segment-adults .reversal__signoff {
+
+  font-family:var(--font-accent);
+  color:var(--on-dark-muted);
+  font-size:1rem;
+  margin:1.5rem 0 0;
+
+}
+
+/* =================================================================
+   FAQ
+   ================================================================= */
+
+body.segment-adults .faq {
+ background:var(--paper); 
+}
+
+body.segment-adults .faq__item {
+
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:0 1.2rem;
+  margin-bottom:.75rem;
+
+}
+
+body.segment-adults .faq__item summary {
+
+  cursor:pointer;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:1.05rem;
+  padding:1rem 0;
+  list-style:none;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+
+}
+
+body.segment-adults .faq__item summary::-webkit-details-marker {
+ display:none; 
+}
+
+body.segment-adults .faq__item summary::after {
+
+  content:"+";
+  color:var(--purple);
+  font-size:1.4rem;
+  font-weight:700;
+  line-height:1;
+
+}
+
+body.segment-adults .faq__item[open] summary::after {
+ content:"–"; 
+}
+
+body.segment-adults .faq__a {
+ padding:0 0 1rem; 
+}
+
+body.segment-adults .faq__a p {
+ margin:0; color:var(--muted); 
+}
+
+/* =================================================================
+   FINAL CTA
+   ================================================================= */
+
+body.segment-adults .final-cta {
+ background:var(--hero-tint); 
+}
+
+body.segment-adults .final-cta__inner {
+ text-align:center; 
+}
+
+body.segment-adults .final-cta__title {
+ font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:.3em; 
+}
+
+body.segment-adults .final-cta__sub {
+ color:var(--muted); margin-bottom:1.5rem; 
+}
+
+body.segment-adults .final-cta__close {
+
+  color:var(--muted);
+  font-size:.95rem;
+  max-width:48ch;
+  margin:1.75rem auto 0;
+
+}
+
+body.segment-adults .btn--inline {
+
+  width:auto;
+  text-decoration:none;
+  padding:.95rem 2rem;
+
+}
+
+/* =================================================================
+   FOOTER
+   ================================================================= */
+
+body.segment-adults .footer {
+
+  background:var(--ink-900);
+  color:#cfcfcf;
+  text-align:center;
+  padding:2.5rem 1.25rem;
+
+}
+
+body.segment-adults .footer__name {
+
+  font-family:var(--font-head);
+  font-weight:800;
+  color:var(--paper);
+  font-size:1.2rem;
+  margin-bottom:.4rem;
+
+}
+
+body.segment-adults .footer__detail {
+ margin:.2rem 0; font-size:.95rem; 
+}
+
+body.segment-adults .footer__detail a {
+ color:#cfcfcf; 
+}
+
+/* =================================================================
+   MOBILE STICKY CTA BAR
+   ================================================================= */
+
+body.segment-adults .sticky-cta {
+ display:none; 
+}
+
+@media (max-width:859px) {
+body.segment-adults .sticky-cta {
+
+    position:fixed;
+    left:1rem;
+    right:1rem;
+    bottom:1rem;
+    z-index:50;
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    background:var(--purple);
+    color:var(--paper);
+    font-family:var(--font-body);
+    font-weight:600;
+    font-size:1.05rem;
+    padding:.95rem 1rem;
+    border-radius:999px;
+    box-shadow:0 8px 24px rgba(124,58,237,.45);
+    transform:translateY(150%);
+    transition:transform .25s ease;
+  
+}
+
+body.segment-adults .sticky-cta.is-visible {
+ transform:translateY(0); 
+}
+
+body.segment-adults .footer {
+ padding-bottom:6rem; 
+}
+}
+
+@media (prefers-reduced-motion:reduce) {
+body.segment-adults .sticky-cta {
+ transition:none; 
+}
+}
