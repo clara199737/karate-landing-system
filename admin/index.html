@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Content Editor · Karate Landing Pages</title>
   <link href="https://unpkg.com/decap-cms@^3.0.0/dist/main.css" rel="stylesheet">
+  <!-- Vercel's cleanUrls: true strips trailing slashes, so Decap's default
+       relative fetch of config.yml lands at /config.yml (404). Explicit
+       absolute path fixes it. -->
+  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url">
 </head>
 <body>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
