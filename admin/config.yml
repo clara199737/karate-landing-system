@@ -11,8 +11,7 @@
 
 backend:
   name: github
-  # Replace with your GitHub owner/repo after pushing this repo to GitHub.
-  repo: TODO_OWNER/TODO_REPO
+  repo: clara199737/karate-landing-system
   branch: main
   # decapbridge.com brokers the OAuth flow so we don't run a server.
   # Sign up at decapbridge.com, create a site, paste the site_id here.
