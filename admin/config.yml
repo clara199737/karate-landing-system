@@ -538,6 +538,7 @@ collections:
       - name: theme
         label: "Colors & fonts"
         file: settings/site.json
+        preview_path: "adults"                # View button previews the theme on the adults page
         format: json
         json:
           indent_style: space
