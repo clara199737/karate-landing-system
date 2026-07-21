@@ -518,6 +518,7 @@ collections:
     slug: "{{fields.meta.segment}}"            # Filename derives from meta.segment
     identifier_field: meta.segment             # What Decap shows as the entry title in the list
     summary: "{{fields.meta.segment}} — {{fields.meta.page_title}}"
+    preview_path: "{{fields.meta.segment}}"    # Makes the "View" button point at /<segment> on the live site
     media_folder: "/source/{{fields.meta.segment}}/assets"
     public_folder: "assets"
     editor:
