@@ -1,0 +1,306 @@
+{
+  "config": {
+    "formspree_id": "FORM_ID_adults",
+    "pixel_content_category": "adult",
+    "pixel_view_content": true,
+    "utm_passthrough": true
+  },
+  "meta": {
+    "segment": "test adults",
+    "page_title": "Free Adult Karate Class — Adults 18+ · Beginners Welcome, Start Where You Are",
+    "meta_description": "A free intro karate class for adults 18+. Beginners-only welcome — you won't be the only white belt, and nobody cares what shape you're in when you walk in. Real martial arts, adults-only classes."
+  },
+  "final_cta": {
+    "headline": "Ready to claim your free class?",
+    "subheadline": "Free · adults 18+ · no experience needed",
+    "button_label": "Claim Your Free Class",
+    "closing_line": "The class runs Tuesday whether you're there or not. Twenty years from now it'll still be running. The only variable is you."
+  },
+  "thank_you": {
+    "lead": "You're booked. 🥋",
+    "body": "Check your email — we're saving you a spot with the instructor and we'll confirm your class time shortly."
+  },
+  "testimonials": {
+    "eyebrow": "From adults who walked in exactly where you are",
+    "headline": "\"I thought I was too old to start.\"",
+    "items": [
+      {
+        "quote": "\"I started at 43 convinced I'd be the oldest person there by twenty years. I wasn't even close. Two years later I'm testing for my next belt and I move better now than I did at 35.\"",
+        "name": "TODO: real adult student, started at 43",
+        "avatar": {
+          "src": "assets/testimonial-1.jpg",
+          "alt": "",
+          "width": 56,
+          "height": 56
+        },
+        "placeholder": true
+      },
+      {
+        "quote": "\"It's the only hour of my week that's actually mine. My phone's in a cubby, nobody needs anything from me, and for sixty minutes I'm just learning something. I didn't know how much I needed that.\"",
+        "name": "TODO: real adult student",
+        "avatar": {
+          "src": "assets/testimonial-2.jpg",
+          "alt": "",
+          "width": 56,
+          "height": 56
+        },
+        "placeholder": true
+      },
+      {
+        "quote": "\"I watched my daughter train for a year from the bench. Now we compare notes at dinner and she's genuinely impressed I can keep up. Best decision I've made in a decade.\"",
+        "name": "TODO: real adult student, sideline parent",
+        "avatar": {
+          "src": "assets/testimonial-3.jpg",
+          "alt": "",
+          "width": 56,
+          "height": 56
+        },
+        "placeholder": true
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Good questions",
+    "headline": "What adults usually ask…",
+    "items": [
+      {
+        "q": "Do I need to be in shape first?",
+        "a": "No — that's backwards. The class <em>is</em> the getting-in-shape. Conditioning is built into the training, not a prerequisite for it. You start exactly where you are, and you'll be surprised how fast that moves."
+      },
+      {
+        "q": "What about my knee / back / shoulder?",
+        "a": "Tell the instructor before class — everyone does, and everything modifies. Training around old injuries is routine here, not a special case. Nobody's going to throw you; you'll be taught."
+      },
+      {
+        "q": "Will I be training with teenagers?",
+        "a": "TODO — HARD GATE: state the real schedule. (If the adult classes are genuinely adults-only, say so and list the nights. If 16–17-year-olds share the mat on certain nights, say exactly which ones — honesty here is a launch requirement, not a nicety.)"
+      },
+      {
+        "q": "How long until I'm not terrible?",
+        "a": "Honest answer: about a month until it starts to click. Everyone feels clumsy for the first few classes — that's universal, not a sign you're behind. The free class is where you find out it's more doable than it looks."
+      },
+      {
+        "q": "What do I wear and bring?",
+        "a": "Gym clothes you can move in, and water. That's it — no gi to buy for the free class, no gear, no card. If you decide to keep training, a uniform comes later."
+      },
+      {
+        "q": "What if I haven't worked out in years?",
+        "a": "Then you're in the majority of people who walk in. The program scales to the body you have today. You set the pace, you take the breaks you need, and nobody is watching you the way you think they are."
+      }
+    ]
+  },
+  "proof_bar": {
+    "stats": [
+      {
+        "value": "TODO: [N]",
+        "label": "adults currently training"
+      },
+      {
+        "value": "TODO: [X] nights",
+        "label": "adults-only classes a week"
+      },
+      {
+        "value": "TODO: age [N]",
+        "label": "oldest student to earn black belt"
+      },
+      {
+        "value": "TODO: [N]★",
+        "label": "Google rating"
+      }
+    ]
+  },
+  "hero": {
+    "badge": "100% FREE · ADULTS 18+",
+    "headline": "test One free class. Adults only. [[Start where you are.]]",
+    "subheadline": "A free intro class for adults 18+. Beginners welcome — you will not be the only white belt in the room, and nobody cares what shape you're in when you walk through the door.",
+    "image": {
+      "src": "assets/hero.jpg",
+      "alt": "An adult in their 40s in a white karate gi holding a strong technique mid-class in a sunlit dojo, visible effort and focus, ordinary athletic build",
+      "width": 432,
+      "height": 544
+    },
+    "trust_items": [
+      "Adults 18+",
+      "Beginners welcome",
+      "Start where you are"
+    ],
+    "form": {
+      "heading": "Claim your free class",
+      "subheading": "Takes 60 seconds. We'll email to confirm your time.",
+      "button_label": "Claim Your Free Class",
+      "disclaimer": "60-second signup · no card · no experience needed",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Your name",
+          "type": "text",
+          "autocomplete": "name",
+          "required": true
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "autocomplete": "tel",
+          "required": true
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "autocomplete": "email",
+          "required": true
+        }
+      ],
+      "hidden_fields": [
+        {
+          "name": "segment",
+          "value": "adult"
+        }
+      ]
+    }
+  },
+  "footer": {
+    "school_name": "Your Karate School",
+    "address": {
+      "text": "123 Example Street, Yourtown, ST 00000",
+      "href": "https://maps.google.com/?q=TODO+address"
+    },
+    "phone": {
+      "text": "(000) 000-0000",
+      "href": "tel:+10000000000"
+    }
+  },
+  "beginner_objection": {
+    "eyebrow": "Your first class, minute by minute",
+    "headline": "You won't be the only beginner in the room.",
+    "body": "The fear is being the conspicuous white belt — worse, next to teenagers who outrank you. Here's how the first class actually goes. Read it and the fear loses its grip.",
+    "image": {
+      "src": "assets/class.jpg",
+      "alt": "A mix of adult students of different ages and builds drilling technique in a sunlit dojo while a black-belt instructor coaches one of them one-on-one",
+      "width": 1692,
+      "height": 1148
+    },
+    "steps": [
+      {
+        "title": "You're paired, not thrown in",
+        "body": "You're set up with an instructor or a senior adult student from the first minute — not dropped into a line to fend for yourself."
+      },
+      {
+        "title": "We ask about your body first",
+        "body": "Knees, back, shoulders, old injuries — the instructor asks before you bow in. Modifications exist for all of it. The program scales to the body you have now, not the one you had at 25."
+      },
+      {
+        "title": "You go at your own pace",
+        "body": "Nobody spars on day one. Nobody spars until they decide they're ready. Day one is technique, movement, and catching your breath — that's it."
+      },
+      {
+        "title": "You finish, then you decide",
+        "body": "You do the real class end to end. No spotlight, no ceremony, no sales pitch on the mat. Then you decide if you're coming back."
+      }
+    ],
+    "age_spread": {
+      "caption": "Our adult class right now",
+      "stats": [
+        {
+          "value": "TODO: [N]",
+          "label": "youngest"
+        },
+        {
+          "value": "TODO: [N]",
+          "label": "oldest"
+        },
+        {
+          "value": "TODO: ~[N]",
+          "label": "median"
+        }
+      ],
+      "line": "You will fit."
+    }
+  },
+  "benefits": {
+    "eyebrow": "What an hour on the mat actually gives you",
+    "headline": "Not for the kids. Not for work. Yours.",
+    "items": [
+      {
+        "thumbnail": {
+          "src": "assets/benefit-fitness.jpg",
+          "alt": "An adult student mid-technique in the dojo, working up a sweat",
+          "width": 808,
+          "height": 808
+        },
+        "title": "Fitness that compounds",
+        "body": "Not reps for the sake of reps — skill that stacks. Every class you're measurably better at something than you were last week. The gym never gave you that."
+      },
+      {
+        "thumbnail": {
+          "src": "assets/benefit-focus.jpg",
+          "alt": "An adult student in a focused stance, fully absorbed in the training",
+          "width": 808,
+          "height": 808
+        },
+        "title": "An hour your phone can't reach",
+        "body": "You physically cannot check email while someone's teaching you to move. One hour where the job, the kids, and the noise are gone. Most people don't know how badly they needed it until they have it."
+      },
+      {
+        "thumbnail": {
+          "src": "assets/benefit-confidence.jpg",
+          "alt": "An adult student standing tall and composed on the dojo mat",
+          "width": 808,
+          "height": 808
+        },
+        "title": "Confidence that shows up everywhere",
+        "body": "In how you carry yourself, how you take up a room, and yes — in knowing you could handle yourself if it ever came to that. It follows you off the mat."
+      },
+      {
+        "thumbnail": {
+          "src": "assets/benefit-yours.jpg",
+          "alt": "An adult student tying a belt, a moment that is entirely their own",
+          "width": 808,
+          "height": 808
+        },
+        "title": "Something that's yours",
+        "body": "Not for your kids. Not for your job. A rank you earn, a skill nobody can hand you, a thing you did for yourself. When was the last time you had one of those?"
+      }
+    ]
+  },
+  "sideline_bridge": {
+    "eyebrow": "If you've been watching from the bench",
+    "body": "You've watched them bow in three nights a week for months, and every time you've thought about it. This is the sign. <strong>Your first class is free too</strong> — and yes, there's a schedule that works around drop-off.",
+    "note": "Ask about the family plan when you come in."
+  },
+  "instructor": {
+    "eyebrow": "Who's teaching",
+    "name": "TODO: Instructor name",
+    "bio": "TODO: one grounded paragraph — years spent teaching <em>adults</em> specifically, experience modifying training for bad knees, old backs, and late starters, and a human detail. If they started training late themselves (say, at 30), lead with it — an instructor who was once exactly where you are is the whole point.",
+    "photo": {
+      "src": "assets/instructor.jpg",
+      "alt": "A black-belt karate instructor standing on the dojo mat, mid-explanation to an adult student",
+      "width": 1181,
+      "height": 787,
+      "placeholder": true
+    },
+    "credential_line": "TODO: rank/credential · <strong>years coaching adult beginners</strong>"
+  },
+  "risk_reversal": {
+    "headline": "Walk in, wear gym clothes, and see for yourself.",
+    "body": "The free class costs you nothing and commits you to nothing. No contract talk at the first visit — a gi comes later, if you decide to stay. Wear clothes you can move in, walk in or book online, and find out. If it's not for you, you'll know, and you'll never get a sales call.",
+    "signature": {
+      "name": "TODO: school owner's name",
+      "title": ""
+    }
+  },
+  "problem": {
+    "eyebrow": "Sound familiar?",
+    "headline": "You didn't click this by accident.",
+    "body": "Something's been nagging at you. It's probably one of these — and if it is, you already know which one.",
+    "checklist": [
+      "\"I've paid for three gym memberships I stopped using by March.\"",
+      "\"I need one hour a week where I physically cannot think about work.\"",
+      "\"I want to know I could actually protect myself if I had to.\"",
+      "\"I've watched from the bench for months thinking — I wish I'd done this.\"",
+      "\"I'm not done starting things. I want to prove that to myself.\""
+    ],
+    "closing": "It's not discipline you're missing. It's a reason to show up. The treadmill never gave you one. A belt you have to earn does."
+  }
+}
