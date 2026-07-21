@@ -354,7 +354,18 @@ for (const p of parsed) {
   cpSync(path.join(TEMPLATES, 'styles.css'), path.join(outDir, 'css', 'styles.css'));
   mkdirSync(path.join(outDir, 'js'), { recursive: true });
   cpSync(path.join(TEMPLATES, 'main.js'), path.join(outDir, 'js', 'main.js'));
-  cpSync(path.join(SOURCE, p.segment, 'assets'), path.join(outDir, 'assets'), { recursive: true });
+  // Segment's assets folder is optional — a page created via the CMS
+  // (Duplicate or New) doesn't get one until the author uploads photos.
+  // Missing folder = create an empty dist/<segment>/assets/ so the site
+  // still deploys. Images referenced in the JSON will 404 until real
+  // photos are uploaded via the CMS or copied in by hand.
+  const srcAssets = path.join(SOURCE, p.segment, 'assets');
+  const distAssets = path.join(outDir, 'assets');
+  if (existsSync(srcAssets)) {
+    cpSync(srcAssets, distAssets, { recursive: true });
+  } else {
+    mkdirSync(distAssets, { recursive: true });
+  }
 
   console.log(`built dist/${p.segment}/index.html`);
 }
