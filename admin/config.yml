@@ -554,6 +554,7 @@ collections:
               - {name: teal, label: "Tertiary (trust signals, checks)", widget: color, allowInput: true, enableAlpha: false}
               - {name: ink, label: "Text color", widget: color, allowInput: true, enableAlpha: false}
               - {name: paper, label: "Page background", widget: color, allowInput: true, enableAlpha: false}
+              - {name: field_bg, label: "Form input background", widget: color, allowInput: true, enableAlpha: false, hint: "The color inside the name/phone/email boxes. White works with the light page background."}
           - name: fonts
             label: "Fonts (from Google Fonts)"
             widget: object

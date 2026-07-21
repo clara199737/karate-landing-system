@@ -37,6 +37,7 @@ const THEME_DEFAULTS = {
     pink: '#EC4899',
     pink_ink: '#BE185D',
     teal: '#0D9488',
+    field_bg: '#FFFFFF',
   },
   fonts: {
     heading: 'Bricolage Grotesque',
@@ -64,7 +65,7 @@ function loadTheme() {
 // :root selector alone loses to body.segment-<name>.
 function themeCSS(theme) {
   const c = theme.colors;
-  return `:root,body[class*="segment-"]{--ink:${c.ink};--paper:${c.paper};--purple:${c.purple};--pink:${c.pink};--pink-ink:${c.pink_ink};--teal:${c.teal};--font-head:'${theme.fonts.heading}',sans-serif;--font-body:'${theme.fonts.body}',sans-serif;--font-accent:'${theme.fonts.accent}',sans-serif;--radius:${theme.radius}px;}`;
+  return `:root,body[class*="segment-"]{--ink:${c.ink};--paper:${c.paper};--purple:${c.purple};--pink:${c.pink};--pink-ink:${c.pink_ink};--teal:${c.teal};--field-bg:${c.field_bg};--font-head:'${theme.fonts.heading}',sans-serif;--font-body:'${theme.fonts.body}',sans-serif;--font-accent:'${theme.fonts.accent}',sans-serif;--radius:${theme.radius}px;}body[class*="segment-"] .lead-form input,body[class*="segment-"] .lead-form select{color:${c.ink};}`;
 }
 
 // Build the Google Fonts CSS2 URL for the three chosen families.

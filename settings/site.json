@@ -5,7 +5,8 @@
     "purple": "#ff0000",
     "pink": "#EC4899",
     "pink_ink": "#BE185D",
-    "teal": "#0D9488"
+    "teal": "#0D9488",
+    "field_bg": "#FFFFFF"
   },
   "fonts": {
     "heading": "Bricolage Grotesque",
