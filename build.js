@@ -57,11 +57,14 @@ function loadTheme() {
   };
 }
 
-// Emit an inline <style> block that overrides the :root tokens. Placed
-// AFTER the linked stylesheet in the template so cascade wins.
+// Emit an inline <style> block that overrides the design tokens. Uses
+// `body[class*="segment-"]` selector so it ties on specificity with the
+// per-segment override blocks in templates/styles.css and wins by cascade
+// order (this <style> tag comes AFTER the linked stylesheet in the head).
+// :root selector alone loses to body.segment-<name>.
 function themeCSS(theme) {
   const c = theme.colors;
-  return `:root{--ink:${c.ink};--paper:${c.paper};--purple:${c.purple};--pink:${c.pink};--pink-ink:${c.pink_ink};--teal:${c.teal};--font-head:'${theme.fonts.heading}',sans-serif;--font-body:'${theme.fonts.body}',sans-serif;--font-accent:'${theme.fonts.accent}',sans-serif;--radius:${theme.radius}px;}`;
+  return `:root,body[class*="segment-"]{--ink:${c.ink};--paper:${c.paper};--purple:${c.purple};--pink:${c.pink};--pink-ink:${c.pink_ink};--teal:${c.teal};--font-head:'${theme.fonts.heading}',sans-serif;--font-body:'${theme.fonts.body}',sans-serif;--font-accent:'${theme.fonts.accent}',sans-serif;--radius:${theme.radius}px;}`;
 }
 
 // Build the Google Fonts CSS2 URL for the three chosen families.
