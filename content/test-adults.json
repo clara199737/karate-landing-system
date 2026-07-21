@@ -1,6 +1,6 @@
 {
   "config": {
-    "formspree_id": "FORM_ID_adults",
+    "formspree_id": "FORM_ID_adults-test",
     "pixel_content_category": "adult",
     "pixel_view_content": true,
     "utm_passthrough": true
