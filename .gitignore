@@ -2,3 +2,4 @@ node_modules/
 dist/
 tests/tmp/
 .DS_Store
+.vercel

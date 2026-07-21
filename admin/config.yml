@@ -523,3 +523,59 @@ collections:
     editor:
       preview: false
     fields: *segment_fields
+
+  ########################################################################
+  # Site theme — colors, fonts, and corner radius that apply to every page.
+  # Rendered as an inline <style> block in each page's <head>, overriding
+  # the base tokens in templates/styles.css via CSS cascade.
+  ########################################################################
+  - name: settings
+    label: "Site settings"
+    editor:
+      preview: false
+    files:
+      - name: theme
+        label: "Colors & fonts"
+        file: settings/site.json
+        format: json
+        json:
+          indent_style: space
+          indent_size: 2
+        fields:
+          - name: colors
+            label: "Colors"
+            widget: object
+            fields:
+              - {name: purple, label: "Primary (buttons, highlights)", widget: color, allowInput: true, enableAlpha: false}
+              - {name: pink, label: "Secondary (accent, validation)", widget: color, allowInput: true, enableAlpha: false}
+              - {name: pink_ink, label: "Pink for white text on pink (WCAG AA)", widget: color, allowInput: true, enableAlpha: false, hint: "Darker pink used behind white text so contrast passes."}
+              - {name: teal, label: "Tertiary (trust signals, checks)", widget: color, allowInput: true, enableAlpha: false}
+              - {name: ink, label: "Text color", widget: color, allowInput: true, enableAlpha: false}
+              - {name: paper, label: "Page background", widget: color, allowInput: true, enableAlpha: false}
+          - name: fonts
+            label: "Fonts (from Google Fonts)"
+            widget: object
+            fields:
+              - name: heading
+                label: "Headings"
+                widget: select
+                options: &font_options
+                  - Bricolage Grotesque
+                  - Manrope
+                  - Archivo
+                  - Inter
+                  - Poppins
+                  - Roboto
+                  - DM Sans
+                  - Work Sans
+                  - Space Grotesk
+                  - Nunito
+                  - Karla
+                  - IBM Plex Sans
+                  - Fira Sans
+                  - Playfair Display
+                  - Merriweather
+                  - Lora
+              - {name: body, label: "Body copy", widget: select, options: *font_options}
+              - {name: accent, label: "Small labels / eyebrows", widget: select, options: *font_options}
+          - {name: radius, label: "Corner radius (px)", widget: number, value_type: int, min: 0, max: 48, default: 12, hint: "0 = square corners. 12 = current. 20+ = pill-like."}

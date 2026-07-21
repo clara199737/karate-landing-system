@@ -189,6 +189,40 @@ If you don't have a similar existing page to duplicate:
    can be left empty — the template just skips them.
 4. Save.
 
+## Changing colors and fonts (site-wide)
+
+There's a **Site settings → Colors & fonts** entry in the CMS. Editing
+it changes the design system for every landing page at once.
+
+1. Open `/admin/`.
+2. On the entries list, switch to **Site settings** (top-left dropdown
+   or sidebar depending on Decap version) → **Colors & fonts**.
+3. Change colors with the color pickers:
+   - **Primary** — CTAs, highlights (default purple #7C3AED)
+   - **Secondary** — accent, form-validation (default pink #EC4899)
+   - **Pink for white text on pink** — a darker pink used behind
+     white text so the contrast passes WCAG AA. Only change this
+     if you also change Secondary.
+   - **Tertiary** — trust signals, checks (default teal #0D9488)
+   - **Text color** — main body text
+   - **Page background**
+4. Change fonts from the three dropdowns (Headings / Body / Small
+   labels). All 16 available fonts are on Google Fonts and load
+   automatically. Weight `400;500;600;700` is requested for each.
+5. Adjust corner radius if you want everything more/less rounded (0
+   = square, 12 = current, 20+ = very pill-like).
+6. Save.
+
+Vercel rebuilds. All four (or five, or however many) landing pages
+pick up the new theme within ~30 seconds.
+
+**What if a color you picked looks off on one specific page?** Some
+audience pages have per-segment overrides in
+`templates/styles.css` (e.g. teens is intentionally darker/moodier
+than the others). Those overrides win against the global theme.
+To change those, edit `templates/styles.css` directly (via GitHub
+web editor). The `body.segment-teens { … }` etc. blocks are labelled.
+
 ### What you cannot change per-page
 
 - **The design system** (colors, fonts, spacing) — lives in

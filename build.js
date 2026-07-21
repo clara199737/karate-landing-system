@@ -20,8 +20,60 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const TEMPLATES = path.join(ROOT, 'templates');
 const PARTIALS = path.join(TEMPLATES, 'partials');
 const DEFAULT_CONTENT = path.join(ROOT, 'content');
+const SETTINGS = path.join(ROOT, 'settings');
 const SOURCE = path.join(ROOT, 'source');
 const DIST = path.join(ROOT, 'dist');
+
+// ---------------------------------------------------------------
+// Site theme — colors + fonts + radius, editable via /admin/.
+// Falls back to the current design system defaults if settings/site.json
+// is missing or a field is unset.
+// ---------------------------------------------------------------
+const THEME_DEFAULTS = {
+  colors: {
+    ink: '#141414',
+    paper: '#FAFAFA',
+    purple: '#7C3AED',
+    pink: '#EC4899',
+    pink_ink: '#BE185D',
+    teal: '#0D9488',
+  },
+  fonts: {
+    heading: 'Bricolage Grotesque',
+    body: 'Manrope',
+    accent: 'Archivo',
+  },
+  radius: 12,
+};
+
+function loadTheme() {
+  const p = path.join(SETTINGS, 'site.json');
+  if (!existsSync(p)) return THEME_DEFAULTS;
+  const raw = JSON.parse(readFileSync(p, 'utf8'));
+  return {
+    colors: { ...THEME_DEFAULTS.colors, ...(raw.colors || {}) },
+    fonts:  { ...THEME_DEFAULTS.fonts,  ...(raw.fonts  || {}) },
+    radius: raw.radius ?? THEME_DEFAULTS.radius,
+  };
+}
+
+// Emit an inline <style> block that overrides the :root tokens. Placed
+// AFTER the linked stylesheet in the template so cascade wins.
+function themeCSS(theme) {
+  const c = theme.colors;
+  return `:root{--ink:${c.ink};--paper:${c.paper};--purple:${c.purple};--pink:${c.pink};--pink-ink:${c.pink_ink};--teal:${c.teal};--font-head:'${theme.fonts.heading}',sans-serif;--font-body:'${theme.fonts.body}',sans-serif;--font-accent:'${theme.fonts.accent}',sans-serif;--radius:${theme.radius}px;}`;
+}
+
+// Build the Google Fonts CSS2 URL for the three chosen families.
+// Requests weights 400;500;600;700 across the board — covers the range
+// the template uses without asking the CMS author to pick weights.
+function fontsUrl(theme) {
+  const families = [theme.fonts.heading, theme.fonts.body, theme.fonts.accent];
+  const seen = new Set();
+  const uniq = families.filter((f) => (seen.has(f) ? false : (seen.add(f), true)));
+  const parts = uniq.map((f) => 'family=' + encodeURIComponent(f).replace(/%20/g, '+') + ':wght@400;500;600;700');
+  return 'https://fonts.googleapis.com/css2?' + parts.join('&') + '&display=swap';
+}
 
 // ---------------------------------------------------------------
 // CLI parsing
@@ -341,7 +393,15 @@ for (const f of readdirSync(PARTIALS).filter((n) => n.endsWith('.html'))) {
   partials[f.replace(/\.html$/, '')] = readFileSync(path.join(PARTIALS, f), 'utf8');
 }
 
+// Load once — theme applies uniformly across every segment.
+const theme = loadTheme();
+const themeCssStr = themeCSS(theme);
+const fontsUrlStr = fontsUrl(theme);
+
 for (const p of parsed) {
+  // Attach the shared theme values so the template can render them.
+  p.raw.theme_css = themeCssStr;
+  p.raw.fonts_url = fontsUrlStr;
   const html = Mustache.render(template, p.raw, partials);
 
   const outDir = path.join(DIST, p.segment);

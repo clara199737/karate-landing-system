@@ -7,10 +7,10 @@
   <title>{{{meta.page_title}}}</title>
   <meta name="description" content="{{{meta.meta_description}}}">
 
-  <!-- Fonts: Bricolage Grotesque (headings) + Manrope (body) + Archivo (accent) -->
+  <!-- Fonts driven by settings/site.json (editable in /admin/ → Site theme). -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600&family=Bricolage+Grotesque:wght@600;700;800&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="{{{fonts_url}}}" rel="stylesheet">
 
   <!-- HTMX 2.0 blocks cross-origin requests by default (selfRequestsOnly).
        Formspree is cross-origin, so we must opt in or the form silently won't POST. -->
@@ -31,6 +31,9 @@
   </script>
 
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Site theme overrides (colors, fonts, radius) — from settings/site.json.
+       Placed AFTER the linked stylesheet so cascade wins. -->
+  <style>{{{theme_css}}}</style>
   <script>window.LP_CONFIG = {{{lp_config_json}}};</script>
   <script src="js/main.js" defer></script>
 </head>
