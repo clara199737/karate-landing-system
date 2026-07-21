@@ -1,0 +1,273 @@
+{
+  "config": {
+    "formspree_id": "FORM_ID_preschool",
+    "pixel_content_category": "preschool"
+  },
+  "meta": {
+    "segment": "test-preschool",
+    "page_title": "Free Preschool Karate Class — Ages 3–5 · A First Class for First-Timers",
+    "meta_description": "A free 30-minute intro karate class built for ages 3–5. Play-based, gentle, and parents stay in the room. Too young? That's exactly who this class is for."
+  },
+  "final_cta": {
+    "headline": "Ready to save your child's spot?",
+    "subheadline": "Free · 30 minutes · parents stay and watch",
+    "button_label": "Save My Child's Spot"
+  },
+  "thank_you": {
+    "lead": "You're in! 🎉",
+    "body": "Check your email — we'll confirm your class time shortly."
+  },
+  "testimonials": {
+    "eyebrow": "From parents who were unsure too",
+    "headline": "\"I thought she was too young…\"",
+    "items": [
+      {
+        "quote": "\"I honestly thought she was too young and would just cry. She was quiet the first week — and now she picks out her gi the night before.\"",
+        "name": "Gabriela M.",
+        "avatar": {
+          "src": "assets/review-1.webp",
+          "alt": "",
+          "width": 56,
+          "height": 56
+        }
+      },
+      {
+        "quote": "\"He cried the entire first class and clung to my leg. The instructor said 'that's totally normal, come back next week.' Now he runs in.\"",
+        "name": "Danny K.",
+        "avatar": {
+          "src": "assets/review-2.webp",
+          "alt": "",
+          "width": 56,
+          "height": 56
+        }
+      },
+      {
+        "quote": "\"It's his first ever activity. I didn't expect a 3-year-old to follow along — but it's all games, so he doesn't even realize he's learning.\"",
+        "name": "Renée A.",
+        "avatar": {
+          "src": "assets/review-3.webp",
+          "alt": "",
+          "width": 56,
+          "height": 56
+        }
+      }
+    ]
+  },
+  "faq": {
+    "eyebrow": "Good questions",
+    "headline": "Preschool parents usually ask…",
+    "items": [
+      {
+        "q": "Is my child too young?",
+        "a": "Almost certainly not. The class is built for ages 3–5, and readiness is what it builds — not something your child needs to bring. If they can walk and follow a simple game, they can start."
+      },
+      {
+        "q": "What if they cry or have a meltdown?",
+        "a": "Completely normal, and completely okay. You're right there in the room. If they need to sit with you and watch, that's a fine first class — and you're welcome back next week, free, to try again."
+      },
+      {
+        "q": "Do parents stay?",
+        "a": "Yes. For this age, parents stay in the room and watch the whole time. No drop-off, no separation — you're part of the first class."
+      },
+      {
+        "q": "What should they wear?",
+        "a": "Comfy clothes they can move in — a t-shirt and stretchy pants are perfect. Bare feet or grippy socks. Nothing to buy for the free class."
+      },
+      {
+        "q": "Do they need to be potty trained?",
+        "a": "TODO: confirm with the school. (Common answer: potty training isn't required for the free class since a parent stays in the room, but check the school's policy before launch.)"
+      },
+      {
+        "q": "What happens after the free class?",
+        "a": "No pressure, no hard sell. If your child loved it, we'll walk you through the preschool program and schedule. If it wasn't the right fit yet, that's genuinely fine — many families come back a few months later."
+      }
+    ]
+  },
+  "reframe": {
+    "eyebrow": "Here's the reframe",
+    "headline": "Readiness isn't required. It's what the class builds.",
+    "body": "Your child doesn't need to sit still, take turns, or follow directions <em>yet</em>. Those are the exact skills a first class starts to grow — gently, through play.",
+    "items": [
+      {
+        "icon": "listening",
+        "title": "Listening",
+        "description": "Tuning in to an instructor's voice in a room full of other kids."
+      },
+      {
+        "icon": "taking-turns",
+        "title": "Taking turns",
+        "description": "Waiting for a turn, then cheering on the friend who goes next."
+      },
+      {
+        "icon": "following-directions",
+        "title": "Following directions",
+        "description": "\"Hands up, feet together\" — following two-step directions, one game at a time."
+      }
+    ]
+  },
+  "hero": {
+    "badge": "100% FREE · AGES 3–5",
+    "headline": "test Too young for karate? [[That's exactly who this class is for.]]",
+    "subheadline": "A free 30-minute intro class for ages 3–5. Games, giggles, and their first \"yes ma'am.\" Parents stay and watch.",
+    "image": {
+      "src": "assets/class-2.webp",
+      "alt": "A laughing preschool girl in an oversized white karate gi mid-class, with other children and watching parents behind her",
+      "width": 1192,
+      "height": 798
+    },
+    "trust_items": [
+      "Ages 3–5",
+      "Parents welcome",
+      "No experience — obviously"
+    ],
+    "route_link": {
+      "label": "Child older than 5? Start here →",
+      "href": "https://free-karate-landing.vercel.app/"
+    },
+    "form": {
+      "heading": "Save your child's spot",
+      "subheading": "Takes 60 seconds. We'll email to confirm your time.",
+      "button_label": "Save My Child's Spot",
+      "disclaimer": "60-second signup · no card · parents stay and watch",
+      "fields": [
+        {
+          "name": "parent_name",
+          "label": "Parent's name",
+          "type": "text",
+          "autocomplete": "name",
+          "required": true
+        },
+        {
+          "name": "child_name",
+          "label": "Child's first name",
+          "type": "text",
+          "autocomplete": "off",
+          "required": true
+        },
+        {
+          "name": "child_age",
+          "label": "Child's age",
+          "type": "select",
+          "required": true,
+          "placeholder_label": "Select age",
+          "options": [
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5"
+            }
+          ]
+        },
+        {
+          "name": "phone",
+          "label": "Phone",
+          "type": "tel",
+          "autocomplete": "tel",
+          "required": true
+        },
+        {
+          "name": "email",
+          "label": "Email",
+          "type": "email",
+          "autocomplete": "email",
+          "required": true
+        },
+        {
+          "name": "class_time",
+          "label": "Preferred class time",
+          "type": "select",
+          "required": true,
+          "placeholder_label": "Select a time",
+          "options": [
+            {
+              "value": "TODO-weekday-am",
+              "label": "Weekday mornings"
+            },
+            {
+              "value": "TODO-weekday-pm",
+              "label": "Weekday afternoons"
+            },
+            {
+              "value": "TODO-saturday",
+              "label": "Saturday mornings"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "footer": {
+    "school_name": "Your Karate School",
+    "address": {
+      "text": "123 Example Street, Yourtown, ST 00000",
+      "href": "https://maps.google.com/?q=TODO+address"
+    },
+    "phone": {
+      "text": "(000) 000-0000",
+      "href": "tel:+10000000000"
+    }
+  },
+  "instructor": {
+    "eyebrow": "Who's teaching",
+    "name": "TODO: Instructor name",
+    "bio": "TODO: one warm paragraph — years teaching, why they love this age, and a human detail. Keep it about the kids, not the trophies.",
+    "photo": {
+      "src": "assets/instructor.webp",
+      "alt": "A smiling black-belt karate instructor sitting cross-legged on the dojo mat, holding a sheet of star stickers",
+      "width": 1190,
+      "height": 798,
+      "placeholder": true
+    },
+    "credential_line": "TODO: rank/credential · <strong>trained specifically for ages 3–5</strong>"
+  },
+  "how_it_works": {
+    "eyebrow": "30 minutes, start to finish",
+    "headline": "What the class actually looks like",
+    "image": {
+      "src": "assets/class.webp",
+      "alt": "A black-belt instructor kneeling to high-five a smiling preschool girl in a white gi, with parents watching from a bench behind them",
+      "width": 1192,
+      "height": 802
+    },
+    "steps": [
+      {
+        "title": "Circle-up game",
+        "body": "Everyone sits in a circle for a name game — a soft landing so no one feels put on the spot."
+      },
+      {
+        "title": "Animal-movement drill",
+        "body": "Bear crawls, crab walks, kangaroo hops — the wiggles come out and the giggles start."
+      },
+      {
+        "title": "One karate move",
+        "body": "Just one — a punch or a block — taught slow, celebrated big. Their first real \"yes ma'am.\""
+      },
+      {
+        "title": "High-five graduation",
+        "body": "A line of high-fives and a sticker. They leave feeling like they did something big — because they did."
+      }
+    ],
+    "note": "The instructor is trained specifically for this age group, and <strong>you stay in the room the whole time</strong>."
+  },
+  "risk_reversal": {
+    "headline": "If they cling to your leg the whole time? That's fine. That's normal.",
+    "body": "The class is free, and there's no contract to think about. If your child has a rough first day, that's completely okay — <strong>come back next week, free.</strong> Some kids watch for three weeks before they join in. We've seen it a hundred times."
+  },
+  "problem": {
+    "eyebrow": "Sound familiar?",
+    "headline": "You're not sure they're ready.",
+    "checklist": [
+      "\"He won't sit still for five minutes.\"",
+      "\"She's shy — she hides behind my leg with new people.\"",
+      "\"I'm just not sure he's ready for something like this yet.\""
+    ],
+    "closing": "For most preschool parents, this would be their child's first structured class of any kind. That nervous feeling is normal — and it's the whole reason this class exists."
+  }
+}
