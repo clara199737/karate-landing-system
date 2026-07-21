@@ -3,6 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Vercel's cleanUrls strips the trailing slash from /adults etc., which
+       makes relative URLs like `css/styles.css` resolve to the wrong path.
+       Explicit base tells the browser to always resolve from /<segment>/. -->
+  <base href="/{{{meta.segment}}}/">
 
   <title>{{{meta.page_title}}}</title>
   <meta name="description" content="{{{meta.meta_description}}}">
