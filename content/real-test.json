@@ -1,0 +1,123 @@
+{
+  "config": {
+    "pixel_view_content": false,
+    "utm_passthrough": false,
+    "formspree_id": "FORM_ID_test"
+  },
+  "meta": {
+    "segment": "real-test",
+    "page_title": "test landing page",
+    "meta_description": "a landing page to test the template landing page"
+  },
+  "final_cta": {
+    "headline": "final headline",
+    "subheadline": "test",
+    "button_label": "click here"
+  },
+  "thank_you": {
+    "lead": "lead line",
+    "body": "thank youuuuuuu"
+  },
+  "testimonials": {
+    "items": [
+      {
+        "placeholder": false,
+        "quote": "\"quote\"",
+        "name": "todo:test"
+      }
+    ]
+  },
+  "faq": {
+    "headline": "questions",
+    "items": [
+      {
+        "q": "question",
+        "a": "answer"
+      }
+    ]
+  },
+  "reframe": {
+    "variant": "reframe"
+  },
+  "hero": {
+    "form": {
+      "fields": [
+        {
+          "type": "text",
+          "required": true,
+          "name": "name",
+          "label": "name"
+        },
+        {
+          "type": "text",
+          "required": true,
+          "name": "age",
+          "label": "age"
+        },
+        {
+          "type": "text",
+          "required": true,
+          "name": "number",
+          "label": "number"
+        },
+        {
+          "type": "text",
+          "required": true,
+          "name": "email",
+          "label": "email"
+        }
+      ],
+      "heading": "form heading",
+      "subheading": "subheading",
+      "button_label": "get your free class",
+      "disclaimer": "disclaimer"
+    },
+    "badge": "100% free, test",
+    "headline": "this is a test landing page",
+    "subheadline": "just making sure everything works",
+    "image": {
+      "src": "assets/titan-edit.png",
+      "alt": "that's my dawg"
+    },
+    "trust_items": [
+      "test"
+    ]
+  },
+  "footer": {
+    "school_name": "school name",
+    "address": {
+      "text": "address",
+      "href": "https://maps.google.com/?q=TODO+address"
+    },
+    "phone": {
+      "text": "123",
+      "href": "tel:+000"
+    }
+  },
+  "instructor": {
+    "photo": {
+      "placeholder": false
+    }
+  },
+  "how_it_works": {
+    "belt_ladder": {
+      "rungs": [],
+      "caption": ""
+    },
+    "eyebrow": "test",
+    "headline": "test",
+    "image": {
+      "alt": "test"
+    },
+    "note": "test"
+  },
+  "risk_reversal": {
+    "headline": "headline",
+    "body": "test"
+  },
+  "problem": {
+    "eyebrow": "test",
+    "headline": "test",
+    "body": "test"
+  }
+}
