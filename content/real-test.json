@@ -6,7 +6,7 @@
   },
   "meta": {
     "segment": "real-test",
-    "page_title": "test landing page",
+    "page_title": "test landing page ",
     "meta_description": "a landing page to test the template landing page"
   },
   "final_cta": {
@@ -77,7 +77,9 @@
     "subheadline": "just making sure everything works",
     "image": {
       "src": "assets/titan-edit.png",
-      "alt": "that's my dawg"
+      "alt": "that's my dawg",
+      "width": 0,
+      "height": 0
     },
     "trust_items": [
       "test"
