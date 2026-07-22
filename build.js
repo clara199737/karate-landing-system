@@ -261,10 +261,12 @@ function normalize(data, tag) {
 
   if (data.testimonials) {
     data.testimonials.cta_label = data.hero.form.button_label;
-    data.testimonials.items.forEach((item, i) => { item._first = i === 0; });
+    if (Array.isArray(data.testimonials.items)) {
+      data.testimonials.items.forEach((item, i) => { item._first = i === 0; });
+    }
   }
 
-  if (data.how_it_works) {
+  if (data.how_it_works && Array.isArray(data.how_it_works.steps)) {
     data.how_it_works.steps.forEach((s, i) => { s.step_num = i + 1; });
   }
 
